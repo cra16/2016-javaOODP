@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,11 +41,10 @@ public class buyPanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		Object o = e.getSource();
 		
+		
 		if(ticketInformation[0] == o)
 		{
-			
-			
-			Dialog buyticket = new Dialog(ProgramGUI.getJFrame(),"A",true);
+			JDialog buyticket = new JDialog(ProgramGUI.getJFrame(),"A",true);
 			System.out.print("ffff");
 			buyticket.setSize(100,100);
 			buyticket.setLayout(new FlowLayout());
@@ -52,7 +52,7 @@ public class buyPanel extends JPanel implements ActionListener{
 			buyticket.add(new JButton("GGGG"));
 			
 			buyticket.setVisible(true);
-			
+			buyticket.dispose();
 		}
 		
 	}

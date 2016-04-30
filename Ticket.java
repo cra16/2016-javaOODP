@@ -6,6 +6,11 @@ public class Ticket {
 	private int cost;
 	private Performance performance;
 	
+	public Ticket(Performance performance){
+		
+		this.performance=performance;
+	}
+	
 	public void bringData()
 	{
 		

@@ -4,9 +4,10 @@ public class Schedule {
 	private String time;
 	private String date;
 	
-	public void insertDate()
+	public void insertDate(String time, String date)
 	{
-		
+		this.time = time;
+		this.date = date;
 	}
 	public void updateDate()
 	{
