@@ -1,4 +1,4 @@
-﻿import java.awt.Dialog;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class buyPanel extends JPanel implements ActionListener{
 	
 	public void create()
 	{
-	a
+	
 		
 	}
 

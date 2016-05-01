@@ -6,10 +6,13 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 
 
@@ -29,6 +32,14 @@ public class ProgramGUI extends JFrame implements ActionListener
 	JButton add = new JButton("추가");
 	JButton update = new JButton("update");
 	
+	int user=0;
+	
+	JButton login = new JButton("Login");
+	JRadioButton checkbuyer = new JRadioButton("buyer",false);
+	JRadioButton checkseller = new JRadioButton("seller",false);
+	ButtonGroup btngroup = new ButtonGroup();
+	
+	JDialog logindialog= new JDialog();
 	
 	//singleton
 	private ProgramGUI()
@@ -37,8 +48,9 @@ public class ProgramGUI extends JFrame implements ActionListener
 		setTitle("title");
 		setSize(1024,768);
 		setLayout(new BorderLayout());
-		createMainInformation();
+		this.setVisible(false);
 		
+		createLogin();
 	}
 	public static ProgramGUI getInstance()
 	{
@@ -68,6 +80,25 @@ public class ProgramGUI extends JFrame implements ActionListener
 	}
 	
 	
+	public void createLogin()
+	{
+		logindialog.setLayout(new FlowLayout());
+		contentPane = logindialog.getContentPane();
+		logindialog.setSize(200,200);
+		btngroup.add(checkbuyer);
+		btngroup.add(checkseller);
+		
+		login.addActionListener(this);
+		
+		contentPane.add(checkbuyer);
+		contentPane.add(checkseller);
+		contentPane.add(login);
+		
+		
+		logindialog.setVisible(true);
+		
+	}
+	
 	public void createMainInformation()
 	{
 		currentpage=0;
@@ -81,14 +112,16 @@ public class ProgramGUI extends JFrame implements ActionListener
 		p1.setBackground(Color.RED);
 		
 		String[] button_name = {"공연정보","티켓정보","티켓예약"};
-		
+		int[] checkuser = {1,2,2};
 		for(int i =0; i<3; i++)
 		{	
 			
 			b[i]= new JButton();
 			b[i].setText(button_name[i]);
 			b[i].addActionListener(this);
-			p1.add(b[i]);
+			
+			if(user==checkuser[i])
+				p1.add(b[i]);
 			
 		}
 		
@@ -283,6 +316,24 @@ public class ProgramGUI extends JFrame implements ActionListener
 				p1.removeAll();
 				createMainInformation();
 				return;
+			}
+			
+			else if(o==login)
+			{
+				if(checkbuyer.isSelected() == true)
+				{
+					user = 1;
+					logindialog.setVisible(false);
+					createMainInformation();
+				}
+				else if(checkseller.isSelected() == true)
+				{
+					user=2;
+					logindialog.setVisible(false);
+					createMainInformation();
+				}
+				
+			
 			}
 		}
 }
