@@ -82,6 +82,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		UpdatePerformance updateperformance = new UpdatePerformance();
+		DeletePerformance deleteperformance = new DeletePerformance();
 		if(o==update)
 		{
 			ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
@@ -93,6 +94,15 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			Info.setSize(200,200);
 			Info.setLayout(new FlowLayout());
 			Info.setVisible(true);
+		}
+		else if(o==delete)
+		{
+			JDialog Info=deleteperformance.deletePerformance(currentIndex);
+			Info.setVisible(true);
+			Info.setSize(200,200);
+			Info.setLayout(new FlowLayout());
+			Info.setVisible(true);
+
 		}
 	}
 }
