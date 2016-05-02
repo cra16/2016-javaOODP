@@ -16,8 +16,8 @@ public class DeletePerformance implements ActionListener{
 	
 	private JPanel panel1= new JPanel();
 	private JPanel panel2= new JPanel();
-	JButton delete = new JButton();
-	JButton cancel = new JButton();
+	JButton delete = new JButton("ªË¡¶");
+	JButton cancel = new JButton("cancel");
 	private int currentIndex;
 	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
 	

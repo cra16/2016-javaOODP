@@ -15,6 +15,8 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 
 		JButton update=new JButton("update");
 		JButton delete=new JButton("삭제");
+		JButton reserve = new JButton("예약");
+		JButton close = new JButton("닫기");
 		
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
@@ -65,11 +67,28 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		panel3.add(costLabel);
 		
 		
-		update.addActionListener(this);
-		delete.addActionListener(this);
+		if(ProgramGUI.getInstance().getCurrentuser()==2)
+		{
+			update.addActionListener(this);
+			delete.addActionListener(this);
+			reserve.addActionListener(this);
+			close.addActionListener(this);
+			
+			panel4.add(reserve);
+			panel4.add(close);
+			panel4.add(update);
+			panel4.add(delete);
+		}
+		else if(ProgramGUI.getInstance().getCurrentuser()==1)
+		{
+			reserve.addActionListener(this);
+			close.addActionListener(this);
+			
+			panel4.add(reserve);
+			panel4.add(close);
+		}		
 		
-		panel4.add(update);
-		panel4.add(delete);
+		
 		this.add(panel1);
 		this.add(panel2);
 		this.add(panel3);
@@ -103,6 +122,16 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			Info.setLayout(new FlowLayout());
 			Info.setVisible(true);
 
+		}
+		else if(o==reserve)
+		{
+			this.setVisible(false);
+			ProgramGUI.getInstance().createBuyFrame();
+		
+		}
+		else if(o==close)
+		{
+			ProgramGUI.getInstance().createPerformanceInformation();
 		}
 	}
 }

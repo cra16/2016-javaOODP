@@ -26,6 +26,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	private int currentpage=-1;
 	private static ArrayList<Performance> performances = new ArrayList<Performance>();
 	private AddPerformance addPerform;
+	private int currentuser =0; //user 임시판별용
 	
 	JPanel p1 = new JPanel();
 	JButton[] b = new JButton[10];
@@ -64,6 +65,12 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 	}
 	
+	public int getCurrentuser() {
+		return currentuser;
+	}
+	public void setCurrentuser(int currentuser) {
+		this.currentuser = currentuser;
+	}
 	public ArrayList<Performance> getPerformances() {
 		return performances;
 	}
@@ -109,7 +116,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 		
 		logindialog.setVisible(true);
-		
 	}
 	
 	public void createMainInformation()
@@ -125,14 +131,13 @@ public class ProgramGUI extends JFrame implements ActionListener
 		p1.setBackground(Color.RED);
 		
 		String[] button_name = {"공연정보","티켓정보","티켓예약"};
-		int[] checkuser = {2,2,2};
+		int[] checkuser = {1,1,1};
 		for(int i =0; i<3; i++)
 		{	
 			b[i]= new JButton();
 			b[i].setText(button_name[i]);
 			b[i].addActionListener(this);
 			
-			if(user==checkuser[i])
 				p1.add(b[i]);
 		}
 		
@@ -154,9 +159,12 @@ public class ProgramGUI extends JFrame implements ActionListener
 		JPanel performPanelTop = new performancePanel();
 		JPanel performPanelBottom = new JPanel();
 		cancel.addActionListener(this);
+		if(currentuser==2)
+		{
 		add.addActionListener(this);
 		
 		performPanelBottom.add(add);
+		}
 		performPanelBottom.add(cancel);
 		
 		contentPane.add(performPanelTop,BorderLayout.NORTH);
@@ -291,13 +299,13 @@ public class ProgramGUI extends JFrame implements ActionListener
 			{
 				if(checkbuyer.isSelected() == true)
 				{
-					user = 1;
+					currentuser = 1;
 					logindialog.setVisible(false);
 					createMainInformation();
 				}
 				else if(checkseller.isSelected() == true)
 				{
-					user=2;
+					currentuser=2;
 					logindialog.setVisible(false);
 					createMainInformation();
 				}
