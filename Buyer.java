@@ -1,5 +1,5 @@
 
-public class Buyer {
+public class Audience {
 
 	
 	private String name;

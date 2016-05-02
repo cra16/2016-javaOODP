@@ -105,7 +105,7 @@ public class AddPerformance implements ActionListener {
 		
 		Date temp = new Date();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
-		java.sql.Date  d = null;
+		java.sql.Date d = null;
 
 			
 		try {
@@ -135,10 +135,8 @@ public class AddPerformance implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		
-		System.out.println("클릭 작동");
 		if(o==ok)
 		{
-			System.out.println("ok 작동");
 			eventAddPerformance(performancePlace.getSelectedIndex(),monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.setVisible(false);
@@ -146,11 +144,8 @@ public class AddPerformance implements ActionListener {
 		}
 		else if(o==cancel)
 		{
-			System.out.println("cancel 작동");
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.setVisible(false);
 		}
-		// TODO Auto-generated method stub
-		
 	}
 }

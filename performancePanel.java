@@ -70,7 +70,7 @@ public class performancePanel extends JPanel implements ActionListener{
 				//Info.add(new PerformanceGUI(performances,i));
 			
 			
-				Info.setSize(200,200);
+				Info.setSize(400,200);
 				Info.setLayout(new FlowLayout());
 				Info.setVisible(true);
 			

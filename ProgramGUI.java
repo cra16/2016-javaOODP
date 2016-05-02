@@ -22,7 +22,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public static JFrame Program;
 	public static ProgramGUI programGUI;
 	private Host host;
-	private Buyer buyer = new Buyer();
+	private Audience audience = new Audience();
 	private int currentpage=-1;
 	private static ArrayList<Performance> performances = new ArrayList<Performance>();
 	private AddPerformance addPerform;
@@ -37,8 +37,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 	int user=0;
 	
 	JButton login = new JButton("Login");
-	JRadioButton checkbuyer = new JRadioButton("buyer",false);
-	JRadioButton checkseller = new JRadioButton("seller",false);
+	JRadioButton checkAudience = new JRadioButton("Audience",false);
+	JRadioButton checkHost = new JRadioButton("Host",false);
 	ButtonGroup btngroup = new ButtonGroup();
 	
 	JDialog logindialog= new JDialog();
@@ -67,9 +67,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public ArrayList<Performance> getPerformances() {
 		return performances;
 	}
-	public void setPerformances(ArrayList<Performance> performances) {
-		this.performances = performances;
-	}
+
 	public static JFrame getJFrame()
 	{
 		return Program;
@@ -92,19 +90,18 @@ public class ProgramGUI extends JFrame implements ActionListener
 		Program=ProgramGUI.getInstance();
 	}
 	
-	
 	public void createLogin()
 	{
 		logindialog.setLayout(new FlowLayout());
 		contentPane = logindialog.getContentPane();
 		logindialog.setSize(200,200);
-		btngroup.add(checkbuyer);
-		btngroup.add(checkseller);
+		btngroup.add(checkAudience);
+		btngroup.add(checkHost);
 		
 		login.addActionListener(this);
 		
-		contentPane.add(checkbuyer);
-		contentPane.add(checkseller);
+		contentPane.add(checkAudience);
+		contentPane.add(checkHost);
 		contentPane.add(login);
 		
 		
@@ -112,57 +109,29 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 	}
 	
-	public void createMainInformation()
+	
+	
+	public void createPerformanceInformation()
 	{
-		currentpage=0;
-		
 		if(contentPane!=null)
 			contentPane.removeAll();
 		contentPane= this.getContentPane();
 		contentPane.setBackground(Color.BLUE);
-			
-		
-		p1.setBackground(Color.RED);
-		
-		String[] button_name = {"공연정보","티켓정보","티켓예약"};
-		int[] checkuser = {2,2,2};
-		for(int i =0; i<3; i++)
-		{	
-			b[i]= new JButton();
-			b[i].setText(button_name[i]);
-			b[i].addActionListener(this);
-			
-			if(user==checkuser[i])
-				p1.add(b[i]);
-		}
-		
-		contentPane.removeAll();
-		contentPane.add(p1);
-		
-		this.repaint();
-		setVisible(true);		
-	}
-	
-	public void createPerformanceInformation()
-	{
-		currentpage=1;
-		
-		contentPane.removeAll();
-		cancel.removeActionListener(this);
-		add.removeActionListener(this);
 		
 		JPanel performPanelTop = new performancePanel();
 		JPanel performPanelBottom = new JPanel();
 		cancel.addActionListener(this);
 		add.addActionListener(this);
 		
-		performPanelBottom.add(add);
-		performPanelBottom.add(cancel);
-		
+		if(user == 1){
+			performPanelBottom.add(add);
+		}
 		contentPane.add(performPanelTop,BorderLayout.NORTH);
 		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
 		contentPane.revalidate();
-		repaint();
+		
+		this.repaint();
+		setVisible(true);
 	}
 	
 	public void createBuyFrame()
@@ -227,21 +196,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 		addPerform = new AddPerformance();
 		
 		//state pattern??
-			if(o==b[0])
-			{
-				createPerformanceInformation();
-			}
-			else if(o==b[1])
-			{	
-				createTicketInformation();
-				return;
-			}
-			else if(o==b[2])
-			{
-				createBuyFrame();
-				return;
-			}
-			else if(o==add &&currentpage==1)
+			if(o==add &&currentpage==1)
 			{
 				addPerform.addPerformacne();
 				createPerformanceInformation();
@@ -249,57 +204,46 @@ public class ProgramGUI extends JFrame implements ActionListener
 			else if(o==cancel&&currentpage==1)
 			{
 				p1.removeAll();
-				createMainInformation();
+				createPerformanceInformation();
 				return;
 			}
 			
-			else if(o==add &&currentpage==2)
+			else if(o==add)
 			{
 				addPerform.addPerformacne();
-				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==2)
 			{
 				p1.removeAll();
-				createMainInformation();
+				createPerformanceInformation();
 				return;
-			}
-			else if(o==add &&currentpage==3)
-			{
-				addPerform.addPerformacne();
-				
 			}
 			else if(o==cancel&&currentpage==3)
 			{
 				p1.removeAll();
-				createMainInformation();
-				return;
-			}
-			else if(o==add &&currentpage==1)
-			{
-				addPerform.addPerformacne();
 				createPerformanceInformation();
+				return;
 			}
 			else if(o==cancel&&currentpage==1)
 			{
 				p1.removeAll();
-				createMainInformation();
+				createPerformanceInformation();
 				return;
 			}
 			
 			else if(o==login)
 			{
-				if(checkbuyer.isSelected() == true)
+				if(checkAudience.isSelected() == true)
+				{
+					user = 2;
+					logindialog.dispose();
+					createPerformanceInformation();
+				}
+				else if(checkHost.isSelected() == true)
 				{
 					user = 1;
-					logindialog.setVisible(false);
-					createMainInformation();
-				}
-				else if(checkseller.isSelected() == true)
-				{
-					user=2;
-					logindialog.setVisible(false);
-					createMainInformation();
+					logindialog.dispose();
+					createPerformanceInformation();
 				}
 				
 			
