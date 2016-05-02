@@ -2,6 +2,7 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -12,48 +13,32 @@ import javax.swing.JTextField;
 
 
 public class buyPanel extends JPanel implements ActionListener{
+	int performanceNum;
 	
-	JButton[] ticketInformation = new JButton[10];
+	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
+	JButton[] ticketInformation = new JButton[performances.get(0).getMaxSeat()];
 	
-	public buyPanel()
+	public buyPanel(int performanceNum)
 	{
-		
-		
-		
-		for(int i=0; i<10;i++)
+		this.performanceNum = performanceNum;
+		for(int i=0; i<performances.get(performanceNum).getMaxSeat();i++)
 		{
-			ticketInformation[i]=new JButton("Ç¥" + i);
+			ticketInformation[i]=new JButton("ÁÂ¼® - " + (i+1));
 			ticketInformation[i].addActionListener(this);
 			this.add(ticketInformation[i]);
-			
 		}
-		
-		
-	}
-	
-	public void create()
-	{
-	
-		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) { 
+		int seatIndex = 0;
 		Object o = e.getSource();
-		
-		
-		if(ticketInformation[0] == o)
-		{
-			JDialog buyticket = new JDialog(ProgramGUI.getJFrame(),"A",true);
-			System.out.print("ffff");
-			buyticket.setSize(100,100);
-			buyticket.setLayout(new FlowLayout());
-			buyticket.add(new JLabel("This is good data",JLabel.CENTER));
-			buyticket.add(new JButton("GGGG"));
-			
-			buyticket.setVisible(true);
-			buyticket.dispose();
+
+		for(int i=0;i<performances.get(0).getMaxSeat();i++){
+			if(ticketInformation[i] == o){
+				seatIndex = i;
+				new ReserveDialog(performances.get(this.performanceNum).getSeat()[seatIndex]);
+			}
 		}
-		
 	}
 }
