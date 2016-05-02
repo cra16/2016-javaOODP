@@ -135,8 +135,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		if(user == 1){
 			performPanelBottom.add(add);
 		}
-
-		performPanelBottom.add(cancel);
 		
 		contentPane.add(performPanelTop,BorderLayout.NORTH);
 		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
