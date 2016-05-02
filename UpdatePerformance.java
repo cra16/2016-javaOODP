@@ -13,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddPerformance implements ActionListener {
+
+public class UpdatePerformance implements ActionListener {
 	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
 	private Place place = new Place();//place저장공간이라서
 	
@@ -46,11 +47,18 @@ public class AddPerformance implements ActionListener {
 	String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
 	int[] monthdata = {1,2,3,4,5,6,7,8,9,10,11,12};
 	int[] daydata = new int[31];
+
+	int currentIndex=0;
 	
-	
-	public void addPerformacne()
+	public JDialog updatePerformance(ArrayList<Performance> performances, int currentIndex)
 	{
-		//여긴 나중에 GUI로 따로 뺄거
+		this.currentIndex=currentIndex;
+		//여기도 GUI로 따로뺄거 일단 구현만해놓음
+		int placeindex =0;
+		int dayindex=0;
+		int monthindex=0;
+		int timeindex=0;
+		Performance update_perform = performances.get(currentIndex);
 		for(int i=0; i<31; i++)
 		{
 		
@@ -59,19 +67,37 @@ public class AddPerformance implements ActionListener {
 		
 		panel.add(pLabel);
 		for(int i=0; i<3; i++)
+		{
 			performancePlace.addItem(place.getPlaceName(i));
+			if(place.getPlaceName(i).equals(update_perform.getPlaceName()))//장소이름이 중복아니라고 가정햇을때 이렇게함 아마 다른방법도 잇을듯
+				placeindex=i;
+		}
+		
 		for(int i=0; i<31; i++)
 		{
 			dayBox.addItem(daydata[i]);
+			if(daydata[i]==update_perform.getSchedule().getDate().getDate())
+				dayindex=i;
 		}
 		for(int i=0; i<12;i++)
 		{
 			monthBox.addItem(monthstamp[i]);
+			if(monthstamp[i].equals(String.valueOf(update_perform.getSchedule().getDate().getMonth()+1)))
+				monthindex=i;
+				
 		}
 		for(int i=0; i<timestamp.length; i++)
 		{
 			timeBox.addItem(timestamp[i]);
+			if(timestamp[i].equals(update_perform.getSchedule().getTime().getHours()+":"+update_perform.getSchedule().getTime().getMinutes()))
+				timeindex= i;
 		}
+		
+		performancePlace.setSelectedIndex(placeindex);
+		dayBox.setSelectedIndex(dayindex);
+		monthBox.setSelectedIndex(monthindex);
+		timeBox.setSelectedIndex(timeindex);
+		
 		
 		panel.add(performancePlace);
 		panel2.add(nLabel);
@@ -98,10 +124,10 @@ public class AddPerformance implements ActionListener {
 		dialog.add(panel4);
 		dialog.add(panel5);
 		dialog.setVisible(true);
+		return dialog;
 	}
-	
-	public void eventAddPerformance(int placeindex,int month, int day, String time,int cost)
-	{
+
+	public void eventUpdatePerformance(int currentIndex,int month, int day, String time,int cost){
 		
 		Date temp = new Date();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -128,21 +154,18 @@ public class AddPerformance implements ActionListener {
 		}
 		
 		
-		performances.add(new Performance(placeindex, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(temp.getTime()), new java.sql.Time(t.getTime()),cost));
+		performances.set(currentIndex,new Performance(currentIndex, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(temp.getTime()), new java.sql.Time(t.getTime()),cost));
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
 		
-		System.out.println("클릭 작동");
 		if(o==ok)
 		{
-			System.out.println("ok 작동");
-			eventAddPerformance(performancePlace.getSelectedIndex(),monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
+			System.out.println("GGG");
+			eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.setVisible(false);
-			
 		}
 		else if(o==cancel)
 		{
@@ -150,7 +173,6 @@ public class AddPerformance implements ActionListener {
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.setVisible(false);
 		}
-		// TODO Auto-generated method stub
 		
 	}
 }
