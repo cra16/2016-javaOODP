@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -17,10 +18,10 @@ public class ProgramGUI extends JFrame implements ActionListener
 {
 	public static JFrame Program;
 	public static ProgramGUI programGUI;
-	private Seller[] seller= new Seller[4];
-	private Buyer[] buyer = new Buyer[4];
+	private Host host;
+	private Buyer buyer = new Buyer();
 	private int currentpage=-1;
-	
+	private ArrayList<Performance> performances = new ArrayList<Performance>();
 	
 	JPanel p1 = new JPanel();
 	JButton[] b = new JButton[10];
@@ -29,13 +30,12 @@ public class ProgramGUI extends JFrame implements ActionListener
 	JButton add = new JButton("추가");
 	JButton update = new JButton("update");
 	
-	
 	//singleton
 	private ProgramGUI()
 	{
-		seller[0]=new Seller("임현우","01093045749","darkzero");
+		host=new Host("임현우","01093045749","darkzero");
 		setTitle("title");
-		setSize(1024,768);
+		setSize(512,384);
 		setLayout(new BorderLayout());
 		createMainInformation();
 		
@@ -50,11 +50,22 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 	}
 	
-
-	
+	public ArrayList<Performance> getPerformances() {
+		return performances;
+	}
+	public void setPerformances(ArrayList<Performance> performances) {
+		this.performances = performances;
+	}
 	public static JFrame getJFrame()
 	{
 		return Program;
+	}
+	
+	public Host getHost() {
+		return host;
+	}
+	public void setHost(Host host) {
+		this.host = host;
 	}
 	
 	public ProgramGUI getProgmGUI()
@@ -108,20 +119,16 @@ public class ProgramGUI extends JFrame implements ActionListener
 		update.removeActionListener(this);
 		add.removeActionListener(this);
 		
-		JPanel temppanel = new performancePanel(seller[0].getPerformance(),seller[0].getPcount());
-		JPanel temppanel2=new JPanel();
+		JPanel performPanelTop = new performancePanel();
+		JPanel performPanelBottom = new JPanel();
 		cancel.addActionListener(this);
-		update.addActionListener(this);
 		add.addActionListener(this);
 		
-		temppanel2.add(add);
-		temppanel2.add(update);
-		temppanel2.add(cancel);
+		performPanelBottom.add(add);
+		performPanelBottom.add(cancel);
 		
-		
-		
-		contentPane.add(temppanel,BorderLayout.NORTH);
-		contentPane.add(temppanel2,BorderLayout.SOUTH);
+		contentPane.add(performPanelTop,BorderLayout.NORTH);
+		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
 		contentPane.revalidate();
 		repaint();
 	}
@@ -140,17 +147,13 @@ public class ProgramGUI extends JFrame implements ActionListener
 		contentPane.revalidate();
 		this.repaint();
 	}
-	
-	
 
-	
-	
 	public void createTicketInformation()
 	{
 		currentpage=3;
 		JButton[] c = new JButton[10];
-		JPanel temppanel = new JPanel();
-		JPanel temppanel2 = new JPanel();
+		JPanel performPanelTop = new JPanel();
+		JPanel performPanelBottom = new JPanel();
 		contentPane.removeAll();
 		cancel.removeActionListener(this);
 		update.removeActionListener(this);
@@ -162,7 +165,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			c[j]= new JButton();
 			c[j].setText(Integer.toString('x'));
 			c[j].addActionListener(this);
-			temppanel.add(c[j],BorderLayout.NORTH);
+			performPanelTop.add(c[j],BorderLayout.NORTH);
 			
 		}
 		
@@ -171,9 +174,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 		update.addActionListener(this);
 		add.addActionListener(this);
 		
-		temppanel2.add(cancel);
-		temppanel2.add(update);
-		temppanel2.add(add);
+		performPanelBottom.add(cancel);
+		performPanelBottom.add(add);
 		
 		
 		
@@ -182,9 +184,9 @@ public class ProgramGUI extends JFrame implements ActionListener
 		JTable table = TicketTable.createTable(contents, header);
 		
 		
-		contentPane.add(temppanel,BorderLayout.NORTH);
+		contentPane.add(performPanelTop,BorderLayout.NORTH);
 		contentPane.add(table,BorderLayout.CENTER);
-		contentPane.add(temppanel2,BorderLayout.SOUTH);
+		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
 		
 		
 		contentPane.revalidate(); 
@@ -192,7 +194,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 		this.repaint();
 	}
-	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -206,7 +207,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 			else if(o==b[1])
 			{	
 				createTicketInformation();
-				System.out.println("GGGG");
 				return;
 			}
 			else if(o==b[2])
@@ -216,15 +216,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add &&currentpage==1)
 			{
-
-				seller[0].addPerformacne();
-				createPerformanceInformation();
-			}
-			else if(o==update &&currentpage==1)
-			{
-				
-			
-				seller[0].modifyPerformance();
+				AddPerformance.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==1)
@@ -236,12 +228,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			
 			else if(o==add &&currentpage==2)
 			{
-				seller[0].addPerformacne();
-				createPerformanceInformation();
-			}
-			else if(o==update &&currentpage==2)
-			{
-				seller[0].modifyPerformance();
+				AddPerformance.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==2)
@@ -250,17 +237,10 @@ public class ProgramGUI extends JFrame implements ActionListener
 				createMainInformation();
 				return;
 			}
-			
-			
 			else if(o==add &&currentpage==3)
 			{
-				seller[0].addPerformacne();
+				AddPerformance.addPerformacne();
 				
-			}
-			else if(o==update &&currentpage==3)
-			{
-				seller[0].modifyPerformance();
-				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==3)
 			{
@@ -270,12 +250,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add &&currentpage==1)
 			{
-				seller[0].addPerformacne();
-				createPerformanceInformation();
-			}
-			else if(o==update &&currentpage==1)
-			{
-				seller[0].modifyPerformance();
+				AddPerformance.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==1)

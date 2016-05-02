@@ -33,7 +33,7 @@ public class buyPanel extends JPanel implements ActionListener{
 	
 	public void create()
 	{
-	a
+	
 		
 	}
 
