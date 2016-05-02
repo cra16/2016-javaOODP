@@ -9,14 +9,17 @@ public class Performance {
 	private String name;
 	private Ticket[] ticket=new Ticket[200];
 	private int ticketcount=0;
+	private Time time;
+	private Date date;
 	
-	public Performance(int placeNum, Host host, String name, Date date, Time time)
+	public Performance(int placeNum, Host host, String name, Date date, Time time ,int cost)
 	{
 		this.placeNum = placeNum;
 		this.host = host;
 		this.name = name;
 		this.schedule.setDate(date);
 		this.schedule.setTime(time);
+		this.cost = cost;
 	}
 	
 	public void createTicket()
@@ -90,6 +93,9 @@ public class Performance {
 	public void setTicketcount(int ticketcount) {
 		this.ticketcount = ticketcount;
 	}
+
+
+	
 	
 	
 	

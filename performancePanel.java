@@ -14,16 +14,11 @@ public class performancePanel extends JPanel implements ActionListener{
 	private ArrayList<Performance> performances;
 	JButton[] performance;
 	
-	JButton update=new JButton("update");
-	JButton delete=new JButton("삭제");
+	
 	
 	private JDialog dialog = new JDialog();
 	
-	//for information
-	JLabel plabel = new JLabel();
-	JLabel hlabel = new JLabel();
-	JLabel slabel = new JLabel();
-	JLabel nlabel = new JLabel();
+	
 	
 	//for update
 	private JTextField performancePlace = new JTextField(10);
@@ -40,7 +35,7 @@ public class performancePanel extends JPanel implements ActionListener{
 	JLabel pLabel = new JLabel("장소 : ");
 	JLabel nLabel = new JLabel("공연이름 :");
 	
-	JDialog Info= new JDialog(ProgramGUI.getJFrame(),"A",true);
+	
 	
 	
 	public performancePanel()
@@ -65,34 +60,25 @@ public class performancePanel extends JPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e) { 
 		Object o = e.getSource();
 		
-		
-		if(performance[0] == o)
+		for(int i=0; i<performances.size();i++)
 		{
-			System.out.println("공연 개체 클릭 작동");
-			update.removeActionListener(this);
-			delete.removeActionListener(this);
+			if(performance[i] == o)//공연 눌렀을 때 켜지는 화면
+			{
+				
+				JDialog Info= new PerformanceGUI(performances,i);
+				Info.setLayout(new FlowLayout());
+				//Info.add(new PerformanceGUI(performances,i));
 			
-			Info.setSize(200,200);
-			Info.setLayout(new FlowLayout());
 			
-			plabel.setText("장소 : " +performances.get(0).getPlaceName());
-			hlabel.setText("주최자 : " +ProgramGUI.getInstance().getHost().getName());
-			slabel.setText("잔여 좌석수 : " + (performances.get(0).getMaxSeat() - performances.get(0).getCurrentNum()));
-			nlabel.setText("공연이름 : " +performances.get(0).getName());
+				Info.setSize(200,200);
+				Info.setLayout(new FlowLayout());
+				Info.setVisible(true);
 			
-			Info.add(plabel);
-			Info.add(hlabel);
-			Info.add(slabel);
-			Info.add(nlabel);
 			
-			update.addActionListener(this);
-			delete.addActionListener(this);
-			
-			Info.add(update);
-			Info.add(delete);
-			Info.setVisible(true);
+			}
 		}
-		else if(update == o)
+		
+		if(ok == o)// 얜뭐죠?
 		{
 			ok.removeActionListener(this);
 			cancel.removeActionListener(this);
@@ -111,13 +97,13 @@ public class performancePanel extends JPanel implements ActionListener{
 			dialog.add(panel);
 			dialog.add(panel2);
 			dialog.add(panel3);
-			Info.setVisible(false);
+			
 			dialog.setVisible(true);
 		}
 		
-		else if(ok==o)
+		 if(ok==o)
 		{
-			performances.add(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000)));
+			performances.add(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000),10));
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.setVisible(false);
 		}
