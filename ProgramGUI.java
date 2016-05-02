@@ -26,6 +26,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	private int currentpage=-1;
 	private static ArrayList<Performance> performances = new ArrayList<Performance>();
 	private AddPerformance addPerform;
+
 	
 	JPanel p1 = new JPanel();
 	JButton[] b = new JButton[10];
@@ -64,6 +65,12 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 	}
 	
+	public int getUser() {
+		return user;
+	}
+	public void setUser(int currentuser) {
+		this.user = currentuser;
+	}
 	public ArrayList<Performance> getPerformances() {
 		return performances;
 	}
@@ -106,7 +113,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 		
 		logindialog.setVisible(true);
-		
 	}
 	
 	
@@ -117,15 +123,21 @@ public class ProgramGUI extends JFrame implements ActionListener
 			contentPane.removeAll();
 		contentPane= this.getContentPane();
 		contentPane.setBackground(Color.BLUE);
+
 		
 		JPanel performPanelTop = new performancePanel();
 		JPanel performPanelBottom = new JPanel();
 		cancel.addActionListener(this);
+	
 		add.addActionListener(this);
 		
+
 		if(user == 1){
 			performPanelBottom.add(add);
 		}
+
+		performPanelBottom.add(cancel);
+		
 		contentPane.add(performPanelTop,BorderLayout.NORTH);
 		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
 		contentPane.revalidate();
@@ -235,15 +247,20 @@ public class ProgramGUI extends JFrame implements ActionListener
 			{
 				if(checkAudience.isSelected() == true)
 				{
+
 					user = 2;
 					logindialog.dispose();
 					createPerformanceInformation();
+
 				}
 				else if(checkHost.isSelected() == true)
 				{
+
 					user = 1;
 					logindialog.dispose();
 					createPerformanceInformation();
+
+
 				}
 				
 			
