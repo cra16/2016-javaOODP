@@ -1,14 +1,20 @@
 
 public class Seat {
-
-	private int maxpeople;
-	private String place;
-	private int seatnumber;
-	private boolean isreserved;
+	private boolean isReserved;
 	
-	public void checkReserve()
-	{
-		
+	public Seat(){
+		this.isReserved = false;
 	}
 	
+	public void reserve(){
+		this.isReserved = true;
+	}
+	
+	public void cancel(){
+		this.isReserved = false;
+	}
+	
+	public boolean isReserved(){
+		return this.isReserved;
+	}
 }

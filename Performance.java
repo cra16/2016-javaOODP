@@ -1,40 +1,27 @@
+import java.sql.*;
 
 public class Performance {
-
-	private Schedule schedule=new Schedule(); 
-	private String place;
-	private String host;
-	private Seat[] seat;
+	private Place place = new Place();
+	private int placeNum;
+	private Schedule schedule=new Schedule();
+	private Host host;
 	private int cost;
 	private String name;
 	private Ticket[] ticket=new Ticket[200];
 	private int ticketcount=0;
 	
-	
-	public Performance(String place , String host, int seatcount, String name)
+	public Performance(int placeNum, Host host, String name, Date date, Time time)
 	{
-		this.place=place;
-		this.host=host;
-		this.seat = new Seat[seatcount];
+		this.placeNum = placeNum;
+		this.host = host;
 		this.name = name;
-		this.schedule.insertDate("17:00","2015-1-1");
+		this.schedule.setDate(date);
+		this.schedule.setTime(time);
 	}
 	
 	public void createTicket()
 	{
-		
-		
-		
 		ticket[ticketcount]= new Ticket(this);
-		
-	}
-	public void evaluateGrade()
-	{
-		
-	}
-	public void showGrade()
-	{
-		
 	}
 	public void showInformation()
 	{
@@ -49,28 +36,27 @@ public class Performance {
 		this.schedule = schedule;
 	}
 
-	public String getPlace() {
-		return place;
+	public String getPlaceName() {
+		return this.place.getPlaceName(this.placeNum);
 	}
-
-	public void setPlace(String place) {
-		this.place = place;
+	
+	public int getMaxSeat(){
+		return this.place.getMaxSeat(this.placeNum);
+	}
+	
+	public int getCurrentNum(){
+		return this.place.getCurrentNum(this.placeNum);
+	}
+	public void setPlace(int place) {
+		this.placeNum = place;
 	}
 
 	public String getHost() {
-		return host;
+		return host.getName();
 	}
-
-	public void setHost(String host) {
-		this.host = host;
-	}
-
-	public Seat[] getSeat() {
-		return seat;
-	}
-
-	public void setSeat(Seat[] seat) {
-		this.seat = seat;
+	
+	public Seat[] getSeat(int placeNum) {
+		return this.place.getSeat(placeNum);
 	}
 
 	public int getCost() {
