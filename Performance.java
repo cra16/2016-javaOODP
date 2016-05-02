@@ -7,7 +7,7 @@ public class Performance {
 	private Host host;
 	private int cost;
 	private String name;
-	private Ticket[] ticket=new Ticket[200];
+	private Ticket[] ticket;
 	private int ticketcount=0;
 	
 	public Performance(int placeNum, Host host, String name, Date date, Time time)
@@ -55,8 +55,8 @@ public class Performance {
 		return host.getName();
 	}
 	
-	public Seat[] getSeat(int placeNum) {
-		return this.place.getSeat(placeNum);
+	public Seat[] getSeat() {
+		return this.place.getSeat(this.placeNum);
 	}
 
 	public int getCost() {

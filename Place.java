@@ -7,17 +7,23 @@ public class Place {
 	public Place(){
 		this.placeName[0] = "학관 101호";
 		this.maxSeat[0] = 60;
-		seat[0] = new Seat[this.maxSeat[0]];
+		this.seat[0] = new Seat[this.maxSeat[0]];
+		for(int i=0;i<this.maxSeat[0];i++)
+			this.seat[0][i] = new Seat();
 		this.currentNum[0] = 0;
 		
 		this.placeName[1] = "학관 104호";
 		this.maxSeat[1] = 80;
-		seat[1] = new Seat[this.maxSeat[1]];
+		this.seat[1] = new Seat[this.maxSeat[1]];
+		for(int i=0;i<this.maxSeat[0];i++)
+			this.seat[1][i] = new Seat();
 		this.currentNum[1] = 0;
 		
 		this.placeName[2] = "채플";
 		this.maxSeat[2] = 1000;
-		seat[2] = new Seat[this.maxSeat[1]];
+		this.seat[2] = new Seat[this.maxSeat[2]];
+		for(int i=0;i<this.maxSeat[0];i++)
+			this.seat[2][i] = new Seat();
 		this.currentNum[2] = 0;
 	}
 	

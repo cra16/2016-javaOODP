@@ -48,7 +48,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	{
 		host=new Host("임현우","01093045749","darkzero");
 		setTitle("title");
-		setSize(512,384);
+		setSize(768,576);
 		setLayout(new BorderLayout());
 		this.setVisible(false);
 		
@@ -125,17 +125,15 @@ public class ProgramGUI extends JFrame implements ActionListener
 		p1.setBackground(Color.RED);
 		
 		String[] button_name = {"공연정보","티켓정보","티켓예약"};
-		int[] checkuser = {1,2,2};
+		int[] checkuser = {2,2,2};
 		for(int i =0; i<3; i++)
 		{	
-			
 			b[i]= new JButton();
 			b[i].setText(button_name[i]);
 			b[i].addActionListener(this);
 			
 			if(user==checkuser[i])
 				p1.add(b[i]);
-			
 		}
 		
 		contentPane.removeAll();
@@ -170,7 +168,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public void createBuyFrame()
 	{
 		currentpage=2;
-		JPanel bpanel = new buyPanel();
+		JPanel bpanel = new buyPanel(0);
 		contentPane.removeAll();
 		contentPane.add(bpanel);
 		
@@ -193,16 +191,13 @@ public class ProgramGUI extends JFrame implements ActionListener
 		update.removeActionListener(this);
 		add.removeActionListener(this);
 
-
 		for(int j =0; j<3; j++)
 		{
 			c[j]= new JButton();
 			c[j].setText(Integer.toString('x'));
 			c[j].addActionListener(this);
 			performPanelTop.add(c[j],BorderLayout.NORTH);
-			
 		}
-		
 		
 		cancel.addActionListener(this);
 		update.addActionListener(this);
@@ -211,12 +206,9 @@ public class ProgramGUI extends JFrame implements ActionListener
 		performPanelBottom.add(cancel);
 		performPanelBottom.add(add);
 		
-		
-		
 		String[] header = {"티켓이름","티켓번호","좌석번호"};
 		String[][] contents = {{"몰라","1","1"},{"알수","2","2"},{"가 없네","3","3"}};
 		JTable table = TicketTable.createTable(contents, header);
-		
 		
 		contentPane.add(performPanelTop,BorderLayout.NORTH);
 		contentPane.add(table,BorderLayout.CENTER);
