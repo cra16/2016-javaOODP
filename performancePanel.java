@@ -78,6 +78,7 @@ public class performancePanel extends JPanel implements ActionListener{
 			}
 		}
 		
+		/*
 		if(ok == o)// ¾ë¹¹ÁÒ?
 		{
 			ok.removeActionListener(this);
@@ -100,12 +101,12 @@ public class performancePanel extends JPanel implements ActionListener{
 			
 			dialog.setVisible(true);
 		}
-		
+		*/
 		 if(ok==o)
 		{
 			performances.add(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000),10));
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
+			dialog.dispose();
 		}
 	}
 }

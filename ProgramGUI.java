@@ -51,7 +51,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 		setTitle("title");
 		setSize(768,576);
 		setLayout(new BorderLayout());
-		this.setVisible(false);
+		this.dispose();
 		
 		createLogin();
 	}
@@ -130,7 +130,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		cancel.addActionListener(this);
 	
 		add.addActionListener(this);
-		
 
 		if(user == 1){
 			performPanelBottom.add(add);
@@ -206,41 +205,17 @@ public class ProgramGUI extends JFrame implements ActionListener
 		addPerform = new AddPerformance();
 		
 		//state pattern??
-			if(o==add &&currentpage==1)
-			{
-				addPerform.addPerformacne();
-				createPerformanceInformation();
-			}
-			else if(o==cancel&&currentpage==1)
+			if(o==cancel)
 			{
 				p1.removeAll();
 				createPerformanceInformation();
 				return;
 			}
-			
 			else if(o==add)
 			{
 				addPerform.addPerformacne();
+				//add.removeActionListener(this);
 			}
-			else if(o==cancel&&currentpage==2)
-			{
-				p1.removeAll();
-				createPerformanceInformation();
-				return;
-			}
-			else if(o==cancel&&currentpage==3)
-			{
-				p1.removeAll();
-				createPerformanceInformation();
-				return;
-			}
-			else if(o==cancel&&currentpage==1)
-			{
-				p1.removeAll();
-				createPerformanceInformation();
-				return;
-			}
-			
 			else if(o==login)
 			{
 				if(checkAudience.isSelected() == true)
@@ -257,11 +232,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 					user = 1;
 					logindialog.dispose();
 					createPerformanceInformation();
-
-
 				}
-				
-			
 			}
 		}
 }

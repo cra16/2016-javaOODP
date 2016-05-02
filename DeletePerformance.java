@@ -46,22 +46,17 @@ public class DeletePerformance implements ActionListener{
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 		Object o = e.getSource();
 		
 		if(o==delete)
 		{
 			eventDeletePerformance(currentIndex);
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
+			dialog.dispose();
 		}
 		else if(o==cancel)
 		{
-			dialog.setVisible(false);
-
+			dialog.dispose();
 		}
-			
-		
 	}
 }

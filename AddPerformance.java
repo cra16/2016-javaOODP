@@ -139,13 +139,12 @@ public class AddPerformance implements ActionListener {
 		{
 			eventAddPerformance(performancePlace.getSelectedIndex(),monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
-			
+			dialog.dispose();
 		}
 		else if(o==cancel)
 		{
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
+			dialog.dispose();
 		}
 	}
 }

@@ -165,13 +165,13 @@ public class UpdatePerformance implements ActionListener {
 			System.out.println("GGG");
 			eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
+			dialog.dispose();
 		}
 		else if(o==cancel)
 		{
 			System.out.println("cancel ¿€µø");
 			ProgramGUI.getInstance().createPerformanceInformation();
-			dialog.setVisible(false);
+			dialog.dispose();
 		}
 		
 	}

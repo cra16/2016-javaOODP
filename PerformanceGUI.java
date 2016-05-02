@@ -67,7 +67,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		panel3.add(costLabel);
 		
 		
-		if(ProgramGUI.getInstance().getUser()==2)
+		if(ProgramGUI.getInstance().getUser()==1)
 		{
 			update.addActionListener(this);
 			delete.addActionListener(this);
@@ -79,7 +79,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			panel4.add(update);
 			panel4.add(delete);
 		}
-		else if(ProgramGUI.getInstance().getUser()==1)
+		else if(ProgramGUI.getInstance().getUser()==2)
 		{
 			reserve.addActionListener(this);
 			close.addActionListener(this);
@@ -110,9 +110,11 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			//Info.add(new PerformanceGUI(performances,i));
 		
 		
-			Info.setSize(200,200);
+			Info.setSize(500,400);
 			Info.setLayout(new FlowLayout());
 			Info.setVisible(true);
+			
+			update.removeActionListener(this);
 		}
 		else if(o==delete)
 		{
@@ -121,17 +123,23 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			Info.setSize(200,200);
 			Info.setLayout(new FlowLayout());
 			Info.setVisible(true);
-
+			this.dispose();
+			
+			delete.removeActionListener(this);
 		}
 		else if(o==reserve)
 		{
-			this.setVisible(false);
+			this.dispose();
 			ProgramGUI.getInstance().createBuyFrame();
-		
+			
+			reserve.removeActionListener(this);
 		}
 		else if(o==close)
 		{
+			this.dispose();
 			ProgramGUI.getInstance().createPerformanceInformation();
+			
+			close.removeActionListener(this);
 		}
 	}
 }
