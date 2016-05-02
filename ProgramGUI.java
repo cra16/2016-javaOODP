@@ -24,7 +24,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 	private Host host;
 	private Buyer buyer = new Buyer();
 	private int currentpage=-1;
-	private ArrayList<Performance> performances = new ArrayList<Performance>();
+	private static ArrayList<Performance> performances = new ArrayList<Performance>();
+	private AddPerformance addPerform;
 	
 	JPanel p1 = new JPanel();
 	JButton[] b = new JButton[10];
@@ -150,7 +151,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		
 		contentPane.removeAll();
 		cancel.removeActionListener(this);
-		update.removeActionListener(this);
 		add.removeActionListener(this);
 		
 		JPanel performPanelTop = new performancePanel();
@@ -232,6 +232,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
+		addPerform = new AddPerformance();
 		
 		//state pattern??
 			if(o==b[0])
@@ -250,7 +251,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add &&currentpage==1)
 			{
-				AddPerformance.addPerformacne();
+				addPerform.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==1)
@@ -262,7 +263,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			
 			else if(o==add &&currentpage==2)
 			{
-				AddPerformance.addPerformacne();
+				addPerform.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==2)
@@ -273,7 +274,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add &&currentpage==3)
 			{
-				AddPerformance.addPerformacne();
+				addPerform.addPerformacne();
 				
 			}
 			else if(o==cancel&&currentpage==3)
@@ -284,7 +285,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add &&currentpage==1)
 			{
-				AddPerformance.addPerformacne();
+				addPerform.addPerformacne();
 				createPerformanceInformation();
 			}
 			else if(o==cancel&&currentpage==1)

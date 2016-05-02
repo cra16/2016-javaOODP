@@ -11,8 +11,9 @@ import javax.swing.JTextField;
 
 
 public class performancePanel extends JPanel implements ActionListener{
-	JButton[] performance;
 	private ArrayList<Performance> performances;
+	JButton[] performance;
+	
 	JButton update=new JButton("update");
 	JButton delete=new JButton("삭제");
 	
@@ -47,7 +48,8 @@ public class performancePanel extends JPanel implements ActionListener{
 		int i = 0;
 		
 		performances = ProgramGUI.getInstance().getPerformances();
-
+		performance = new JButton[performances.size()];
+		
 		for(Performance perform : performances)
 		{
 			performance[i] = new JButton(perform.getName());
@@ -64,8 +66,9 @@ public class performancePanel extends JPanel implements ActionListener{
 		Object o = e.getSource();
 		
 		
-		if(performances.get(0) == o)
+		if(performance[0] == o)
 		{
+			System.out.println("공연 개체 클릭 작동");
 			update.removeActionListener(this);
 			delete.removeActionListener(this);
 			
@@ -88,7 +91,6 @@ public class performancePanel extends JPanel implements ActionListener{
 			Info.add(update);
 			Info.add(delete);
 			Info.setVisible(true);
-		
 		}
 		else if(update == o)
 		{
@@ -103,7 +105,7 @@ public class performancePanel extends JPanel implements ActionListener{
 			ok.addActionListener(this);
 			cancel.addActionListener(this);
 			dialog.setSize(300,300);
-			panel3.add(ok);	
+			panel3.add(ok);
 			panel3.add(cancel);
 			dialog.setLayout(new FlowLayout(FlowLayout.LEFT,10,15));
 			dialog.add(panel);
