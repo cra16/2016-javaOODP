@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -48,13 +49,17 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		Date tempdate = performances.get(index).getSchedule().getDate();
 		Time temptime = performances.get(index).getSchedule().getTime();
 		
-		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(tempdate);
+		System.out.println(""+calendar.get(Calendar.YEAR));
 		plabel.setText("장소 : " +performances.get(index).getPlaceName());
 		hlabel.setText("주최자 : " +ProgramGUI.getInstance().getHost().getName());
 		slabel.setText("잔여 좌석수 : " + (performances.get(index).getMaxSeat() - performances.get(index).getCurrentNum()));
 		nlabel.setText("공연이름 : " +performances.get(index).getName());
-		dateLabel.setText("날짜 : " + tempdate.getYear() +"-" + tempdate.getMonth()+"-" +tempdate.getDate());	
-		timeLabel.setText("시간 : " + temptime.getHours() +"time");
+		dateLabel.setText("날짜 : " + calendar.get(Calendar.YEAR) +"-" + calendar.get(Calendar.MONTH)+"-" +calendar.get(Calendar.DATE));	
+		
+		calendar.setTime(temptime);
+		timeLabel.setText("시간 : " + calendar.get(Calendar.HOUR_OF_DAY) +"time");
 		costLabel.setText("가격 : " + performances.get(index).getCost());
 		
 		

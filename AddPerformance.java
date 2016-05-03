@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JButton;
@@ -103,23 +104,19 @@ public class AddPerformance implements ActionListener {
 	public void eventAddPerformance(int placeindex,int month, int day, String time,int cost)
 	{
 		
-		Date temp = new Date();
+		Calendar temp=Calendar.getInstance();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date d = null;
-
+		Date date=new Date();
+		temp.set(temp.get(Calendar.YEAR), month+1, day);
+		
+		date=new Date(temp.getTimeInMillis());
 			
-		try {
-			temp=  transFormat.parse(temp.getYear()+1900+1900 + "-"+month+1 +"-"+day);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-			
-		System.out.println(""+temp.getYear() + "-"+month +"-"+day);
 		
 		Date t = null;
 		
 		SimpleDateFormat transFormat2= new SimpleDateFormat("HH:MM:SS");
+		
 		try {
 			t=transFormat2.parse(time+":"+"00");
 		} catch (ParseException e) {
@@ -128,7 +125,7 @@ public class AddPerformance implements ActionListener {
 		}
 		
 		
-		performances.add(new Performance(placeindex, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(temp.getTime()), new java.sql.Time(t.getTime()),cost));
+		performances.add(new Performance(placeindex, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost));
 	}
 
 	@Override
