@@ -124,7 +124,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 		contentPane= this.getContentPane();
 		contentPane.setBackground(Color.BLUE);
 
-		
+		add.removeActionListener(this);
+		cancel.removeActionListener(this);
 		JPanel performPanelTop = new performancePanel();
 		JPanel performPanelBottom = new JPanel();
 		cancel.addActionListener(this);
@@ -214,7 +215,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 			else if(o==add)
 			{
 				addPerform.addPerformacne();
-				//add.removeActionListener(this);
+				
 			}
 			else if(o==login)
 			{
