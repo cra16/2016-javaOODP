@@ -108,7 +108,7 @@ public class AddPerformance implements ActionListener {
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date d = null;
 		Date date=new Date();
-		temp.set(temp.get(Calendar.YEAR), month+1, day);
+		temp.set(temp.get(Calendar.YEAR), month, day);
 		
 		date=new Date(temp.getTimeInMillis());
 			

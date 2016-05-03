@@ -163,6 +163,7 @@ public class UpdatePerformance implements ActionListener {
 			eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()),performancePlace.getSelectedIndex());
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.dispose();
+			
 		}
 		else if(o==cancel)
 		{
