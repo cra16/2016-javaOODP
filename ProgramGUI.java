@@ -159,47 +159,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 		this.repaint();
 	}
 
-	public void createTicketInformation()
-	{
-		currentpage=3;
-		JButton[] c = new JButton[10];
-		JPanel performPanelTop = new JPanel();
-		JPanel performPanelBottom = new JPanel();
-		contentPane.removeAll();
-		cancel.removeActionListener(this);
-		update.removeActionListener(this);
-		add.removeActionListener(this);
-
-		for(int j =0; j<3; j++)
-		{
-			c[j]= new JButton();
-			c[j].setText(Integer.toString('x'));
-			c[j].addActionListener(this);
-			performPanelTop.add(c[j],BorderLayout.NORTH);
-		}
-		
-		cancel.addActionListener(this);
-		update.addActionListener(this);
-		add.addActionListener(this);
-		
-		performPanelBottom.add(cancel);
-		performPanelBottom.add(add);
-		
-		String[] header = {"티켓이름","티켓번호","좌석번호"};
-		String[][] contents = {{"몰라","1","1"},{"알수","2","2"},{"가 없네","3","3"}};
-		JTable table = TicketTable.createTable(contents, header);
-		
-		contentPane.add(performPanelTop,BorderLayout.NORTH);
-		contentPane.add(table,BorderLayout.CENTER);
-		contentPane.add(performPanelBottom,BorderLayout.SOUTH);
-		
-		
-		contentPane.revalidate(); 
-		
-		
-		this.repaint();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();

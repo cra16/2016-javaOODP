@@ -67,9 +67,7 @@ public class performancePanel extends JPanel implements ActionListener{
 				
 				JDialog Info= new PerformanceGUI(performances,i);
 				Info.setLayout(new FlowLayout());
-				//Info.add(new PerformanceGUI(performances,i));
-			
-			
+				
 				Info.setSize(400,200);
 				Info.setLayout(new FlowLayout());
 				Info.setVisible(true);
@@ -78,30 +76,6 @@ public class performancePanel extends JPanel implements ActionListener{
 			}
 		}
 		
-		/*
-		if(ok == o)// ¾ë¹¹ÁÒ?
-		{
-			ok.removeActionListener(this);
-			cancel.removeActionListener(this);
-			
-			panel.add(pLabel);
-			panel.add(performancePlace);
-			panel2.add(nLabel);
-			panel2.add(performanceName);
-			
-			ok.addActionListener(this);
-			cancel.addActionListener(this);
-			dialog.setSize(300,300);
-			panel3.add(ok);
-			panel3.add(cancel);
-			dialog.setLayout(new FlowLayout(FlowLayout.LEFT,10,15));
-			dialog.add(panel);
-			dialog.add(panel2);
-			dialog.add(panel3);
-			
-			dialog.setVisible(true);
-		}
-		*/
 		 if(ok==o)
 		{
 			performances.add(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000),10));

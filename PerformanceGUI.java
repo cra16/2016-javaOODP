@@ -118,6 +118,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			Info.setSize(500,400);
 			Info.setLayout(new FlowLayout());
 			Info.setVisible(true);
+			this.dispose();
 			
 			update.removeActionListener(this);
 		}
