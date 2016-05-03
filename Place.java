@@ -20,7 +20,7 @@ public class Place {
 		this.currentNum[1] = 0;
 		
 		this.placeName[2] = "รควร";
-		this.maxSeat[2] = 1000;
+		this.maxSeat[2] = 100;
 		this.seat[2] = new Seat[this.maxSeat[2]];
 		for(int i=0;i<this.maxSeat[0];i++)
 			this.seat[2][i] = new Seat();

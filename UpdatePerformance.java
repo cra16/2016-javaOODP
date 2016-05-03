@@ -128,7 +128,7 @@ public class UpdatePerformance implements ActionListener {
 		return dialog;
 	}
 
-	public void eventUpdatePerformance(int currentIndex,int month, int day, String time,int cost){
+	public void eventUpdatePerformance(int currentIndex,int month, int day, String time,int cost,int placeNum){
 		
 		Calendar temp=Calendar.getInstance();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -150,8 +150,8 @@ public class UpdatePerformance implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		
-		performances.set(currentIndex,new Performance(currentIndex, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost));
+
+		performances.set(currentIndex,new Performance(placeNum, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost));
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -160,7 +160,7 @@ public class UpdatePerformance implements ActionListener {
 		if(o==ok)
 		{
 			System.out.println("GGG");
-			eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()));
+			eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()),performancePlace.getSelectedIndex());
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.dispose();
 		}

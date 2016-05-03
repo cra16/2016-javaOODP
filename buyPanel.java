@@ -21,6 +21,7 @@ public class buyPanel extends JPanel implements ActionListener{
 	public buyPanel(int performanceNum)
 	{
 		this.performanceNum = performanceNum;
+		ticketInformation = new JButton[performances.get(performanceNum).getMaxSeat()];
 		for(int i=0; i<performances.get(performanceNum).getMaxSeat();i++)
 		{
 			ticketInformation[i]=new JButton("ÁÂ¼® - " + (i+1));
