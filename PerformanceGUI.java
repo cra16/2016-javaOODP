@@ -105,12 +105,12 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		UpdatePerformance updateperformance = new UpdatePerformance();
 		DeletePerformance deleteperformance = new DeletePerformance();
 		if(o==update)
 		{
 			ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
-			JDialog Info= updateperformance.updatePerformance(performances,currentIndex);
+			
+			JDialog Info= new UpdatePerformanceGUI(performances);
 			Info.setLayout(new FlowLayout());
 			//Info.add(new PerformanceGUI(performances,i));
 		
@@ -121,6 +121,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			this.dispose();
 			
 			update.removeActionListener(this);
+			this.dispose();
 		}
 		else if(o==delete)
 		{
