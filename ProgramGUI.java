@@ -22,10 +22,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public static JFrame Program;
 	public static ProgramGUI programGUI;
 	private Host host;
-	private Audience audience = new Audience();
-	private int currentpage=-1;
-	private static ArrayList<Performance> performances = new ArrayList<Performance>();
-	private AddPerformance addPerform;
+	private  ArrayList<Performance> performances = new ArrayList<Performance>();
+	private AddPerformanceGUI addPerform;
 
 	
 	JPanel p1 = new JPanel();
@@ -146,7 +144,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 	
 	public void createBuyFrame()
 	{
-		currentpage=2;
 		JPanel bpanel = new buyPanel(0);
 		contentPane.removeAll();
 		contentPane.add(bpanel);
@@ -161,7 +158,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 
 	public void createTicketInformation()
 	{
-		currentpage=3;
 		JButton[] c = new JButton[10];
 		JPanel performPanelTop = new JPanel();
 		JPanel performPanelBottom = new JPanel();
@@ -203,7 +199,6 @@ public class ProgramGUI extends JFrame implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object o = e.getSource();
-		addPerform = new AddPerformance();
 		
 		//state pattern??
 			if(o==cancel)
@@ -214,8 +209,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 			}
 			else if(o==add)
 			{
-				addPerform.addPerformacne();
-				
+				addPerform = new AddPerformanceGUI();
+								
 			}
 			else if(o==login)
 			{
