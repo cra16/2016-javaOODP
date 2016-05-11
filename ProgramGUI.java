@@ -22,7 +22,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public static JFrame Program;
 	public static ProgramGUI programGUI;
 	private Host host;
-	private  ArrayList<Performance> performances = new ArrayList<Performance>();
+	private Factory perFactory = new PerformanceFactory();
+	private ArrayList<Product> performance = new ArrayList<Product>();
 	private AddPerformanceGUI addPerform;
 
 	
@@ -69,10 +70,13 @@ public class ProgramGUI extends JFrame implements ActionListener
 	public void setUser(int currentuser) {
 		this.user = currentuser;
 	}
-	public ArrayList<Performance> getPerformances() {
-		return performances;
+	public ArrayList<Product> getPerformances() {
+		return performance;
 	}
-
+	
+	public Factory getPerFactory() {
+		return perFactory;
+	}
 	public static JFrame getJFrame()
 	{
 		return Program;

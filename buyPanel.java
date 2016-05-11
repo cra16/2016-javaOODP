@@ -15,14 +15,14 @@ import javax.swing.JTextField;
 public class buyPanel extends JPanel implements ActionListener{
 	int performanceNum;
 	
-	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
-	JButton[] ticketInformation = new JButton[performances.get(0).getMaxSeat()];
+	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
+	JButton[] ticketInformation = new JButton[performances.get(0).getChooseProduct().getMaxSeat()];
 	
 	public buyPanel(int performanceNum)
 	{
 		this.performanceNum = performanceNum;
-		ticketInformation = new JButton[performances.get(performanceNum).getMaxSeat()];
-		for(int i=0; i<performances.get(performanceNum).getMaxSeat();i++)
+		ticketInformation = new JButton[performances.get(performanceNum).getChooseProduct().getMaxSeat()];
+		for(int i=0; i<performances.get(performanceNum).getChooseProduct().getMaxSeat();i++)
 		{
 			ticketInformation[i]=new JButton("ÁÂ¼® - " + (i+1));
 			ticketInformation[i].addActionListener(this);
@@ -35,10 +35,10 @@ public class buyPanel extends JPanel implements ActionListener{
 		int seatIndex = 0;
 		Object o = e.getSource();
 
-		for(int i=0;i<performances.get(0).getMaxSeat();i++){
+		for(int i=0;i<performances.get(0).getChooseProduct().getMaxSeat();i++){
 			if(ticketInformation[i] == o){
 				seatIndex = i;
-				new ReserveDialog(performances.get(this.performanceNum).getSeat()[seatIndex]);
+				new ReserveDialog(performances.get(this.performanceNum).getChooseProduct().getSeat()[seatIndex]);
 			}
 		}
 	}

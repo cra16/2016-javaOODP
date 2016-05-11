@@ -19,7 +19,7 @@ public class DeletePerformance implements ActionListener{
 	JButton delete = new JButton("ªË¡¶");
 	JButton cancel = new JButton("cancel");
 	private int currentIndex;
-	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
+	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
 	
 	public JDialog deletePerformance(int currentIndex)
 	{

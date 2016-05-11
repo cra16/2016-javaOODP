@@ -16,8 +16,8 @@ import javax.swing.JTextField;
 
 
 public class UpdatePerformance{
-	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
-	
+	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
+	private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
 	
 	public void updatePerformance()
 	{
@@ -48,7 +48,7 @@ public class UpdatePerformance{
 		}
 		
 
-		performances.set(currentIndex,new Performance(placeNum, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost));
+		performances.set(currentIndex,perFactory.createProduct(new Performance(placeNum, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost)));
 	}
 	
 }

@@ -11,7 +11,8 @@ import javax.swing.JTextField;
 
 
 public class performancePanel extends JPanel implements ActionListener{
-	private ArrayList<Performance> performances;
+	private ArrayList<Product> performances;
+	private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
 	JButton[] performance;
 	
 	
@@ -45,9 +46,9 @@ public class performancePanel extends JPanel implements ActionListener{
 		performances = ProgramGUI.getInstance().getPerformances();
 		performance = new JButton[performances.size()];
 		
-		for(Performance perform : performances)
+		for(Product perform : performances)
 		{
-			performance[i] = new JButton(perform.getName());
+			performance[i] = new JButton(perform.getChooseProduct().getName());
 			performance[i].addActionListener(this);
 			this.add(performance[i]);
 			i++;
@@ -78,7 +79,7 @@ public class performancePanel extends JPanel implements ActionListener{
 		
 		 if(ok==o)
 		{
-			performances.add(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000),10));
+			performances.add(perFactory.createProduct(new Performance(0, ProgramGUI.getInstance().getHost(), performanceName.getText(), new java.sql.Date(2016-5-20), new java.sql.Time(210000),10)));
 			ProgramGUI.getInstance().createPerformanceInformation();
 			dialog.dispose();
 		}

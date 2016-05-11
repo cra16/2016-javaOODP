@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddPerformance implements ActionListener {
-	private ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
-	
+	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
+	private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
 	
 	public void addPerformacne()
 	{
@@ -47,7 +47,7 @@ public class AddPerformance implements ActionListener {
 		}
 		
 		
-		performances.add(new Performance(placeindex, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost));
+		performances.add(perFactory.createProduct(new Performance(placeindex, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost)));
 	}
 
 	@Override

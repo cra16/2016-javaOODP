@@ -38,7 +38,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		
 		private int currentIndex;
 		
-	PerformanceGUI(ArrayList<Performance> performances,int index)
+	PerformanceGUI(ArrayList<Product> performances,int index)
 	{
 		currentIndex = index;
 		
@@ -46,21 +46,21 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		delete.removeActionListener(this);
 		
 		
-		Date tempdate = performances.get(index).getSchedule().getDate();
-		Time temptime = performances.get(index).getSchedule().getTime();
+		Date tempdate = performances.get(index).getChooseProduct().getSchedule().getDate();
+		Time temptime = performances.get(index).getChooseProduct().getSchedule().getTime();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(tempdate);
 		System.out.println(""+calendar.get(Calendar.YEAR));
-		plabel.setText("장소 : " +performances.get(index).getPlaceName());
+		plabel.setText("장소 : " +performances.get(index).getChooseProduct().getPlaceName());
 		hlabel.setText("주최자 : " +ProgramGUI.getInstance().getHost().getName());
-		slabel.setText("잔여 좌석수 : " + (performances.get(index).getMaxSeat() - performances.get(index).getCurrentNum()));
-		nlabel.setText("공연이름 : " +performances.get(index).getName());
+		slabel.setText("잔여 좌석수 : " + (performances.get(index).getChooseProduct().getMaxSeat() - performances.get(index).getChooseProduct().getCurrentNum()));
+		nlabel.setText("공연이름 : " +performances.get(index).getChooseProduct().getName());
 		dateLabel.setText("날짜 : " + calendar.get(Calendar.YEAR) +"-" + calendar.get(Calendar.MONTH)+"-" +calendar.get(Calendar.DATE));	
 		
 		calendar.setTime(temptime);
 		timeLabel.setText("시간 : " + calendar.get(Calendar.HOUR_OF_DAY) +"time");
-		costLabel.setText("가격 : " + performances.get(index).getCost());
+		costLabel.setText("가격 : " + performances.get(index).getChooseProduct().getCost());
 		
 		
 		panel1.add(plabel);
@@ -108,7 +108,7 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		DeletePerformance deleteperformance = new DeletePerformance();
 		if(o==update)
 		{
-			ArrayList<Performance> performances = ProgramGUI.getInstance().getPerformances();
+			ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
 			
 			JDialog Info= new UpdatePerformanceGUI(performances);
 			Info.setLayout(new FlowLayout());
