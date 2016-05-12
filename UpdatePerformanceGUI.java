@@ -45,7 +45,7 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 	int[] daydata = new int[31];
 
 	
-	public UpdatePerformanceGUI(ArrayList<Performance> performances){
+	public UpdatePerformanceGUI(ArrayList<Product> performances){
 		//여기도 GUI로 따로뺄거 일단 구현만해놓음
 		Place place = new Place();//place저장공간이라서
 
@@ -53,7 +53,7 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 		int dayindex=0;
 		int monthindex=0;
 		int timeindex=0;
-		Performance update_perform = performances.get(currentIndex);
+		Product update_perform = performances.get(currentIndex);
 		for(int i=0; i<31; i++)
 		{
 		
@@ -63,27 +63,27 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 		for(int i=0; i<3; i++)
 		{
 			performancePlace.addItem(place.getPlaceName(i));
-			if(place.getPlaceName(i).equals(update_perform.getPlaceName()))//장소이름이 중복아니라고 가정햇을때 이렇게함 아마 다른방법도 잇을듯
+			if(place.getPlaceName(i).equals(update_perform.getChooseProduct().getPlaceName()))//장소이름이 중복아니라고 가정햇을때 이렇게함 아마 다른방법도 잇을듯
 				placeindex=i;
 		}
 				
 		for(int i=0; i<31; i++)
 		{
 			dayBox.addItem(daydata[i]);
-			if(daydata[i]==update_perform.getSchedule().getDate().getDate())
+			if(daydata[i]==update_perform.getChooseProduct().getSchedule().getDate().getDate())
 				dayindex=i;
 		}
 		for(int i=0; i<12;i++)
 		{
 			monthBox.addItem(monthstamp[i]);
-			if(monthstamp[i].equals(String.valueOf(update_perform.getSchedule().getDate().getMonth()+1)))
+			if(monthstamp[i].equals(String.valueOf(update_perform.getChooseProduct().getSchedule().getDate().getMonth()+1)))
 				monthindex=i;
 				
 		}
 		for(int i=0; i<timestamp.length; i++)
 		{
 			timeBox.addItem(timestamp[i]);
-			if(timestamp[i].equals(update_perform.getSchedule().getTime().getHours()+":"+update_perform.getSchedule().getTime().getMinutes()))
+			if(timestamp[i].equals(update_perform.getChooseProduct().getSchedule().getTime().getHours()+":"+update_perform.getChooseProduct().getSchedule().getTime().getMinutes()))
 				timeindex= i;
 		}
 		performancePlace.setSelectedIndex(placeindex);
