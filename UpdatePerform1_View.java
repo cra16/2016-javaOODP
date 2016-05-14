@@ -3,8 +3,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPerform1_View extends JFrame //implements ActionListener
-{
+/**
+ * Created by Eunbee on 2016-05-15.
+ */
+public class UpdatePerform1_View extends JFrame {
     Container contentPane;
     String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
     String[] placestamp = {"학관 101호", "학관 104호", "채플"};
@@ -12,7 +14,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
     String[] periodstamp = new String[7];
     int i = 0;
 
-    AddPerform1_View()
+    UpdatePerform1_View()
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -20,7 +22,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
 
-        JLabel title = new JLabel("공연 등록 - [1/2]");
+        JLabel title = new JLabel("공연 수정 - [1/2]");
         JLabel label1 = new JLabel("공연 이름 :");
         JLabel label2 = new JLabel("장소 :");
         JLabel label3 = new JLabel("날짜 :");
@@ -88,7 +90,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new AddPerform2_View().setVisible(true); // Main Form to show after the Login Form.
+                new UpdatePerform2_View().setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });
@@ -100,14 +102,13 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         this.setContentPane(add1panel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
     }
 
 
     public static void main(String arr[])
 
     {
-        new AddPerform1_View();
+        new UpdatePerform1_View();
     }
 
 
