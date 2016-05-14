@@ -1,0 +1,86 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class AddPerform1_View extends JFrame //implements ActionListener
+{
+    Container contentPane;
+    int[] period = {150000,160000,170000,180000,190000,200000,210000,220000};
+    String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
+    int[] daystamp = new int[31];
+    int i = 0;
+
+
+
+    AddPerform1_View()
+    {
+        contentPane=this.getContentPane();
+        JPanel add1panel = new JPanel();
+        setBounds(80,80,250,500);
+        this.setVisible(true);
+        this.setLayout( null);
+
+        JLabel label1 = new JLabel("공연 이름 :");
+        JLabel label2 = new JLabel("장소 :");
+        JLabel label3 = new JLabel("날짜 :");
+        JLabel label4 = new JLabel("기간 :");
+        JLabel label5 = new JLabel("공연 설명 :");
+
+        JTextArea area1 = new JTextArea();  //공연설명
+        JTextField field1 = new JTextField(15); //공연이름
+        JButton btn1 = new JButton("다음");
+        JComboBox monthList = new JComboBox(monthstamp);
+        JComboBox dayList = new JComboBox()
+        JComboBox periodList = new JComboBox(timestamp);
+
+
+        label1.setBounds(30,70,80,40);  //공연이름
+        label2.setBounds(30,110,80,40); //장소
+        label3.setBounds(30,150,80,40); //날짜
+        label4.setBounds(30,190,80,40); //기간
+        label5.setBounds(30,230,80,40); //공연 설명
+        btn1.setBounds(160,420,70,50);
+        area1.setBounds(30,270,200,130);
+        field1.setBounds(110,70, 120, 40);
+        dayList.setBounds(110, 150, 80, 40);
+
+
+        add1panel.add(label1);
+        add1panel.add(label2);
+        add1panel.add(label3);
+        add1panel.add(label4);
+        add1panel.add(label5);
+        add1panel.add(field1);
+        add1panel.add(btn1);
+        add1panel.add(area1);
+        add1panel.add(petList);
+
+        btn1.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e) {
+                new AddPerform2_View().setVisible(true); // Main Form to show after the Login Form.
+                dispose();
+            }
+        });
+
+        // frame setting
+        add1panel.setVisible(true);
+        add1panel.setLayout(null);
+        setSize(250,500);
+        this.setContentPane(add1panel);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
+
+
+    public static void main(String arr[])
+
+    {
+        new AddPerform1_View();
+    }
+
+
+
+}
