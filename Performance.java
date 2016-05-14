@@ -9,11 +9,11 @@ public class Performance {
 	private String name;
 	private String description;
 	
-	public Performance(int placeNum, Host host, String name, Date firstDay, int duration, Time[] time ,int cost, String description){
+	public Performance(int placeNum, Host host, Schedule schedule, String name, int cost, String description){
 		this.placeNum = placeNum;
 		this.host = host;
 		this.name = name;
-		this.schedule = new Schedule(name, firstDay, duration, time);
+		this.schedule = schedule;
 		this.cost = cost;
 		this.description = description;
 	}
