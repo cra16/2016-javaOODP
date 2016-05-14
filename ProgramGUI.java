@@ -30,8 +30,8 @@ public class ProgramGUI extends JFrame implements ActionListener
 	JPanel p1 = new JPanel();
 	JButton[] b = new JButton[10];
 	Container contentPane;
-	JButton cancel = new JButton("µÚ·Î°¡±â");
-	JButton add = new JButton("Ãß°¡");
+	JButton cancel = new JButton("ï¿½Ú·Î°ï¿½ï¿½ï¿½");
+	JButton add = new JButton("ï¿½ß°ï¿½");
 	JButton update = new JButton("update");
 	
 	int user=0;
@@ -46,7 +46,7 @@ public class ProgramGUI extends JFrame implements ActionListener
 	//singleton
 	private ProgramGUI()
 	{
-		host=new Host("ÀÓÇö¿ì","01093045749","darkzero");
+		//host = new Host("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½","01093045749","darkzero");
 		setTitle("title");
 		setSize(768,576);
 		setLayout(new BorderLayout());

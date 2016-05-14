@@ -1,12 +1,17 @@
+import java.util.ArrayList;
 
 public class Audience {
-
-	
 	private String name;
-	private String phonenumber;
+	private String phoneNum;
 	private String userID;
-	private Ticket ticket;
+	private ArrayList<Ticket> tickets;
 	
+	public Audience(String name, String phoneNum, String userID, ArrayList<Ticket> tickets){
+		this.name = name;
+		this.phoneNum = phoneNum;
+		this.userID = userID;
+		this.tickets = tickets;
+	}
 	
 	public void addTicket()
 	{
@@ -35,22 +40,16 @@ public class Audience {
 		this.name = name;
 	}
 	public String getPhonenumber() {
-		return phonenumber;
+		return phoneNum;
 	}
 	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+		this.phoneNum = phonenumber;
 	}
 	public String getUserID() {
 		return userID;
 	}
 	public void setUserID(String userID) {
 		this.userID = userID;
-	}
-	public Ticket getTicket() {
-		return ticket;
-	}
-	public void setTicket(Ticket ticket) {
-		this.ticket = ticket;
 	}
 	
 }

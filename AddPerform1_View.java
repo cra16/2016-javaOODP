@@ -90,14 +90,4 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-    public static void main(String arr[])
-
-    {
-        new AddPerform1_View();
-    }
-
-
-
 }

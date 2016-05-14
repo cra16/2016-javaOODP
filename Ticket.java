@@ -1,12 +1,13 @@
+import java.sql.*;
 
 public class Ticket {
-	private Schedule schedule;
-	private String serialnumber;
-	private int cost;
-	private Performance performance;
+	private Date date;
+	private Time time;
+	private String performanceName;
 	
-	public Ticket(Performance performance){
-		this.performance=performance;
+	public Ticket(String performanceName, Date date, Time time){
+		this.performanceName = performanceName;
+		this.date = date;
+		this.time = time;
 	}
-	
 }

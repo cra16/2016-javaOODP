@@ -22,8 +22,7 @@ public class HomeView extends JFrame //implements ActionListener
         JButton myPerform = new JButton("내 공연");
 
         DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(new Object[] {
-                "공연", "날짜"});
+        model.setColumnIdentifiers(new Object[] {"공연", "날짜"});
 
         JTable table = new JTable(model);
         model.insertRow(0, new Object[] {"공연", "날짜"});
@@ -59,13 +58,4 @@ public class HomeView extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-    public static void main(String arr[])
-    {
-        new HomeView();
-    }
-
-
-
 }
