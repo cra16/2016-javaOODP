@@ -10,7 +10,7 @@ public class LoginView extends JFrame //implements ActionListener
     {
         contentPane=this.getContentPane();
         JPanel loginpanel = new JPanel();
-        setBounds(0,0,250,500);
+        setBounds(0,0,350,600);
         this.setVisible(true);
         this.setLayout( null);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -22,7 +22,8 @@ public class LoginView extends JFrame //implements ActionListener
         JRadioButton checkAudience = new JRadioButton("Audience",false);
         JRadioButton checkHost = new JRadioButton("Host",false);
         ButtonGroup btngroup = new ButtonGroup();
-        JButton login = new JButton("�α���");
+
+        JButton login = new JButton("로그인");
         btngroup.add(checkAudience);
         btngroup.add(checkHost);
 
@@ -73,7 +74,7 @@ public class LoginView extends JFrame //implements ActionListener
         // frame setting
         loginpanel.setVisible(true);
         loginpanel.setLayout(null);
-        setSize(250,500);
+        setSize(350,600);
         this.setContentPane(loginpanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

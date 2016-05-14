@@ -3,12 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPerform2_View extends JFrame //implements ActionListener
+public class UpdatePerform2_View extends JFrame //implements ActionListener
 {
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
 
-    AddPerform2_View()
+    UpdatePerform2_View()
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -17,7 +17,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         this.setLayout( null);
 
 
-        JLabel title = new JLabel("공연 등록 - [2/2]");
+        JLabel title = new JLabel("공연 수정 - [2/2]");
         JLabel subtitle = new JLabel("<날짜별 시간 선택>");
         JButton btn1 = new JButton("완료");
 
@@ -61,7 +61,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                // 제출 처리 해주세요.
+                // 제출 처리 해주세요
                 dispose();
             }
         });
@@ -75,4 +75,14 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+
+
+    public static void main(String arr[])
+
+    {
+        new UpdatePerform2_View();
+    }
+
+
+
 }
