@@ -24,7 +24,14 @@ public class LoginController {
 	
 		
 			DBHelper.getInstance(this.loginID,this.loginPassword,userType);
-		
+			if(userType==1)
+			{
+				new HomeView();
+			}
+			else if(userType==2)
+			{
+				new HomeView_audience();
+			}
 			
 		
 	}
