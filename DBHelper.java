@@ -8,7 +8,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class DBHelper {
-	private static DBHelper DBHelper;
+	private static DBHelper DBHelper=null;
 	private Connection con;
 	private Statement stmt;
 	private ResultSet result;
@@ -16,35 +16,40 @@ public class DBHelper {
 	private Audience audience;
 	private String query;
 	private ArrayList<String> performs;
+	//private Factory perFactory = new PerformanceFactory();
+	//private ArrayList<Product> performance = new ArrayList<Product>();
 	
-	public DBHelper(String id, String pw, int type){
+	private DBHelper(String id, String pw, int type){
+		System.out.println("GG");
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
-			
-			if(type == 0){
-				query = "select * from host where user_id = "+id+"passwd = "+pw;
+		
+			if(type == 1){
+				query = "select * from host where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
-				String user_id = result.getString(1);
-				String name = result.getString(3);
-				String phoneNum = result.getString(4);
+				result.next();
+				String user_id = result.getString("user_id");
+				String name = result.getString("name");
+				String phoneNum = result.getString("phoneNum");
 				
-				query = "select performanceName from performance where hostName = "+name;
+				query = "select performanceName from performance where hostName = '"+name+"'";
 				result = stmt.executeQuery(query);
 				ArrayList<String> performanceList = null;
 				while(result.next()){
 					performanceList.add(result.getString(1));
 				}
 				host = new Host(name, phoneNum, user_id, performanceList);
-			}else if(type ==1){
-				query = "select * from audience where user_id = "+id+"passwd = "+pw;
+			}else if(type ==2){
+				query = "select * from audience where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
+				result.next();
 				String user_id = result.getString(1);
 				String name = result.getString(3);
 				String phoneNum = result.getString(4);
 				
-				query = "select * from ticket where audienceName = "+name;
+				query = "select * from ticket where audienceName = '"+name+"'";
 				result = stmt.executeQuery(query);
 				ArrayList<Ticket> tickets = null;
 				while(result.next()){
@@ -73,6 +78,11 @@ public class DBHelper {
 		}
 		return DBHelper;
 	}
+	public static DBHelper getInstance()
+	{
+		return DBHelper;
+	}
+	
 	
 	public Performance getPerformance(String performanceName){
 		Performance performance = null;
@@ -80,6 +90,7 @@ public class DBHelper {
 		try{
 			query = "select * from performance where performanceName = " + performanceName;
 			result = stmt.executeQuery(query);
+			result.next();
 			String hostName = result.getString("hostNam");
 			int placeNum = result.getInt("placeNum");
 			int cost = result.getInt("cost");
@@ -87,6 +98,7 @@ public class DBHelper {
 			
 			query = "select user_id, phoneNum from host where name = " + hostName;
 			result = stmt.executeQuery(query);
+			result.next();
 			String user_id = result.getString("user_id");
 			String phoneNum = result.getString("phoneNum");
 			
@@ -100,6 +112,7 @@ public class DBHelper {
 			
 			query = "select * from schedule where performanceName = " + performanceName;
 			result = stmt.executeQuery(query);
+			result.next();
 			Date firstDay = result.getDate("firstDay");
 			int duration = result.getInt("duration");
 			Time[] time = new Time[duration];
@@ -116,4 +129,17 @@ public class DBHelper {
 	
 		return performance;
 	}
+
+	public Host getHost() {
+		return host;
+	}
+
+	public Audience getAudience() {
+		return audience;
+	}
+
+
+	
+	
+	
 }

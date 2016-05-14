@@ -18,29 +18,22 @@ public class LoginController {
 		
 	}
 	
-	public Object checkLogin()
+	public void checkLogin()
 	{
 		//call db model.
-		String dbID="darkzero";
-		String dbPw = "1";
-		int dbType=1;
+	
 		
-		if(dbID.equals(this.loginID)&&dbPw.equals(this.loginPassword)&& userType == dbType)
-		{
-			ProgramSession.getInstance(this.loginID,this.loginPassword,userType);//Session Start
-
+			DBHelper.getInstance(this.loginID,this.loginPassword,userType);
 			if(userType==1)
-				return new HomeView(); // Main Form to show after the Login Form.;
+			{
+				new HomeView();
+			}
 			else if(userType==2)
-				return new HomeView_audience();
-			else
-				return null;
+			{
+				new HomeView_audience();
+			}
 			
-		}
-		else
-		{
-			return null;
-		}
+		
 	}
 	
 	

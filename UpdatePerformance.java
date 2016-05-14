@@ -1,6 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import javax.swing.JTextField;
 
 
 public class UpdatePerformance{
-	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
-	private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
+	//private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
+	//private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
 	
 	public void updatePerformance()
 	{
-		//¿©±âµµ GUI·Î µû·Î»¬°Å ÀÏ´Ü ±¸Çö¸¸ÇØ³õÀ½
+		//ï¿½ï¿½ï¿½âµµ GUIï¿½ï¿½ ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
 
 	}
 
@@ -46,9 +47,11 @@ public class UpdatePerformance{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		Time[] time2= new Time[4];
 
-		performances.set(currentIndex,perFactory.createProduct(new Performance(placeNum, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost)));
+	//	performances.set(currentIndex,perFactory.createProduct(new Performance(placeNum, DBHelper.getInstance().getHost(),
+	//			new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
+	//			,cost,"1")));
 	}
 	
 }

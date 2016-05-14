@@ -1,4 +1,4 @@
-import java.awt.Dialog;
+/*import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +24,7 @@ public class buyPanel extends JPanel implements ActionListener{
 		ticketInformation = new JButton[performances.get(performanceNum).getChooseProduct().getMaxSeat()];
 		for(int i=0; i<performances.get(performanceNum).getChooseProduct().getMaxSeat();i++)
 		{
-			ticketInformation[i]=new JButton("ÁÂ¼® - " + (i+1));
+			ticketInformation[i]=new JButton("ï¿½Â¼ï¿½ - " + (i+1));
 			ticketInformation[i].addActionListener(this);
 			this.add(ticketInformation[i]);
 		}
@@ -42,4 +42,4 @@ public class buyPanel extends JPanel implements ActionListener{
 			}
 		}
 	}
-}
+}*/

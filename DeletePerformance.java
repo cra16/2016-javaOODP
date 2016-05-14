@@ -1,4 +1,4 @@
-import java.awt.event.ActionEvent;
+/*import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -16,7 +16,7 @@ public class DeletePerformance implements ActionListener{
 	
 	private JPanel panel1= new JPanel();
 	private JPanel panel2= new JPanel();
-	JButton delete = new JButton("»èÁ¦");
+	JButton delete = new JButton("ï¿½ï¿½ï¿½ï¿½");
 	JButton cancel = new JButton("cancel");
 	private int currentIndex;
 	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
@@ -24,7 +24,7 @@ public class DeletePerformance implements ActionListener{
 	public JDialog deletePerformance(int currentIndex)
 	{
 		this.currentIndex= currentIndex;
-		JLabel label = new JLabel("ÀÌ °ø¿¬À» »èÁ¦ ÇÏ½Ã°Ú½À´Ï±î?");
+		JLabel label = new JLabel("ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?");
 		
 		delete.addActionListener(this);
 		cancel.addActionListener(this);
@@ -59,4 +59,4 @@ public class DeletePerformance implements ActionListener{
 			dialog.dispose();
 		}
 	}
-}
+}*/

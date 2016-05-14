@@ -1,4 +1,4 @@
-import java.awt.FlowLayout;
+/*import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -15,9 +15,9 @@ import javax.swing.JPanel;
 public class PerformanceGUI extends JDialog implements ActionListener{
 
 		JButton update=new JButton("update");
-		JButton delete=new JButton("»èÁ¦");
-		JButton reserve = new JButton("¿¹¾à");
-		JButton close = new JButton("´Ý±â");
+		JButton delete=new JButton("ï¿½ï¿½ï¿½ï¿½");
+		JButton reserve = new JButton("ï¿½ï¿½ï¿½ï¿½");
+		JButton close = new JButton("ï¿½Ý±ï¿½");
 		
 		JPanel panel1 = new JPanel();
 		JPanel panel2 = new JPanel();
@@ -46,21 +46,21 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 		delete.removeActionListener(this);
 		
 		
-		Date tempdate = performances.get(index).getChooseProduct().getSchedule().getDate();
-		Time temptime = performances.get(index).getChooseProduct().getSchedule().getTime();
+		Date tempdate = performances.get(index).getChooseProduct().getSchedule().getFirstDay();
+		Time[] temptime = performances.get(index).getChooseProduct().getSchedule().getTime();
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(tempdate);
 		System.out.println(""+calendar.get(Calendar.YEAR));
-		plabel.setText("Àå¼Ò : " +performances.get(index).getChooseProduct().getPlaceName());
-		hlabel.setText("ÁÖÃÖÀÚ : " +ProgramGUI.getInstance().getHost().getName());
-		slabel.setText("ÀÜ¿© ÁÂ¼®¼ö : " + (performances.get(index).getChooseProduct().getMaxSeat() - performances.get(index).getChooseProduct().getCurrentNum()));
-		nlabel.setText("°ø¿¬ÀÌ¸§ : " +performances.get(index).getChooseProduct().getName());
-		dateLabel.setText("³¯Â¥ : " + calendar.get(Calendar.YEAR) +"-" + calendar.get(Calendar.MONTH)+"-" +calendar.get(Calendar.DATE));	
+		plabel.setText("ï¿½ï¿½ï¿½ : " +performances.get(index).getChooseProduct().getPlaceName());
+		hlabel.setText("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " +ProgramGUI.getInstance().getHost().getName());
+		slabel.setText("ï¿½Ü¿ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½ : " + (performances.get(index).getChooseProduct().getMaxSeat() - performances.get(index).getChooseProduct().getCurrentNum()));
+		nlabel.setText("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ : " +performances.get(index).getChooseProduct().getName());
+		dateLabel.setText("ï¿½ï¿½Â¥ : " + calendar.get(Calendar.YEAR) +"-" + calendar.get(Calendar.MONTH)+"-" +calendar.get(Calendar.DATE));	
 		
-		calendar.setTime(temptime);
-		timeLabel.setText("½Ã°£ : " + calendar.get(Calendar.HOUR_OF_DAY) +"time");
-		costLabel.setText("°¡°Ý : " + performances.get(index).getChooseProduct().getCost());
+		calendar.setTime(temptime[0]);
+		timeLabel.setText("ï¿½Ã°ï¿½ : " + calendar.get(Calendar.HOUR_OF_DAY) +"time");
+		costLabel.setText("ï¿½ï¿½ï¿½ï¿½ : " + performances.get(index).getChooseProduct().getCost());
 		
 		
 		panel1.add(plabel);
@@ -149,4 +149,4 @@ public class PerformanceGUI extends JDialog implements ActionListener{
 			close.removeActionListener(this);
 		}
 	}
-}
+}*/

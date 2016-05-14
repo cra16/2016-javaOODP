@@ -1,6 +1,7 @@
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,16 +16,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddPerformance implements ActionListener {
-	private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
-	private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
+	
 	
 	public void addPerformacne()
 	{
-		//¿©±ä ³ªÁß¿¡ GUI·Î µû·Î »¬°Å
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß¿ï¿½ GUIï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		}
 	
-	public void eventAddPerformance(int placeindex,int month, int day, String time,int cost,String PerformanceName)
+	public void eventAddPerformance(int placeindex,int month, int day, int duration, String[] time,int cost,String PerformanceName)
 	{
+		
+		
 		
 		Calendar temp=Calendar.getInstance();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -45,9 +47,12 @@ public class AddPerformance implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		Time[] time2= new Time[4];
 		
-		
-		performances.add(perFactory.createProduct(new Performance(placeindex, ProgramGUI.getInstance().getHost(), PerformanceName, new java.sql.Date(date.getTime()), new java.sql.Time(t.getTime()),cost)));
+
+		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
+		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
+		//		,cost,"1"));
 	}
 
 	@Override

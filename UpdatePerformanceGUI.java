@@ -20,11 +20,11 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 	private JPanel panel5 = new JPanel();
 	private JPanel panel6 = new JPanel();
 	
-	JLabel pLabel = new JLabel("Àå¼Ò :");
-	JLabel nLabel = new JLabel("°ø¿¬ÀÌ¸§ :");
-	JLabel timeLabel =new JLabel("½Ã°£ :");
-	JLabel dateLabel = new JLabel("³¯Â¥ :");
-	JLabel costLabel = new JLabel("°¡°Ý : ");
+	JLabel pLabel = new JLabel("ï¿½ï¿½ï¿½ :");
+	JLabel nLabel = new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :");
+	JLabel timeLabel =new JLabel("ï¿½Ã°ï¿½ :");
+	JLabel dateLabel = new JLabel("ï¿½ï¿½Â¥ :");
+	JLabel costLabel = new JLabel("ï¿½ï¿½ï¿½ï¿½ : ");
 	
 	private JComboBox<String> performancePlace = new JComboBox<String>();
 	private JComboBox<Integer> dayBox= new JComboBox<Integer>();
@@ -46,8 +46,8 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 
 	
 	public UpdatePerformanceGUI(ArrayList<Product> performances){
-		//¿©±âµµ GUI·Î µû·Î»¬°Å ÀÏ´Ü ±¸Çö¸¸ÇØ³õÀ½
-		Place place = new Place();//placeÀúÀå°ø°£ÀÌ¶ó¼­
+		//ï¿½ï¿½ï¿½âµµ GUIï¿½ï¿½ ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø³ï¿½ï¿½ï¿½
+		Place place = new Place();//placeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½
 
 		int placeindex =0;
 		int dayindex=0;
@@ -63,28 +63,28 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 		for(int i=0; i<3; i++)
 		{
 			performancePlace.addItem(place.getPlaceName(i));
-			if(place.getPlaceName(i).equals(update_perform.getChooseProduct().getPlaceName()))//Àå¼ÒÀÌ¸§ÀÌ Áßº¹¾Æ´Ï¶ó°í °¡Á¤ÇÞÀ»¶§ ÀÌ·¸°ÔÇÔ ¾Æ¸¶ ´Ù¸¥¹æ¹ýµµ ÀÕÀ»µí
-				placeindex=i;
+//			if(place.getPlaceName(i).equals(update_perform.getChooseProduct().getPlaceName()))//ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½ßºï¿½ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Æ¸ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//				placeindex=i;
 		}
 				
 		for(int i=0; i<31; i++)
 		{
 			dayBox.addItem(daydata[i]);
-			if(daydata[i]==update_perform.getChooseProduct().getSchedule().getDate().getDate())
-				dayindex=i;
+//			if(daydata[i]==update_perform.getChooseProduct().getSchedule().getDate().getDate())
+//				dayindex=i;
 		}
 		for(int i=0; i<12;i++)
 		{
 			monthBox.addItem(monthstamp[i]);
-			if(monthstamp[i].equals(String.valueOf(update_perform.getChooseProduct().getSchedule().getDate().getMonth()+1)))
-				monthindex=i;
+//			if(monthstamp[i].equals(String.valueOf(update_perform.getChooseProduct().getSchedule().getDate().getMonth()+1)))
+//				monthindex=i;
 				
 		}
 		for(int i=0; i<timestamp.length; i++)
 		{
 			timeBox.addItem(timestamp[i]);
-			if(timestamp[i].equals(update_perform.getChooseProduct().getSchedule().getTime().getHours()+":"+update_perform.getChooseProduct().getSchedule().getTime().getMinutes()))
-				timeindex= i;
+//			if(timestamp[i].equals(update_perform.getChooseProduct().getSchedule().getTime().getHours()+":"+update_perform.getChooseProduct().getSchedule().getTime().getMinutes()))
+//				timeindex= i;
 		}
 		performancePlace.setSelectedIndex(placeindex);
 		dayBox.setSelectedIndex(dayindex);
@@ -130,14 +130,14 @@ public class UpdatePerformanceGUI extends JDialog implements ActionListener {
 			UpdatePerformance update = new UpdatePerformance();
 			System.out.println("GGG");
 			update.eventUpdatePerformance(currentIndex,monthdata[monthBox.getSelectedIndex()],daydata[dayBox.getSelectedIndex()],timestamp[timeBox.getSelectedIndex()],Integer.parseInt(costTextfield.getText()),performancePlace.getSelectedIndex(),performanceName.getText());
-			ProgramGUI.getInstance().createPerformanceInformation();
+//			ProgramGUI.getInstance().createPerformanceInformation();
 			this.dispose();
 			
 		}
 		else if(o==cancel)
 		{
-			System.out.println("cancel ÀÛµ¿");
-			ProgramGUI.getInstance().createPerformanceInformation();
+			System.out.println("cancel ï¿½Ûµï¿½");
+//			ProgramGUI.getInstance().createPerformanceInformation();
 			this.dispose();
 		}
 	}

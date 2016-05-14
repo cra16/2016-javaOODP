@@ -65,7 +65,7 @@ public class LoginView extends JFrame //implements ActionListener
             		checknumber=0;
             	LoginController controller = new LoginController(text1.getText(),text2.getText(),checknumber);//input user information.
             	System.out.println();
-            	if(controller.checkLogin()!=null)
+            	controller.checkLogin();
             		dispose();
 
             }
