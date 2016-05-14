@@ -43,9 +43,19 @@ public class LoginView extends JFrame //implements ActionListener
 
         login.addActionListener(new ActionListener()
         {
+        	
             public void actionPerformed(ActionEvent e) {
-                new HomeView().setVisible(true); // Main Form to show after the Login Form.
-                dispose();
+            	int checknumber;
+            	if(checkAudience.isSelected())
+            		checknumber=1;
+            	else if(checkHost.isSelected())
+            		checknumber=2;
+            	else
+            		checknumber=0;
+            	LoginController controller = new LoginController(text1.getText(),text2.getText(),checknumber);//input user information.
+            	System.out.println();
+            	if(controller.checkLogin()!=null)
+            		dispose();
             }
         });
 
@@ -60,11 +70,7 @@ public class LoginView extends JFrame //implements ActionListener
     }
 
 
-    public void actionPerformed(ActionEvent e)
-    {
-        new HomeView().setVisible(true); // Main Form to show after the Login Form.
-        dispose();
-    }
+ 
 
 
     public static void main(String arr[])
