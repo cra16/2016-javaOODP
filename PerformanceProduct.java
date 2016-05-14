@@ -1,14 +1,14 @@
 
 public class PerformanceProduct extends Product {
 
-	Performance performance;
+	String performance;
 	
-	public PerformanceProduct(Performance performance) {
+	public PerformanceProduct(String performance) {
 		this.performance=performance;
 	}
 
 	@Override
-	public Performance getChooseProduct() {
+	public String getChooseProduct() {
 		return performance;
 		
 	}

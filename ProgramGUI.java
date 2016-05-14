@@ -17,7 +17,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 
 
-public class ProgramGUI extends JFrame implements ActionListener
+/*public class ProgramGUI extends JFrame implements ActionListener
 {
 	public static JFrame Program;
 	public static ProgramGUI programGUI;
@@ -196,4 +196,4 @@ public class ProgramGUI extends JFrame implements ActionListener
 				}
 			}
 		}
-}
+}*/

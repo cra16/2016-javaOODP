@@ -1,4 +1,4 @@
-import java.awt.FlowLayout;
+/*import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.*;
@@ -33,8 +33,8 @@ public class performancePanel extends JPanel implements ActionListener{
 	private JButton ok= new JButton("ok");
 	private JButton cancel = new JButton("cancel");
 	
-	JLabel pLabel = new JLabel("Àå¼Ò : ");
-	JLabel nLabel = new JLabel("°ø¿¬ÀÌ¸§ :");
+	JLabel pLabel = new JLabel("ï¿½ï¿½ï¿½ : ");
+	JLabel nLabel = new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :");
 	
 	
 	
@@ -63,7 +63,7 @@ public class performancePanel extends JPanel implements ActionListener{
 		
 		for(int i=0; i<performances.size();i++)
 		{
-			if(performance[i] == o)//°ø¿¬ ´­·¶À» ¶§ ÄÑÁö´Â È­¸é
+			if(performance[i] == o)//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½
 			{
 				
 				JDialog Info= new PerformanceGUI(performances,i);
@@ -84,4 +84,4 @@ public class performancePanel extends JPanel implements ActionListener{
 			dialog.dispose();
 		}
 	}
-}
+}*/

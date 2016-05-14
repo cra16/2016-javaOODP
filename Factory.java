@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public abstract class Factory {
 
-	public final Product create(Performance performance)
+	public final Product create(String performance)
 	{
 		Product p = createProduct(performance);
 
@@ -12,7 +12,7 @@ public abstract class Factory {
 		
 	}
 	
-	protected abstract Product createProduct(Performance performance);
+	protected abstract Product createProduct(String performance);
 	
 	
 }

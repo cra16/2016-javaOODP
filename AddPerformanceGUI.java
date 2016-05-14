@@ -1,4 +1,4 @@
-import java.awt.FlowLayout;
+/*import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,11 +20,11 @@ public class AddPerformanceGUI extends JDialog implements ActionListener{
 	private JPanel panel5 = new JPanel();
 	private JPanel panel6 = new JPanel();
 	
-	JLabel pLabel = new JLabel("Àå¼Ò :");
-	JLabel nLabel = new JLabel("°ø¿¬ÀÌ¸§ :");
-	JLabel timeLabel =new JLabel("½Ã°£ :");
-	JLabel dateLabel = new JLabel("³¯Â¥ :");
-	JLabel costLabel = new JLabel("°¡°Ý : ");
+	JLabel pLabel = new JLabel("ï¿½ï¿½ï¿½ :");
+	JLabel nLabel = new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸ï¿½ :");
+	JLabel timeLabel =new JLabel("ï¿½Ã°ï¿½ :");
+	JLabel dateLabel = new JLabel("ï¿½ï¿½Â¥ :");
+	JLabel costLabel = new JLabel("ï¿½ï¿½ï¿½ï¿½ : ");
 	
 	private JComboBox<String> performancePlace = new JComboBox<String>();
 	private JComboBox<Integer> dayBox= new JComboBox<Integer>();
@@ -44,7 +44,7 @@ public class AddPerformanceGUI extends JDialog implements ActionListener{
 	
 	public AddPerformanceGUI()
 	{
-		Place place = new Place();//placeÀúÀå°ø°£ÀÌ¶ó¼­
+		Place place = new Place();//placeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½
 		
 		for(int i=0; i<31; i++)
 		{
@@ -115,4 +115,4 @@ public class AddPerformanceGUI extends JDialog implements ActionListener{
 		}
 	}
 	
-}
+}*/
