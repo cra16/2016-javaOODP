@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class AddPerform2_View extends JFrame //implements ActionListener
 {
     Container contentPane;
+    String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
 
     AddPerform2_View()
     {
@@ -15,31 +16,41 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
 
-        JLabel label1 = new JLabel("공연 이름 :");
-        JLabel label2 = new JLabel("장소 :");
-        JLabel label3 = new JLabel("날짜 :");
-        JLabel label4 = new JLabel("기간 :");
-        JLabel label5 = new JLabel("공연 설명 :");
 
-        JTextArea area1 = new JTextArea();  //공연설명
-        JTextField field1 = new JTextField(15); //공연이름
-        JButton btn1 = new JButton("다음");
+        JLabel title = new JLabel("공연 등록 - [2/2]");
+        JLabel subtitle = new JLabel("<날짜별 시간 선택>");
+        JButton btn1 = new JButton("완료");
 
-        label1.setBounds(30,70,80,40);
-        label2.setBounds(30,110,80,40);
-        label3.setBounds(30,150,80,40);
-        label4.setBounds(30,190,80,40);
-        label5.setBounds(30,230,80,40);
-        field1.setBounds(110,70, 120, 40);
+        // 선택한 기간에 따라 label 갯수 생성
+        JLabel label1 = new JLabel("날짜1 :"); //SAMPLE 1
+        JLabel label2 = new JLabel("날짜2 :"); //SAMPLE 2
+        JLabel label3 = new JLabel("날짜3 :"); //SAMPLE 3
+        JComboBox drop1 = new JComboBox(timestamp);
+        JComboBox drop2 = new JComboBox(timestamp);
+        JComboBox drop3 = new JComboBox(timestamp);
+
+        title.setBounds(30, 20, 200, 40);
+        subtitle.setBounds(30, 70, 170, 40);
+        label1.setBounds(30, 110, 70, 40); //SAMPLE 1
+        drop1.setBounds(110, 110, 100, 30);
+        label2.setBounds(30, 150, 70, 40); //SAMPLE 2
+        drop2.setBounds(110, 150, 100, 30);
+        label3.setBounds(30, 190, 70, 40); //SAMPLE 3
+        drop3.setBounds(110, 190, 100, 30);
+
+
         btn1.setBounds(160,420,70,50);
+        title.setFont(new Font("Gulim", Font.BOLD, 15));
 
-        add1panel.add(label1);
-        add1panel.add(label2);
-        add1panel.add(label3);
-        add1panel.add(label4);
-        add1panel.add(label5);
-        add1panel.add(field1);
+        add1panel.add(title);
+        add1panel.add(subtitle);
         add1panel.add(btn1);
+        add1panel.add(label1); //SAMPLE 1
+        add1panel.add(drop1);
+        add1panel.add(label2); //SAMPLE 2
+        add1panel.add(drop2);
+        add1panel.add(label3); //SAMPLE 3
+        add1panel.add(drop3);
 
         btn1.addActionListener(new ActionListener()
         {
