@@ -43,7 +43,7 @@ public class LoginView extends JFrame //implements ActionListener
 
 
         loginpanel.add(label1);
-        loginpanel. add(label2);
+        loginpanel.add(label2);
         loginpanel.add(text1);
         loginpanel.add(text2);
         loginpanel.add(checkAudience);

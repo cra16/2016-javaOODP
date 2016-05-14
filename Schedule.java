@@ -1,31 +1,16 @@
 import java.sql.*;
 
 public class Schedule {
-	private Time time;
-	private Date date;
+	private Time[] time;
+	private Date firstDay;
 	private int duration;
+	private String performanceName;
 	
-	public Schedule()
+	public Schedule(String performanceName, Date firstDay, int duration, Time[] time)
 	{
-		this.time = null;
-		this.date = null;
-	}
-	public Time getTime() {
-		return this.time;
-	}
-	public void setTime(Time time) {
+		this.performanceName = performanceName;
+		this.firstDay = firstDay;
 		this.time = time;
-	}
-	public Date getDate() {
-		return this.date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public int getDuration(){
-		return this.duration;
-	}
-	public void getDuration(int duration){
 		this.duration = duration;
 	}
 }

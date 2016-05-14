@@ -3,31 +3,22 @@ import java.sql.*;
 public class Performance {
 	private Place place = new Place();
 	private int placeNum;
-	private Schedule schedule=new Schedule();
+	private Schedule schedule;
 	private Host host;
 	private int cost;
 	private String name;
-	private Ticket[] ticket;
-	private int ticketcount=0;
-	private Time time;
-	private Date date;
+	private String description;
 	
-	public Performance(int placeNum, Host host, String name, Date date, Time time ,int cost)
-	{
+	public Performance(int placeNum, Host host, String name, Date firstDay, int duration, Time[] time ,int cost, String description){
 		this.placeNum = placeNum;
 		this.host = host;
 		this.name = name;
-		this.schedule.setDate(date);
-		this.schedule.setTime(time);
+		this.schedule = new Schedule(name, firstDay, duration, time);
 		this.cost = cost;
+		this.description = description;
 	}
 	
-	public void createTicket()
-	{
-		ticket[ticketcount]= new Ticket(this);
-	}
-	public void showInformation()
-	{
+	public void showInformation(){
 		
 	}
 
@@ -77,26 +68,4 @@ public class Performance {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Ticket[] getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(Ticket[] ticket) {
-		this.ticket = ticket;
-	}
-
-	public int getTicketcount() {
-		return ticketcount;
-	}
-
-	public void setTicketcount(int ticketcount) {
-		this.ticketcount = ticketcount;
-	}
-
-
-	
-	
-	
-	
 }
