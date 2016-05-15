@@ -26,7 +26,7 @@ public class DBHelper {
 		String phoneNum = null;
 		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -35,17 +35,16 @@ public class DBHelper {
 				result = stmt.executeQuery(query);
 				
 				if(result.next()){
-					while(result.next()){
-						user_id = result.getString("user_id");
-						name = result.getString("name");
-						phoneNum = result.getString("phoneNum");
-					}
+					user_id = result.getString("user_id");
+					name = result.getString("name");
+					phoneNum = result.getString("phoneNum");
+					System.out.println(name);
 					
 					query = "select performanceName from performance where hostName = '"+name+"'";
 					result = stmt.executeQuery(query);
-					ArrayList<String> performanceList = null;
+					ArrayList<String> performanceList = new ArrayList<String>();
 					while(result.next()){
-						performanceList.add(result.getString(1));
+						performanceList.add(result.getString("performanceName"));
 					}
 					host = new Host(name, phoneNum, user_id, performanceList);
 					user_validator = true;
@@ -57,11 +56,9 @@ public class DBHelper {
 				result = stmt.executeQuery(query);
 				
 				if(result.next()){
-					while(result.next()){
-						user_id = result.getString(1);
-						name = result.getString(3);
-						phoneNum = result.getString(4);
-					}
+					user_id = result.getString(1);
+					name = result.getString(3);
+					phoneNum = result.getString(4);
 					
 					query = "select * from ticket where audienceName = '"+name+"'";
 					result = stmt.executeQuery(query);
@@ -163,13 +160,13 @@ public class DBHelper {
 		performs.add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			query = "insert into schedule values('"+perform.getName()+"',"+perform.getSchedule().getFirstDay()+","+perform.getSchedule().getDuration();
 			for(int i=0;i<7;i++){
 				query = query +","+ perform.getSchedule().getTime()[i];
 			}
 			query = query + ")";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -187,7 +184,7 @@ public class DBHelper {
 			query = query + "cost="+perform.getCost()+", ";
 			query = query + "description='"+perform.getDescription()+"' ";
 			query = query + "where performanceName='"+performName+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			query = "update schedule set ";
 			query = query + "performanceName='"+perform.getName()+"', ";
 			query = query + "firstDay="+perform.getSchedule().getFirstDay()+", ";
@@ -196,7 +193,7 @@ public class DBHelper {
 				query = query +", time"+i+"="+perform.getSchedule().getTime()[i];
 			}
 			query = query + " where performanceName='"+performName+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -208,9 +205,9 @@ public class DBHelper {
 		performs.remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 			query = "delete from schedule where performanceName='"+perform+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -220,7 +217,7 @@ public class DBHelper {
 	public void reserveTicket(String performName, Date date, Time time, String audienceName){
 		try{
 			query = "insert into ticket values('"+performName+"',"+date+","+time+",'"+audienceName+"')";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -230,7 +227,7 @@ public class DBHelper {
 	public void cancelTicket(String performName, Date date, Time time, String audienceName){
 		try{
 			query = "delete from ticket where performanceName='"+performName+"' and date="+date+" and time"+time+" and audienceName='"+audienceName+"'";
-			stmt.executeQuery(query);
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());

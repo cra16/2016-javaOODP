@@ -47,18 +47,22 @@ public class AddPerformController implements ActionListener {
 		SimpleDateFormat transFormat2= new SimpleDateFormat("HH:MM:SS");
 		
 		
-		Time[] time2= new Time[duration+1];
+		Time[] time2= new Time[7];
 		DBHelper helper= DBHelper.getInstance();
 		
-		for(int i=0; i<duration+1; i++)
+		for(int i=0; i<7; i++)
 		{
 			try {
+				if(i<duration+1)
 				t=transFormat2.parse(Time[i]+":"+"00");
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			time2[i] = new java.sql.Time(t.getTime());
+			if(i<duration+1)
+				time2[i] = new java.sql.Time(t.getTime());
+			else
+				time2[i]=null;
 		}
 
 		
