@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -90,7 +91,10 @@ public class UpdatePerform1_View extends JFrame {
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new UpdatePerform2_View().setVisible(true); // Main Form to show after the Login Form.
+                new UpdatePerform2_View(field1.getText(),placeList.getSelectedIndex(),
+                		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
+                		periodList.getSelectedIndex(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
+                
                 dispose();
             }
         });

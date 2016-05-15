@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +9,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
 
-    AddPerform2_View()
+    AddPerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String Text)
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -22,46 +23,50 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         JButton btn1 = new JButton("완료");
 
         // 선택한 기간에 따라 label 갯수 생성
-        JLabel label1 = new JLabel("날짜1 :"); //SAMPLE 1
-        JLabel label2 = new JLabel("날짜2 :"); //SAMPLE 2
-        JLabel label3 = new JLabel("날짜3 :"); //SAMPLE 3
-        JComboBox drop1 = new JComboBox(timestamp);
-        JComboBox drop2 = new JComboBox(timestamp);
-        JComboBox drop3 = new JComboBox(timestamp);
-
+        JLabel label[] = new JLabel[duration+1]; //SAMPLE 1
+    	JComboBox drop[] = new JComboBox[duration+1];
+        
+        for(int i=0; i<duration+1; i++)
+        {	
+        	label[i] = new JLabel("날짜"+i +": ");
+        	drop[i] = new JComboBox(timestamp);
+        	label[i].setBounds(30, 110+ (i*40), 70, 40); //SAMPLE 1
+        	drop[i].setBounds(110, 110+(i*40), 100, 30);
+        	label[i].setFont(new java.awt.Font("Gulim", 0, 14));
+            drop[i].setFont(new java.awt.Font("Gulim", 0, 14));
+            
+        	add1panel.add(label[i]); //SAMPLE 1
+            add1panel.add(drop[i]);
+           
+        }
         title.setBounds(30, 20, 200, 40);
         subtitle.setBounds(30, 70, 170, 40);
-        label1.setBounds(30, 110, 70, 40); //SAMPLE 1
-        drop1.setBounds(110, 110, 100, 30);
-        label2.setBounds(30, 150, 70, 40); //SAMPLE 2
-        drop2.setBounds(110, 150, 100, 30);
-        label3.setBounds(30, 190, 70, 40); //SAMPLE 3
-        drop3.setBounds(110, 190, 100, 30);
-
+        
+     
         btn1.setBounds(160,420,70,50);
         title.setFont(new Font("Gulim", Font.BOLD, 15));
         subtitle.setFont(new java.awt.Font("Gulim", 0, 14));
-        label1.setFont(new java.awt.Font("Gulim", 0, 14));
-        drop1.setFont(new java.awt.Font("Gulim", 0, 14));
-        label2.setFont(new java.awt.Font("Gulim", 0, 14));
-        drop2.setFont(new java.awt.Font("Gulim", 0, 14));
-        label3.setFont(new java.awt.Font("Gulim", 0, 14));
-        drop3.setFont(new java.awt.Font("Gulim", 0, 14));
+       
 
         add1panel.add(title);
         add1panel.add(subtitle);
         add1panel.add(btn1);
-        add1panel.add(label1); //SAMPLE 1
-        add1panel.add(drop1);
-        add1panel.add(label2); //SAMPLE 2
-        add1panel.add(drop2);
-        add1panel.add(label3); //SAMPLE 3
-        add1panel.add(drop3);
+        
 
         btn1.addActionListener(new ActionListener()
         {
+        	
             public void actionPerformed(ActionEvent e) {
-                // 제출 처리 해주세요.
+            	AddPerformController controller =
+            			new AddPerformController();
+            	
+            	String[] Time = new String[duration+1];
+            	
+            	for(int i=0; i<duration+1;i++)
+            	{
+            		Time[i] = timestamp[drop[i].getSelectedIndex()];
+            	}
+            	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum, Time, duration,Text);
                 dispose();
             }
         });
