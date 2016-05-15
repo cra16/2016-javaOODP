@@ -16,6 +16,7 @@ public class DBHelper {
 	private Audience audience;
 	private String query;
 	private ArrayList<String> performs;
+	private boolean user_validator;
 	//private Factory perFactory = new PerformanceFactory();
 	//private ArrayList<Product> performance = new ArrayList<Product>();
 	
@@ -47,9 +48,9 @@ public class DBHelper {
 						performanceList.add(result.getString(1));
 					}
 					host = new Host(name, phoneNum, user_id, performanceList);
-					new HomeView();
+					user_validator = true;
 				}else {
-					System.out.println("로그인 실패");
+					user_validator = false;
 				}
 			}else if(type == 1){
 				query = "select * from audience where user_id = '"+id+"' and passwd = '"+pw+"'";
@@ -69,9 +70,9 @@ public class DBHelper {
 						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3)));
 					}
 					audience = new Audience(name, phoneNum, user_id, tickets);
-					new HomeView_audience();
+					user_validator = true;
 				}else {
-					System.out.println("로그인 실패");
+					user_validator = false;
 				}
 			}
 			
@@ -269,8 +270,7 @@ public class DBHelper {
 		this.performs = performs;
 	}
 
-
-	
-	
-	
+	public boolean isUser_validator() {
+		return user_validator;
+	}	
 }

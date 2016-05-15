@@ -21,7 +21,14 @@ public class LoginController {
 	public void checkLogin()
 	{
 		//call db model.
-		DBHelper.getInstance(this.loginID,this.loginPassword,userType);
+		DBHelper helper = DBHelper.getInstance(this.loginID,this.loginPassword,userType);
+		if((userType == 1)&&(helper.isUser_validator())){
+			new HomeView_audience();
+		}else if((userType == 2)&&(helper.isUser_validator())){
+			new HomeView();
+		}else{
+			System.out.println("로그인 실패");
+		}
 	}
 	
 	
