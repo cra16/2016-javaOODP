@@ -29,39 +29,48 @@ public class DBHelper {
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
-			if(type == 1){
+			if(type == 2){
 				query = "select * from host where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
-				while(result.next()){
-					user_id = result.getString("user_id");
-					name = result.getString("name");
-					phoneNum = result.getString("phoneNum");
-				}
 				
-				query = "select performanceName from performance where hostName = '"+name+"'";
-				result = stmt.executeQuery(query);
-				ArrayList<String> performanceList = null;
-				while(result.next()){
-					performanceList.add(result.getString(1));
+				if(!result.wasNull()){
+					while(result.next()){
+						user_id = result.getString("user_id");
+						name = result.getString("name");
+						phoneNum = result.getString("phoneNum");
+					}
+					
+					query = "select performanceName from performance where hostName = '"+name+"'";
+					result = stmt.executeQuery(query);
+					ArrayList<String> performanceList = null;
+					while(result.next()){
+						performanceList.add(result.getString(1));
+					}
+					host = new Host(name, phoneNum, user_id, performanceList);
+				}else {
+					System.out.println("로그인 실패");
 				}
-				host = new Host(name, phoneNum, user_id, performanceList);
-			}else if(type ==2){
+			}else if(type == 1){
 				query = "select * from audience where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
-				while(result.next()){
-					user_id = result.getString(1);
-					name = result.getString(3);
-					phoneNum = result.getString(4);
-				}
 				
-				query = "select * from ticket where audienceName = '"+name+"'";
-				result = stmt.executeQuery(query);
-				ArrayList<Ticket> tickets = null;
-				while(result.next()){
-					tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3)));
+				if(!result.wasNull()){
+					while(result.next()){
+						user_id = result.getString(1);
+						name = result.getString(3);
+						phoneNum = result.getString(4);
+					}
+					
+					query = "select * from ticket where audienceName = '"+name+"'";
+					result = stmt.executeQuery(query);
+					ArrayList<Ticket> tickets = null;
+					while(result.next()){
+						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3)));
+					}
+					audience = new Audience(name, phoneNum, user_id, tickets);
+				}else {
+					System.out.println("로그인 실패");
 				}
-				
-				audience = new Audience(name, phoneNum, user_id, tickets);
 			}
 			
 			query = "select performanceName from performance";

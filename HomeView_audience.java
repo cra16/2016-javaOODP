@@ -15,6 +15,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
                     {"즉새두", "2/3"},
             };
     DBHelper dBHelper = DBHelper.getInstance();
+    JButton[] perform;
     
     HomeView_audience()
     {
@@ -24,10 +25,21 @@ public class HomeView_audience extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
         
-        JButton perform1 = new JButton("MIC");
-        perform1.setBounds(0,0,350,50);
-        perform1.setFont(new java.awt.Font("Gulim", 0, 16));
-        homepanel.add(perform1);
+        while(dBHelper.getPerforms().iterator().hasNext()){
+        	int i=0;
+        	perform[i] = new JButton(dBHelper.getPerforms().get(i));
+        	perform[i].setBounds(0,0,350,50);
+        	perform[i].setFont(new java.awt.Font("Gulim", 0, 16));
+        	homepanel.add(perform[i]);
+        	perform[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
+        	        {
+        	            public void actionPerformed(ActionEvent e) {
+        	                new BuyTicketView(); // Main Form to show after the Login Form.
+        	                dispose();
+        	            }
+        	        });
+        	i++;
+        }
 
         // BUTTONS: 예매내역
         JButton orderList = new JButton("예매 내역");
@@ -42,17 +54,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
                 dispose();
             }
         });
-        perform1.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
-        {
-            public void actionPerformed(ActionEvent e) {
-                new BuyTicketView(); // Main Form to show after the Login Form.
-                dispose();
-            }
-        });
-
-
-
-
+        
         // frame setting
         homepanel.setVisible(true);
         homepanel.setLayout(null);
@@ -62,13 +64,4 @@ public class HomeView_audience extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-    public static void main(String arr[])
-    {
-        new HomeView_audience();
-    }
-
-
-
 }
