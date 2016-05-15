@@ -14,7 +14,8 @@ public class HomeView_audience extends JFrame //implements ActionListener
                     {"하이루", "1/2"},
                     {"즉새두", "2/3"},
             };
-
+    DBHelper dBHelper = DBHelper.getInstance();
+    
     HomeView_audience()
     {
         contentPane=this.getContentPane();
@@ -22,8 +23,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
-
-        //SAMPLE
+        
         JButton perform1 = new JButton("MIC");
         perform1.setBounds(0,0,350,50);
         perform1.setFont(new java.awt.Font("Gulim", 0, 16));

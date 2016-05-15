@@ -23,8 +23,9 @@ public class DBHelper {
 		String user_id = null;
 		String name = null;
 		String phoneNum = null;
+		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -66,7 +67,7 @@ public class DBHelper {
 			query = "select performanceName from performance";
 			result = stmt.executeQuery(query);
 			while(result.next()){
-				performs.add(result.getString(1));
+				performs.add(result.getString("performanceName"));
 			}
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -203,13 +204,58 @@ public class DBHelper {
 			System.out.println("SQLState: " + sqex.getSQLState());
 		}
 	}
+	
+	public void reserveTicket(String performName, Date date, Time time, String audienceName){
+		try{
+			query = "insert into ticket values('"+performName+"',"+date+","+time+",'"+audienceName+"')";
+			stmt.executeQuery(query);
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+	}
+	
+	public void cancelTicket(String performName, Date date, Time time, String audienceName){
+		try{
+			query = "delete from ticket where performanceName='"+performName+"' and date="+date+" and time"+time+" and audienceName='"+audienceName+"'";
+			stmt.executeQuery(query);
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+	}
+	
+	public int getCurrentNum(String performName, Date date, Time time){
+		int num = 0;
+		try{
+			query = "select count(*) from ticket where performanceName='"+performName+"' and date="+date+" and time"+time;
+			result = stmt.executeQuery(query);
+			while(result.next()){
+				num = result.getInt(1);
+			}
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+			return -1;
+		}
 		
+		return num;
+	}
+	
 	public Host getHost() {
 		return host;
 	}
 
 	public Audience getAudience() {
 		return audience;
+	}
+
+	public ArrayList<String> getPerforms() {
+		return performs;
+	}
+
+	public void setPerforms(ArrayList<String> performs) {
+		this.performs = performs;
 	}
 
 
