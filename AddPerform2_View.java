@@ -32,6 +32,9 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         	drop[i] = new JComboBox(timestamp);
         	label[i].setBounds(30, 110+ (i*40), 70, 40); //SAMPLE 1
         	drop[i].setBounds(110, 110+(i*40), 100, 30);
+        	label[i].setFont(new java.awt.Font("Gulim", 0, 14));
+            drop[i].setFont(new java.awt.Font("Gulim", 0, 14));
+            
         	add1panel.add(label[i]); //SAMPLE 1
             add1panel.add(drop[i]);
            
