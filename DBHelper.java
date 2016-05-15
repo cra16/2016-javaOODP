@@ -20,7 +20,9 @@ public class DBHelper {
 	//private ArrayList<Product> performance = new ArrayList<Product>();
 	
 	private DBHelper(String id, String pw, int type){
-		System.out.println("GG");
+		String user_id = null;
+		String name = null;
+		String phoneNum = null;
 		try{
 			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
@@ -29,10 +31,11 @@ public class DBHelper {
 			if(type == 1){
 				query = "select * from host where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
-				result.next();
-				String user_id = result.getString("user_id");
-				String name = result.getString("name");
-				String phoneNum = result.getString("phoneNum");
+				while(result.next()){
+					user_id = result.getString("user_id");
+					name = result.getString("name");
+					phoneNum = result.getString("phoneNum");
+				}
 				
 				query = "select performanceName from performance where hostName = '"+name+"'";
 				result = stmt.executeQuery(query);
@@ -44,10 +47,11 @@ public class DBHelper {
 			}else if(type ==2){
 				query = "select * from audience where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
-				result.next();
-				String user_id = result.getString(1);
-				String name = result.getString(3);
-				String phoneNum = result.getString(4);
+				while(result.next()){
+					user_id = result.getString(1);
+					name = result.getString(3);
+					phoneNum = result.getString(4);
+				}
 				
 				query = "select * from ticket where audienceName = '"+name+"'";
 				result = stmt.executeQuery(query);
@@ -86,23 +90,34 @@ public class DBHelper {
 	
 	public Performance getPerformance(String performanceName){
 		Performance performance = null;
+		String hostName = null;
+		int placeNum = 0;
+		int cost = 0;
+		String description = null;
+		String user_id = null;
+		String phoneNum = null;
+		Date firstDay = null;
+		int duration = 0;
+		Time[] time = null;
 		
 		try{
-			query = "select * from performance where performanceName = " + performanceName;
+			query = "select * from performance where performanceName = '" + performanceName + "'";
 			result = stmt.executeQuery(query);
-			result.next();
-			String hostName = result.getString("hostNam");
-			int placeNum = result.getInt("placeNum");
-			int cost = result.getInt("cost");
-			String description = result.getString("description");
+			while(result.next()){
+				hostName = result.getString("hostNam");
+				placeNum = result.getInt("placeNum");
+				cost = result.getInt("cost");
+				description = result.getString("description");
+			}
 			
-			query = "select user_id, phoneNum from host where name = " + hostName;
+			query = "select user_id, phoneNum from host where name = '" + hostName + "'";
 			result = stmt.executeQuery(query);
-			result.next();
-			String user_id = result.getString("user_id");
-			String phoneNum = result.getString("phoneNum");
+			while(result.next()){
+				user_id = result.getString("user_id");
+				phoneNum = result.getString("phoneNum");
+			}
 			
-			query = "select performanceName from performance where hostName = " + hostName;
+			query = "select performanceName from performance where hostName = '" + hostName + "'";
 			result = stmt.executeQuery(query);
 			ArrayList<String> performanceList = null;
 			while(result.next()){
@@ -110,14 +125,15 @@ public class DBHelper {
 			}
 			Host localHost = new Host(hostName, phoneNum, user_id, performanceList);
 			
-			query = "select * from schedule where performanceName = " + performanceName;
+			query = "select * from schedule where performanceName = '" + performanceName + "'";
 			result = stmt.executeQuery(query);
 			result.next();
-			Date firstDay = result.getDate("firstDay");
-			int duration = result.getInt("duration");
-			Time[] time = new Time[duration];
-			for(int i=0;i<duration;i++){
-				time[i] = result.getTime(i+4);
+			firstDay = result.getDate("firstDay");
+			duration = result.getInt("duration");
+			time = new Time[7];
+			for(int i=0;i<7;i++){
+				if(i<duration)time[i] = result.getTime(i+4);
+				else time[i] = null;
 			}
 			Schedule schedule = new Schedule(performanceName, firstDay, duration, time);
 			
@@ -130,6 +146,59 @@ public class DBHelper {
 		return performance;
 	}
 
+	public void addPerformance(Performance perform){
+		try{
+			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
+			stmt.executeQuery(query);
+			query = "insert into schedule values('"+perform.getName()+"',"+perform.getSchedule().getFirstDay()+","+perform.getSchedule().getDuration();
+			for(int i=0;i<7;i++){
+				query = query +","+ perform.getSchedule().getTime()[i];
+			}
+			query = query + ")";
+			stmt.executeQuery(query);
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+	}
+	
+	public void updatePerformance(String performName, Performance perform){
+		try{
+			query = "update performance set ";
+			query = query + "performanceName='"+perform.getName()+"', ";
+			query = query + "hostName='"+perform.getHost().getName()+"', ";
+			query = query + "placeNum="+perform.getPlaceNum()+", ";
+			query = query + "cost="+perform.getCost()+", ";
+			query = query + "description='"+perform.getDescription()+"' ";
+			query = query + "where performanceName='"+performName+"'";
+			stmt.executeQuery(query);
+			query = "update schedule set ";
+			query = query + "performanceName='"+perform.getName()+"', ";
+			query = query + "firstDay="+perform.getSchedule().getFirstDay()+", ";
+			query = query + "duration="+perform.getSchedule().getDuration();
+			for(int i=0;i<7;i++){
+				query = query +", time"+i+"="+perform.getSchedule().getTime()[i];
+			}
+			query = query + " where performanceName='"+performName+"'";
+			stmt.executeQuery(query);
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+	}
+	
+	public void deletePerformance(String perform){
+		try{
+			query = "delete from performance where performanceName='"+perform+"'";
+			stmt.executeQuery(query);
+			query = "delete from schedule where performanceName='"+perform+"'";
+			stmt.executeQuery(query);
+		}catch(SQLException sqex){
+			System.out.println("SQLException: " + sqex.getMessage());
+			System.out.println("SQLState: " + sqex.getSQLState());
+		}
+	}
+		
 	public Host getHost() {
 		return host;
 	}

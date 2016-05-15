@@ -17,9 +17,21 @@ public class Performance {
 		this.cost = cost;
 		this.description = description;
 	}
-	
-	public void showInformation(){
-		
+
+	public Place getPlace() {
+		return place;
+	}
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public int getPlaceNum() {
+		return placeNum;
+	}
+
+	public void setPlaceNum(int placeNum) {
+		this.placeNum = placeNum;
 	}
 
 	public Schedule getSchedule() {
@@ -30,27 +42,12 @@ public class Performance {
 		this.schedule = schedule;
 	}
 
-	public String getPlaceName() {
-		return this.place.getPlaceName(this.placeNum);
-	}
-	
-	public int getMaxSeat(){
-		return this.place.getMaxSeat(this.placeNum);
-	}
-	
-	public int getCurrentNum(){
-		return this.place.getCurrentNum(this.placeNum);
-	}
-	public void setPlace(int place) {
-		this.placeNum = place;
+	public Host getHost() {
+		return host;
 	}
 
-	public String getHost() {
-		return host.getName();
-	}
-	
-	public Seat[] getSeat() {
-		return this.place.getSeat(this.placeNum);
+	public void setHost(Host host) {
+		this.host = host;
 	}
 
 	public int getCost() {
@@ -62,10 +59,20 @@ public class Performance {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	
 }

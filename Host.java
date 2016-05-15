@@ -24,23 +24,36 @@ public class Host{
 		this.userID = userID;
 		this.performanceList = performanceList;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhonenumber() {
+
+	public String getPhoneNum() {
 		return phoneNum;
 	}
-	public void setPhonenumber(String phonenumber) {
-		this.phoneNum = phonenumber;
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
+
 	public String getUserID() {
 		return userID;
 	}
+
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+
+	public ArrayList<String> getPerformanceList() {
+		return performanceList;
+	}
+
+	public void setPerformanceList(ArrayList<String> performanceList) {
+		this.performanceList = performanceList;
 	}
 }

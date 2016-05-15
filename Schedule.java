@@ -15,19 +15,38 @@ public class Schedule {
 		this.time = time;
 		this.duration = duration;
 	}
-	
+
 	public Time[] getTime() {
 		return time;
 	}
-	
-	public Date getFirstDay()
-	{
-		return this.firstDay;
+
+	public void setTime(Time[] time) {
+		this.time = time;
 	}
-	public int getDuration()
-	{
+
+	public Date getFirstDay() {
+		return firstDay;
+	}
+
+	public void setFirstDay(Date firstDay) {
+		this.firstDay = firstDay;
+	}
+
+	public int getDuration() {
 		return duration;
-		
 	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public String getPerformanceName() {
+		return performanceName;
+	}
+
+	public void setPerformanceName(String performanceName) {
+		this.performanceName = performanceName;
+	}
+	
 	
 }
