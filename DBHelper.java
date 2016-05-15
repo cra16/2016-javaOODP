@@ -33,7 +33,7 @@ public class DBHelper {
 				query = "select * from host where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
 				
-				if(!result.wasNull()){
+				if(result.next()){
 					while(result.next()){
 						user_id = result.getString("user_id");
 						name = result.getString("name");
@@ -47,6 +47,7 @@ public class DBHelper {
 						performanceList.add(result.getString(1));
 					}
 					host = new Host(name, phoneNum, user_id, performanceList);
+					new HomeView();
 				}else {
 					System.out.println("로그인 실패");
 				}
@@ -54,7 +55,7 @@ public class DBHelper {
 				query = "select * from audience where user_id = '"+id+"' and passwd = '"+pw+"'";
 				result = stmt.executeQuery(query);
 				
-				if(!result.wasNull()){
+				if(result.next()){
 					while(result.next()){
 						user_id = result.getString(1);
 						name = result.getString(3);
@@ -68,6 +69,7 @@ public class DBHelper {
 						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3)));
 					}
 					audience = new Audience(name, phoneNum, user_id, tickets);
+					new HomeView_audience();
 				}else {
 					System.out.println("로그인 실패");
 				}

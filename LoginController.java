@@ -21,19 +21,7 @@ public class LoginController {
 	public void checkLogin()
 	{
 		//call db model.
-	
-		
-			DBHelper.getInstance(this.loginID,this.loginPassword,userType);
-			if(userType==1)
-			{
-				new HomeView_audience();
-			}
-			else if(userType==2)
-			{
-				new HomeView();
-			}
-			
-		
+		DBHelper.getInstance(this.loginID,this.loginPassword,userType);
 	}
 	
 	
