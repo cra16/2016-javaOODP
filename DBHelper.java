@@ -147,6 +147,7 @@ public class DBHelper {
 	}
 
 	public void addPerformance(Performance perform){
+		performs.add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeQuery(query);
@@ -163,6 +164,8 @@ public class DBHelper {
 	}
 	
 	public void updatePerformance(String performName, Performance perform){
+		int index = performs.indexOf(performName);
+		performs.set(index, perform.getName());
 		try{
 			query = "update performance set ";
 			query = query + "performanceName='"+perform.getName()+"', ";
@@ -188,6 +191,8 @@ public class DBHelper {
 	}
 	
 	public void deletePerformance(String perform){
+		int index = performs.indexOf(perform);
+		performs.remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform+"'";
 			stmt.executeQuery(query);
