@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,7 +37,19 @@ public class HomeView_audience extends JFrame //implements ActionListener
 	        	perform[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
 	        	        {
 	        	            public void actionPerformed(ActionEvent e) {
-	        	                new BuyTicketView(); // Main Form to show after the Login Form.
+	        	            	Object o = e.getSource();
+	        	            	Performance p = null;
+	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
+	        	            	{
+	        	            		if(o==perform[i])
+	        	            		{
+	        	            			p=DBHelper.getInstance().getPerformance(perform[i].getText());
+	        	            			break;
+	        	            		}
+	        	            		else
+	        	            			p=null;
+	        	            	}
+	        	            	new BuyTicketView(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });

@@ -114,7 +114,7 @@ public class DBHelper {
 			query = "select * from performance where performanceName = '" + performanceName + "'";
 			result = stmt.executeQuery(query);
 			while(result.next()){
-				hostName = result.getString("hostNam");
+				hostName = result.getString("hostName");
 				placeNum = result.getInt("placeNum");
 				cost = result.getInt("cost");
 				description = result.getString("description");
@@ -129,7 +129,7 @@ public class DBHelper {
 			
 			query = "select performanceName from performance where hostName = '" + hostName + "'";
 			result = stmt.executeQuery(query);
-			ArrayList<String> performanceList = null;
+			ArrayList<String> performanceList = new ArrayList<String>();
 			while(result.next()){
 				performanceList.add(result.getString("performanceName"));
 			}
@@ -161,9 +161,24 @@ public class DBHelper {
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
-			query = "insert into schedule values('"+perform.getName()+"',"+perform.getSchedule().getFirstDay()+","+perform.getSchedule().getDuration();
+			query = "insert into schedule values('"+perform.getName()+"',"+"STR_TO_DATE("+"'"+perform.getSchedule().getFirstDay()+"','%Y-%m-%d')"+","+perform.getSchedule().getDuration();
+
 			for(int i=0;i<7;i++){
-				query = query +","+ perform.getSchedule().getTime()[i];
+				String[] splitString;
+				String mergeString="";
+				
+				if(perform.getSchedule().getTime()[i] !=null){
+					splitString = perform.getSchedule().getTime()[i].toString().split(":");
+					for(int j=0;j<splitString.length;j++)
+					{
+						mergeString+=splitString[j];
+					
+					}
+				}
+				else{
+					mergeString =null;
+				}
+				query = query +","+mergeString;
 			}
 			query = query + ")";
 			stmt.executeUpdate(query);

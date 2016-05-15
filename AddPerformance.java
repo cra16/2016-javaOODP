@@ -44,6 +44,8 @@ public class AddPerformController implements ActionListener {
 		
 		Date t = null;
 		
+		
+		
 		SimpleDateFormat transFormat2= new SimpleDateFormat("HH:MM:SS");
 		
 		
@@ -54,7 +56,13 @@ public class AddPerformController implements ActionListener {
 		{
 			try {
 				if(i<duration+1)
-				t=transFormat2.parse(Time[i]+":"+"00");
+				{
+					String a = Time[i]+":"+"00";
+					
+					
+					
+					t=transFormat2.parse(a);
+				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -67,7 +75,7 @@ public class AddPerformController implements ActionListener {
 
 		
 		Performance p = new Performance(placeNum,helper.getHost(),
-				new Schedule(performName,new java.sql.Date(date.getDate()),duration+1,time2),performName,100,Text);
+				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
 
 		helper.addPerformance(p);
 		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),

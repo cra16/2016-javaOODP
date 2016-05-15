@@ -16,7 +16,7 @@ public class BuyTicketView extends JFrame //implements ActionListener
 
 
 
-    BuyTicketView()
+    BuyTicketView(Performance perform)
     {
         contentPane=this.getContentPane();
         JPanel buypanel = new JPanel();
@@ -32,14 +32,49 @@ public class BuyTicketView extends JFrame //implements ActionListener
         JLabel dateLabel = new JLabel("날짜 :");
         JLabel timeLabel = new JLabel("시간 :");
         JLabel detailLabel = new JLabel("공연 설명 :");
-
-        JLabel name = new JLabel("SAMPLE_이름"); // Data 채워주세용
-        JLabel provider = new JLabel("SAMPLE_주최측");
-        JLabel price = new JLabel("SAMPLE_가격");
-        JLabel place = new JLabel("SAMPLE_장소");
-        JTextArea detail = new JTextArea("설명설명설명");  // 우선 disabled 상태로 표시될 것.
+        
+        JLabel name = new JLabel(perform.getName()); // Data 채워주세용
+        JLabel provider = new JLabel(perform.getHost().getName());
+        JLabel price = new JLabel(perform.getCost()+"");
+        JLabel place = new JLabel(perform.getPlace().getPlaceName(perform.getPlaceNum()));
+        JTextArea detail = new JTextArea(perform.getDescription());  // 우선 disabled 상태로 표시될 것.
         detail.setEditable(false);   // disabled
-        JComboBox dateList = new JComboBox(datestamp);  // 날짜 1~7개로 제한하기 : 예) 5/5, 4/5 등
+        
+        
+        String[] splitString =perform.getSchedule().getFirstDay().toString().split("-");
+        String mergeString="";
+        String[] userDateStamp = new String[perform.getSchedule().getDuration()];
+        for(int i=1; i<splitString.length;i++)
+        {
+        	mergeString+=splitString[i];
+        	if(i<splitString.length-1)
+        	{
+        		mergeString+="/";
+        	}
+        	
+        }
+        for(int i=0; i<userDateStamp.length; i++)
+        {
+        	if(i==0)
+        		userDateStamp[i]=mergeString;
+        	else
+        	{
+        		int changeday=Integer.parseInt(splitString[splitString.length-1])+i; //아직 예외처리 안만듬
+        		
+        		mergeString = splitString[1]+"/" ;
+        		if(changeday<10)
+        		{
+        			mergeString += "0"+changeday;
+                	
+        		}
+        		else
+        		mergeString +=changeday;
+            	
+        		userDateStamp[i]=mergeString;
+        	}
+        }
+        
+        JComboBox dateList = new JComboBox(userDateStamp);  // 날짜 1~7개로 제한하기 : 예) 5/5, 4/5 등
         JComboBox timeList = new JComboBox(timestamp);
 
         JButton btn1 = new JButton("예매하기");
@@ -110,7 +145,10 @@ public class BuyTicketView extends JFrame //implements ActionListener
         btn2.addActionListener(new ActionListener() //뒤로가기
         {
             public void actionPerformed(ActionEvent e) {
-                new HomeView_audience();
+            	if(DBHelper.getInstance().getHost()!=null)
+            		new HomeView();
+            	else if(DBHelper.getInstance().getAudience()!=null)
+            		new HomeView_audience();
                 dispose();
             }
         });
@@ -127,9 +165,5 @@ public class BuyTicketView extends JFrame //implements ActionListener
     }
 
 
-    public static void main(String arr[])
-    {
-        new BuyTicketView();
-    }
-
+ 
 }

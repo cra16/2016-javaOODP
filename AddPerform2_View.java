@@ -66,8 +66,14 @@ public class AddPerform2_View extends JFrame //implements ActionListener
             	{
             		Time[i] = timestamp[drop[i].getSelectedIndex()];
             	}
-            	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum, Time, duration,Text);
-                dispose();
+            	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum+1, Time, duration,Text);
+                DBHelper helper = DBHelper.getInstance();
+                
+                if(helper.getHost() !=null)
+                	new HomeView();
+                else if(helper.getAudience()!=null)
+                	new HomeView_audience();
+            	dispose();
             }
         });
 

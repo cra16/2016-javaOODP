@@ -92,7 +92,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
                 new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
                 		periodList.getSelectedIndex(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
-                
+                dispose();
             }
         });
 

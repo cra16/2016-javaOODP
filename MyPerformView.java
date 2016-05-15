@@ -17,9 +17,9 @@ public class MyPerformView extends JFrame {
             };
 
 
-    MyPerformView(){
-
-        contentPane=this.getContentPane();
+    MyPerformView(Performance perform){
+    	
+    		contentPane=this.getContentPane();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
@@ -75,8 +75,5 @@ public class MyPerformView extends JFrame {
 
     }
 
-    public static void main(String[] args) {
-        new MyPerformView();
-    }
 
 }

@@ -36,7 +36,18 @@ public class HomeView extends JFrame //implements ActionListener
 	        	perform[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
 	        	        {
 	        	            public void actionPerformed(ActionEvent e) {
-	        	                new BuyTicketView(); // Main Form to show after the Login Form.
+	        	            	Object o = e.getSource();
+	        	            	Performance p=null;
+	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
+	        	            	{
+	        	            		if(o==perform[i])
+	        	            		{
+	        	            			System.out.println("G");
+	        	            			p=DBHelper.getInstance().getPerformance(perform[i].getText());
+	        	            		}
+	        	            	}
+	        	            	
+	        	                new  MyPerformView(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });
@@ -65,7 +76,8 @@ public class HomeView extends JFrame //implements ActionListener
         myPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
         {
             public void actionPerformed(ActionEvent e) {
-                new MyPerformView().setVisible(true); // Main Form to show after the Login Form.
+            	
+                new MyPerformView(null).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });
