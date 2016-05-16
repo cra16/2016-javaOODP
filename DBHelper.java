@@ -26,7 +26,7 @@ public class DBHelper {
 		String phoneNum = null;
 		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -196,9 +196,9 @@ public class DBHelper {
 			query += "duration="+perform.getSchedule().getDuration();
 			for(int i=0;i<7;i++){
 				if(perform.getSchedule().getTime()[i] == null)
-					query += ", time"+i+"='"+perform.getSchedule().getTime()[i];
+					query += ", time"+(i+1)+"="+perform.getSchedule().getTime()[i];
 				else 
-					query += ", time"+i+"='"+perform.getSchedule().getTime()[i]+"'";
+					query += ", time"+(i+1)+"='"+perform.getSchedule().getTime()[i]+"'";
 			}
 			query += " where performanceName='"+performName+"'";
 			stmt.executeUpdate(query);

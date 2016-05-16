@@ -72,7 +72,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
             		
             	}
             	controller.eventUpdatePerformance(perform,performName,placeNum,monthNum, dayNum, Time, duration,Text);
-
+            	new HomeView();
                 dispose();
             }
         });
