@@ -62,7 +62,7 @@ public class DBHelper {
 					
 					query = "select * from ticket where audienceName = '"+name+"'";
 					result = stmt.executeQuery(query);
-					ArrayList<Ticket> tickets = null;
+					ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 					while(result.next()){
 						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3), result.getString(4)));
 					}
@@ -137,13 +137,14 @@ public class DBHelper {
 			
 			query = "select * from schedule where performanceName = '" + performanceName + "'";
 			result = stmt.executeQuery(query);
-			result.next();
-			firstDay = result.getDate("firstDay");
-			duration = result.getInt("duration");
-			time = new Time[7];
-			for(int i=0;i<7;i++){
-				if(i<duration)time[i] = result.getTime(i+4);
-				else time[i] = null;
+			while(result.next()){
+				firstDay = result.getDate("firstDay");
+				duration = result.getInt("duration");
+				time = new Time[7];
+				for(int i=0;i<7;i++){
+					if(i<duration)time[i] = result.getTime(i+4);
+					else time[i] = null;
+				}
 			}
 			Schedule schedule = new Schedule(performanceName, firstDay, duration, time);
 			
@@ -161,26 +162,16 @@ public class DBHelper {
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
-			query = "insert into schedule values('"+perform.getName()+"',"+"STR_TO_DATE("+"'"+perform.getSchedule().getFirstDay()+"','%Y-%m-%d')"+","+perform.getSchedule().getDuration();
+			query = "insert into schedule values('"+perform.getName()+"',"+"'"+perform.getSchedule().getFirstDay()+"',"+perform.getSchedule().getDuration();
 
 			for(int i=0;i<7;i++){
-				String[] splitString;
-				String mergeString="";
-				
-				if(perform.getSchedule().getTime()[i] !=null){
-					splitString = perform.getSchedule().getTime()[i].toString().split(":");
-					for(int j=0;j<splitString.length;j++)
-					{
-						mergeString+=splitString[j];
-					
-					}
-				}
-				else{
-					mergeString =null;
-				}
-				query = query +","+mergeString;
+				if(perform.getSchedule().getTime()[i] == null)
+					query += ","+perform.getSchedule().getTime()[i];
+				else 
+					query += ",'"+perform.getSchedule().getTime()[i]+"'";
 			}
-			query = query + ")";
+			query += ")";
+			System.out.println(query);
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -192,22 +183,26 @@ public class DBHelper {
 		int index = performs.indexOf(performName);
 		performs.set(index, perform.getName());
 		try{
+			
 			query = "update performance set ";
-			query = query + "performanceName='"+perform.getName()+"', ";
-			query = query + "hostName='"+perform.getHost().getName()+"', ";
-			query = query + "placeNum="+perform.getPlaceNum()+", ";
-			query = query + "cost="+perform.getCost()+", ";
-			query = query + "description='"+perform.getDescription()+"' ";
-			query = query + "where performanceName='"+performName+"'";
+			query += "performanceName='"+perform.getName()+"', ";
+			query += "hostName='"+perform.getHost().getName()+"', ";
+			query += "placeNum="+perform.getPlaceNum()+", ";
+			query += "cost="+perform.getCost()+", ";
+			query += "description='"+perform.getDescription()+"' ";
+			query += "where performanceName='"+performName+"'";
 			stmt.executeUpdate(query);
 			query = "update schedule set ";
-			query = query + "performanceName='"+perform.getName()+"', ";
-			query = query + "firstDay="+perform.getSchedule().getFirstDay()+", ";
-			query = query + "duration="+perform.getSchedule().getDuration();
+			query += "performanceName='"+perform.getName()+"', ";
+			query += "firstDay='"+perform.getSchedule().getFirstDay()+"', ";
+			query += "duration="+perform.getSchedule().getDuration();
 			for(int i=0;i<7;i++){
-				query = query +", time"+i+"="+perform.getSchedule().getTime()[i];
+				if(perform.getSchedule().getTime()[i] == null)
+					query += ", time"+i+"='"+perform.getSchedule().getTime()[i];
+				else 
+					query += ", time"+i+"='"+perform.getSchedule().getTime()[i]+"'";
 			}
-			query = query + " where performanceName='"+performName+"'";
+			query += " where performanceName='"+performName+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -223,6 +218,8 @@ public class DBHelper {
 			stmt.executeUpdate(query);
 			query = "delete from schedule where performanceName='"+perform+"'";
 			stmt.executeUpdate(query);
+			query = "delete from ticket where performanceName='"+perform+"'";
+			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
@@ -231,17 +228,18 @@ public class DBHelper {
 	
 	public void reserveTicket(String performName, Date date, Time time, String audienceName){
 		try{
-			query = "insert into ticket values('"+performName+"',"+date+","+time+",'"+audienceName+"')";
+			query = "insert into ticket values('"+performName+"','"+date+"','"+time+"','"+audienceName+"')";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
+			System.out.println("이미 예매함");
 		}
 	}
 	
 	public void cancelTicket(String performName, Date date, Time time, String audienceName){
 		try{
-			query = "delete from ticket where performanceName='"+performName+"' and date="+date+" and time"+time+" and audienceName='"+audienceName+"'";
+			query = "delete from ticket where performanceName='"+performName+"' and date='"+date+"' and time='"+time+"' and audienceName='"+audienceName+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -252,7 +250,7 @@ public class DBHelper {
 	public int getCurrentNum(String performName, Date date, Time time){
 		int num = 0;
 		try{
-			query = "select count(*) from ticket where performanceName='"+performName+"' and date="+date+" and time"+time;
+			query = "select count(*) from ticket where performanceName='"+performName+"' and date='"+date+"' and time='"+time+"'";
 			result = stmt.executeQuery(query);
 			while(result.next()){
 				num = result.getInt(1);
