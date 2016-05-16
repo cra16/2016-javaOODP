@@ -21,6 +21,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         JLabel title = new JLabel("공연 등록 - [2/2]");
         JLabel subtitle = new JLabel("<날짜별 시간 선택>");
         JButton btn1 = new JButton("완료");
+        JButton btn2 = new JButton("취소");
 
         // 선택한 기간에 따라 label 갯수 생성
         JLabel label[] = new JLabel[duration+1]; //SAMPLE 1
@@ -44,6 +45,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         
      
         btn1.setBounds(160,420,70,50);
+        btn2.setBounds(240,420,70,50);
         title.setFont(new Font("Gulim", Font.BOLD, 15));
         subtitle.setFont(new java.awt.Font("Gulim", 0, 14));
        
@@ -51,6 +53,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         add1panel.add(title);
         add1panel.add(subtitle);
         add1panel.add(btn1);
+        add1panel.add(btn2);
         
 
         btn1.addActionListener(new ActionListener()
@@ -75,6 +78,16 @@ public class AddPerform2_View extends JFrame //implements ActionListener
                 	new HomeView_audience();
             	dispose();
             }
+        });
+        
+        btn2.addActionListener(new ActionListener(){
+            
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		dispose();
+        		new HomeView();
+        	}
+        	
         });
 
         // frame setting

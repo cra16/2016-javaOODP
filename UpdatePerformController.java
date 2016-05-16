@@ -43,25 +43,36 @@ public class UpdatePerformController{
 		SimpleDateFormat transFormat2= new SimpleDateFormat("HH:MM:SS");
 		
 		
-		Time[] time2= new Time[duration+1];
+		Time[] time2= new Time[7];
 		DBHelper helper= DBHelper.getInstance();
 		
-		for(int i=0; i<duration+1; i++)
+		for(int i=0; i<7; i++)
 		{
 			try {
-				t=transFormat2.parse(Time[i]+":"+"00");
+				if(i<duration+1)
+				{
+					String a = Time[i]+":"+"00";
+					
+					
+					
+					t=transFormat2.parse(a);
+				}
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			time2[i] = new java.sql.Time(t.getTime());
+			
+			if(i<duration+1)
+				time2[i] = new java.sql.Time(t.getTime());
+			else
+				time2[i]=null;
 		}
 
 		
 		Performance p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getDate()),duration+1,time2),performName,100,Text);
 
-		helper.updatePerformance(performName, p);
+		helper.updatePerformance(perform.getName(), p);
 		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
 		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
 		//		,cost,"1"));

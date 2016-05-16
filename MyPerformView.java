@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class MyPerformView extends JFrame {
@@ -18,50 +19,85 @@ public class MyPerformView extends JFrame {
             };
 
 
-    MyPerformView(Performance perform){
+    MyPerformView(ArrayList<String> performName){
     	
     	contentPane=this.getContentPane();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
-
-        JPanel mypanel = new JPanel();
-        JButton updateBtn = new JButton("수정");
-        JButton delBtn = new JButton("삭제");
-        JLabel label1 = new JLabel("곡성");
-
-
-
-        JPanel performpanel = new JPanel(); // SAMPLE
-        FlowLayout fl = new FlowLayout(3,50,5);
-        performpanel.setLayout(fl);
-        performpanel.add(label1);           // mypanel 하나에 공연/삭제버튼/수정버튼 포함.
-        performpanel.add(updateBtn);
-        performpanel.add(delBtn);
-        delBtn.setHorizontalAlignment(SwingConstants.CENTER);
-
-        delBtn.setFont(new java.awt.Font("Gulim", 0, 14));
-        updateBtn.setFont(new java.awt.Font("Gulim", 0, 14));
-        label1.setFont(new java.awt.Font("Gulim", 0, 14));
-
-        delBtn.setBounds(0,100,100,40);
-        updateBtn.setBounds(0,0,100,40);
-        label1.setBounds(0,0,150,40);
-
-        
-        
-        
-        updateBtn.addActionListener(new ActionListener()
+        Performance[] perform = new Performance[performName.size()];
+        for(int i=0; i<performName.size(); i++)
         {
-            public void actionPerformed(ActionEvent e) {
-                new UpdatePerform1_View(perform).setVisible(true); // Main Form to show after the Login Form.
-                dispose();
-            }
+        	perform[i]=DBHelper.getInstance().getPerformance(performName.get(i));
+        }
+        JPanel mypanel = new JPanel(new FlowLayout(1,50,5));
+        JLabel[] labelName = new JLabel[performName.size()];
+        JButton[] updateBtn = new JButton[performName.size()];
+        JButton[] delBtn = new JButton[performName.size()];
+        JButton backBtn = new JButton("뒤로가기");
+        
+
+
+        JPanel[] performpanel = new JPanel[performName.size()]; // SAMPLE
+        for(int i=0; i<performpanel.length;i++)
+	    {
+	        FlowLayout fl = new FlowLayout(3,50,5);
+	        labelName[i]= new JLabel(perform[i].getName());
+	        updateBtn[i]= new JButton("수정");
+	        delBtn[i]= new JButton("삭제");
+	        performpanel[i] = new JPanel();
+	        performpanel[i].setLayout(fl);
+	        performpanel[i].add(labelName[i]);           // mypanel 하나에 공연/삭제버튼/수정버튼 포함.
+	        performpanel[i].add(updateBtn[i]);
+	        performpanel[i].add(delBtn[i]);
+	        
+	        delBtn[i].setHorizontalAlignment(SwingConstants.CENTER);
+	        delBtn[i].setFont(new java.awt.Font("Gulim", 0, 14));
+	        updateBtn[i].setFont(new java.awt.Font("Gulim", 0, 14));
+	        labelName[i].setFont(new java.awt.Font("Gulim", 0, 14));
+	        
+	        updateBtn[i].addActionListener(new ActionListener()
+	        {
+	            public void actionPerformed(ActionEvent e) {
+	            	int index=0;
+	            	for(int i=0; i<performName.size();i++)
+	            	{
+	            		if(updateBtn[i]==e.getSource())
+	            		{
+	            			index=i;
+	            			break;
+	            		}
+	            	}
+	                new UpdatePerform1_View(perform[index]).setVisible(true); // Main Form to show after the Login Form.
+	                dispose();
+	            }
+	        });
+	        
+	        mypanel.add(performpanel[i]);
+	    }
+     
+
+       
+        
+        backBtn.setBounds(240,420,70,50);
+        backBtn.addActionListener(new ActionListener(){
+            
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		dispose();
+        		new HomeView();
+        	}
+        	
         });
+        mypanel.add(backBtn);
+        
+        
+        
+        
+        
 
 
-
-        mypanel.add(performpanel);
+        
 
 
 
@@ -69,10 +105,10 @@ public class MyPerformView extends JFrame {
 
         // frame setting
         mypanel.setVisible(true);
-        mypanel.setLayout(null);
+        mypanel.setVisible(true);
         setSize(350,600);
 
-        this.setContentPane(performpanel);
+        this.setContentPane(mypanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

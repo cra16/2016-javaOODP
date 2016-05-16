@@ -32,6 +32,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         JTextField field1 = new JTextField(15); //공연이름
         JTextField field2 = new JTextField(15); //가격
         JButton btn1 = new JButton("다음");
+        JButton btn2 = new JButton("취소");
         for(i=0;i<31;i++)                       // Dropdown
         {
             daystamp[i] = String.valueOf(i+1);
@@ -50,9 +51,15 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         label2.setBounds(30,110,80,40); //장소
         label3.setBounds(30,150,80,40); //날짜
         label4.setBounds(30,190,80,40); //기간
+
         label6.setBounds(30,230,80,40); //가격
         label5.setBounds(30,270,80,40); //공연 설명
         btn1.setBounds(160,460,70,50);
+
+  
+        btn1.setBounds(160,420,70,50);
+        btn2.setBounds(240,420,70,50);
+
         field1.setBounds(110,70, 120, 30);
         area1.setBounds(30,310,200,130);
         field2.setBounds(110,230, 120, 30);
@@ -76,7 +83,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         dayList.setFont(new java.awt.Font("Gulim", 0, 14));
         periodList.setFont(new java.awt.Font("Gulim", 0, 14));
         placeList.setFont(new java.awt.Font("Gulim", 0, 14));
-
+        
         add1panel.add(title);
         add1panel.add(label1);
         add1panel.add(label2);
@@ -87,12 +94,13 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         add1panel.add(field1);
         add1panel.add(field2);
         add1panel.add(btn1);
+        add1panel.add(btn2);
         add1panel.add(area1);
         add1panel.add(monthList);
         add1panel.add(dayList);
         add1panel.add(periodList);
         add1panel.add(placeList);
-
+       
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
@@ -102,8 +110,20 @@ public class AddPerform1_View extends JFrame //implements ActionListener
                 		periodList.getSelectedIndex(),field2.getText(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
+           
         });
-
+        btn2.addActionListener(new ActionListener(){
+        
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		dispose();
+        		new HomeView();
+        	}
+        	
+        });
+        	
+        
+        
         // frame setting
         add1panel.setVisible(true);
         add1panel.setLayout(null);
