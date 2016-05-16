@@ -29,8 +29,10 @@ public class OrderView extends JFrame //implements ActionListener
         this.setLayout( null);
 
         //SAMPLE
-        JButton perform1 = new JButton("MIC");
+        JLabel perform1 = new JLabel("MIC");
         perform1.setBounds(0,0,240,50);
+        perform1.setBorder(BorderFactory.createLineBorder(Color.lightGray));
+        perform1.setHorizontalAlignment(JLabel.CENTER);
         perform1.setFont(new java.awt.Font("Gulim", 0, 15));
 
         JButton cancelBtn = new JButton("예매취소");
