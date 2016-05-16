@@ -26,7 +26,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         JLabel label3 = new JLabel("날짜 :");
         JLabel label4 = new JLabel("기간 :");
         JLabel label5 = new JLabel("공연 설명 :");
-        JLabel label6 = new JLabel("가격:");
+        JLabel label6 = new JLabel("가격 :");
 
         JTextArea area1 = new JTextArea();  //공연설명
         JTextField field1 = new JTextField(15); //공연이름
@@ -53,9 +53,9 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         label6.setBounds(30,230,80,40); //가격
         label5.setBounds(30,270,80,40); //공연 설명
         btn1.setBounds(160,460,70,50);
-        field1.setBounds(110,270, 120, 30);
+        field1.setBounds(110,70, 120, 30);
         area1.setBounds(30,310,200,130);
-        field2.setBounds(110,70, 120, 30);
+        field2.setBounds(110,230, 120, 30);
         monthList.setBounds(110, 150, 60, 30);
         dayList.setBounds(180,150, 50,30);
         periodList.setBounds(110, 190, 70, 30);
@@ -67,6 +67,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         label3.setFont(new java.awt.Font("Gulim", 0, 14));
         label4.setFont(new java.awt.Font("Gulim", 0, 14));
         label5.setFont(new java.awt.Font("Gulim", 0, 14));
+        label6.setFont(new java.awt.Font("Gulim", 0, 14));
         btn1.setFont(new java.awt.Font("Gulim", 0, 14));
         area1.setFont(new java.awt.Font("Gulim", 0, 14));
         field1.setFont(new java.awt.Font("Gulim", 0, 14));
@@ -82,6 +83,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         add1panel.add(label3);
         add1panel.add(label4);
         add1panel.add(label5);
+        add1panel.add(label6);
         add1panel.add(field1);
         add1panel.add(field2);
         add1panel.add(btn1);
