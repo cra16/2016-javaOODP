@@ -236,12 +236,12 @@ public class DBHelper {
 		}
 	}
 	
-	public void cancelTicket(String performName, Date date, Time time, String audienceName){
+	public void cancelTicket(Ticket ticket){
 		try{
-			int index = audience.getTickets().indexOf(new Ticket(performName, date, time, audienceName));
+			int index = audience.getTickets().indexOf(ticket);
 			audience.getTickets().remove(index);
 			
-			query = "delete from ticket where performanceName='"+performName+"' and date='"+date+"' and time='"+time+"' and audienceName='"+audienceName+"'";
+			query = "delete from ticket where performanceName='"+ticket.getPerformanceName()+"' and date='"+ticket.getDate()+"' and time='"+ticket.getTime()+"' and audienceName='"+ticket.getAudienceName()+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
