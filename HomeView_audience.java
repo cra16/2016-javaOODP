@@ -26,8 +26,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
         
-        dBHelper.getPerforms();
-        if(dBHelper.getPerforms() != null){
+        if(dBHelper.getPerforms().size() > 0){
 	        perform = new JButton[dBHelper.getPerforms().size()];
 	        for(int i=0;i<dBHelper.getPerforms().size();i++){
 	        	perform[i] = new JButton(dBHelper.getPerforms().get(i));
@@ -50,6 +49,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
 	        	            			p=null;
 	        	            	}
 	        	            	new BuyTicketView(p); // Main Form to show after the Login Form.
+
 	        	                dispose();
 	        	            }
 	        	        });

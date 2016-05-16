@@ -36,7 +36,7 @@ public class BuyTicketView extends JFrame //implements ActionListener
         JLabel name = new JLabel(perform.getName()); // Data 채워주세용
         JLabel provider = new JLabel(perform.getHost().getName());
         JLabel price = new JLabel(perform.getCost()+"");
-        JLabel place = new JLabel(perform.getPlace().getPlaceName(perform.getPlaceNum()));
+        JLabel place = new JLabel(perform.getPlace());
         JTextArea detail = new JTextArea(perform.getDescription());  // 우선 disabled 상태로 표시될 것.
         detail.setEditable(false);   // disabled
         

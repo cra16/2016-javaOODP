@@ -18,8 +18,8 @@ public class Performance {
 		this.description = description;
 	}
 
-	public Place getPlace() {
-		return place;
+	public String getPlace() {
+		return place.getPlaceName(placeNum);
 	}
 
 	public void setPlace(Place place) {
