@@ -25,8 +25,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
         
-        dBHelper.getPerforms();
-        if(dBHelper.getPerforms() != null){
+        if(dBHelper.getPerforms().size() > 0){
 	        perform = new JButton[dBHelper.getPerforms().size()];
 	        for(int i=0;i<dBHelper.getPerforms().size();i++){
 	        	perform[i] = new JButton(dBHelper.getPerforms().get(i));
@@ -36,7 +35,7 @@ public class HomeView_audience extends JFrame //implements ActionListener
 	        	perform[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
 	        	        {
 	        	            public void actionPerformed(ActionEvent e) {
-	        	                new BuyTicketView(); // Main Form to show after the Login Form.
+	        	                new BuyTicketView(e.getActionCommand()); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });

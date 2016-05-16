@@ -26,7 +26,7 @@ public class DBHelper {
 		String phoneNum = null;
 		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -114,7 +114,7 @@ public class DBHelper {
 			query = "select * from performance where performanceName = '" + performanceName + "'";
 			result = stmt.executeQuery(query);
 			while(result.next()){
-				hostName = result.getString("hostNam");
+				hostName = result.getString("hostName");
 				placeNum = result.getInt("placeNum");
 				cost = result.getInt("cost");
 				description = result.getString("description");
