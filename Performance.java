@@ -1,7 +1,7 @@
 import java.sql.*;
 
 public class Performance {
-	private Place place = new Place();
+	private Place place;
 	private int placeNum;
 	private Schedule schedule;
 	private Host host;
@@ -11,6 +11,7 @@ public class Performance {
 	
 	public Performance(int placeNum, Host host, Schedule schedule, String name, int cost, String description){
 		this.placeNum = placeNum;
+		this.place = new Place(placeNum);
 		this.host = host;
 		this.name = name;
 		this.schedule = schedule;
@@ -18,8 +19,8 @@ public class Performance {
 		this.description = description;
 	}
 
-	public String getPlace() {
-		return place.getPlaceName(placeNum);
+	public Place getPlace() {
+		return place;
 	}
 
 	public void setPlace(Place place) {
@@ -73,6 +74,4 @@ public class Performance {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	
 }

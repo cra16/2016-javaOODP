@@ -64,7 +64,7 @@ public class DBHelper {
 					result = stmt.executeQuery(query);
 					ArrayList<Ticket> tickets = null;
 					while(result.next()){
-						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3)));
+						tickets.add(new Ticket(result.getString(1), result.getDate(2), result.getTime(3), result.getString(4)));
 					}
 					audience = new Audience(name, phoneNum, user_id, tickets);
 					user_validator = true;

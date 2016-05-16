@@ -6,18 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Time;
 
 
 public class BuyTicketView extends JFrame //implements ActionListener
 {
     Container contentPane;
-    String[] datestamp = {"5/2","5/3","5/4"};
-    String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
-
-
+    Performance perform;
 
     BuyTicketView(Performance perform)
     {
+    	this.perform = perform;
+    	
         contentPane=this.getContentPane();
         JPanel buypanel = new JPanel();
         setBounds(0,0,350,600);
@@ -36,7 +36,7 @@ public class BuyTicketView extends JFrame //implements ActionListener
         JLabel name = new JLabel(perform.getName()); // Data 채워주세용
         JLabel provider = new JLabel(perform.getHost().getName());
         JLabel price = new JLabel(perform.getCost()+"");
-        JLabel place = new JLabel(perform.getPlace());
+        JLabel place = new JLabel(perform.getPlace().getPlaceName());
         JTextArea detail = new JTextArea(perform.getDescription());  // 우선 disabled 상태로 표시될 것.
         detail.setEditable(false);   // disabled
         
@@ -74,9 +74,20 @@ public class BuyTicketView extends JFrame //implements ActionListener
         	}
         }
         
+        int count=0;
+        while(perform.getSchedule().getTime()[count] != null){
+        	count++;
+        }
+        String[] userTimeStamp = new String[count];
+        for(int i=0;i<count;i++){
+        	splitString = perform.getSchedule().getTime()[i].toString().split(":");
+        	mergeString = splitString[0]+":"+splitString[1];
+        	userTimeStamp[i] = mergeString;
+        }
+                
         JComboBox dateList = new JComboBox(userDateStamp);  // 날짜 1~7개로 제한하기 : 예) 5/5, 4/5 등
-        JComboBox timeList = new JComboBox(timestamp);
-
+        JComboBox timeList = new JComboBox(userTimeStamp);
+        
         JButton btn1 = new JButton("예매하기");
         JButton btn2 = new JButton("뒤로가기");
 
@@ -138,8 +149,15 @@ public class BuyTicketView extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener() //예매하기
         {
             public void actionPerformed(ActionEvent e) {
-                // 정보 저장하기
-                dispose();
+            	if(DBHelper.getInstance().getCurrentNum(perform.getName(), date, time)<perform.getPlace().getMaxSeat()){
+            		DBHelper.getInstance().reserveTicket(perform.getName(), date, time, audienceName);
+            	}else {
+            		if(DBHelper.getInstance().getHost()!=null)
+                		new HomeView();
+                	else if(DBHelper.getInstance().getAudience()!=null)
+                		new HomeView_audience();
+            	}
+            	dispose();
             }
         });
         btn2.addActionListener(new ActionListener() //뒤로가기
@@ -163,7 +181,4 @@ public class BuyTicketView extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
- 
 }
