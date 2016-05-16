@@ -13,33 +13,47 @@ import javax.swing.JTextField;
 
 public class Host{
 	private String name;
-	private String phonenumber;
+	private String phoneNum;
 	private String userID;
+	private ArrayList<String> performanceList;
 	
-	
-	public Host(String name, String phonenumber,String userID)
+	public Host(String name, String phoneNum,String userID, ArrayList<String> performanceList)
 	{
-		this.name =name;
-		this.phonenumber = phonenumber;
-		this.userID= userID;
+		this.name = name;
+		this.phoneNum = phoneNum;
+		this.userID = userID;
+		this.performanceList = performanceList;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getPhonenumber() {
-		return phonenumber;
+
+	public String getPhoneNum() {
+		return phoneNum;
 	}
-	public void setPhonenumber(String phonenumber) {
-		this.phonenumber = phonenumber;
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
 	}
+
 	public String getUserID() {
 		return userID;
 	}
+
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+
+	public ArrayList<String> getPerformanceList() {
+		return performanceList;
+	}
+
+	public void setPerformanceList(ArrayList<String> performanceList) {
+		this.performanceList = performanceList;
 	}
 }

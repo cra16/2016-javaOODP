@@ -15,6 +15,8 @@ public class HomeView extends JFrame //implements ActionListener
                     {"하이루", "1/2"},
                     {"즉새두", "2/3"},
             };
+    DBHelper dBHelper = DBHelper.getInstance();
+    JButton[] perform;
 
     HomeView()
     {
@@ -24,19 +26,41 @@ public class HomeView extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setLayout( null);
 
-        //SAMPLE
-        JButton perform1 = new JButton("MIC");
-        perform1.setBounds(0,0,350,50);
-        perform1.setFont(new java.awt.Font("Gulim", 0, 16));
-        homepanel.add(perform1);
+        if(dBHelper.getPerforms().size() > 0){
+	        perform = new JButton[dBHelper.getPerforms().size()];
+	        for(int i=0;i<dBHelper.getPerforms().size();i++){
+	        	perform[i] = new JButton(dBHelper.getPerforms().get(i));
+	        	perform[i].setBounds(0,50*i,350,50);
+	        	perform[i].setFont(new java.awt.Font("Gulim", 0, 16));
+	        	homepanel.add(perform[i]);
+	        	perform[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
+	        	        {
+	        	            public void actionPerformed(ActionEvent e) {
+	        	            	Object o = e.getSource();
+	        	            	Performance p=null;
+	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
+	        	            	{
+	        	            		if(o==perform[i]){
+	        	            			p=DBHelper.getInstance().getPerformance(perform[i].getText());
+	        	            		}
+	        	            	}
+	        	            	
+	        	                new  BuyTicketView(p); // Main Form to show after the Login Form.
+	        	                dispose();
+	        	            }
+	        	        });
+	        }
+        }
 
         // BUTTONS: 공연등록, 내공연
         JButton addPerform = new JButton("공연 등록");
         JButton myPerform = new JButton("내 공연");
+
         addPerform.setBounds(0,550,175,50);
         myPerform.setBounds(175,550,175,50);
         addPerform.setFont(new java.awt.Font("Gulim", 0, 16));
         myPerform.setFont(new java.awt.Font("Gulim", 0, 16));
+
         homepanel.add(addPerform);
         homepanel.add(myPerform);
 
@@ -50,19 +74,11 @@ public class HomeView extends JFrame //implements ActionListener
         myPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
         {
             public void actionPerformed(ActionEvent e) {
-                new MyPerformView().setVisible(true); // Main Form to show after the Login Form.
+            	
+                new MyPerformView(null).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });
-
-        perform1. addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
-        {
-            public void actionPerformed(ActionEvent e) {
-              //  new SummaryView().setVisible(true); // Main Form to show after the Login Form.수정할예정
-                dispose();
-            }
-        });
-
 
         // frame setting
         homepanel.setVisible(true);
@@ -73,13 +89,4 @@ public class HomeView extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-    public static void main(String arr[])
-    {
-        new HomeView();
-    }
-
-
-
 }

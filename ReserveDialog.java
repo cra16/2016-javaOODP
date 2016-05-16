@@ -1,4 +1,4 @@
-import java.awt.FlowLayout;
+/*import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,9 +7,9 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class ReserveDialog implements ActionListener{
-	JButton confirm = new JButton("È®ÀÎ");
-	JButton ok = new JButton("È®ÀÎ");
-	JButton cancel = new JButton("Ãë¼Ò");
+	JButton confirm = new JButton("È®ï¿½ï¿½");
+	JButton ok = new JButton("È®ï¿½ï¿½");
+	JButton cancel = new JButton("ï¿½ï¿½ï¿½");
 	JDialog buyTicket;
 	Seat seat;
 	
@@ -26,11 +26,11 @@ public class ReserveDialog implements ActionListener{
 		buyTicket.setLayout(new FlowLayout());
 	
 		if(!seat.isReserved()){
-			buyTicket.add(new JLabel("¿¹¾àÇÏ½Ã°Ú½À´Ï±î?",JLabel.CENTER));
+			buyTicket.add(new JLabel("ï¿½ï¿½ï¿½ï¿½ï¿½Ï½Ã°Ú½ï¿½ï¿½Ï±ï¿½?",JLabel.CENTER));
 			buyTicket.add(confirm);
 			buyTicket.add(cancel);
 		}else{
-			buyTicket.add(new JLabel("ÀÌ¹Ì ¿¹¾àµÈ ÁÂ¼®ÀÔ´Ï´Ù.",JLabel.CENTER));
+			buyTicket.add(new JLabel("ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Â¼ï¿½ï¿½Ô´Ï´ï¿½.",JLabel.CENTER));
 			buyTicket.add(ok);
 		}
 		
@@ -46,4 +46,4 @@ public class ReserveDialog implements ActionListener{
 			buyTicket.dispose();
 		}
 	}
-}
+}*/

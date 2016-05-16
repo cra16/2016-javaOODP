@@ -1,6 +1,6 @@
 
 public abstract class Product {
 
-	public abstract Performance getChooseProduct();
-	//ф╪до ╠Б╢и Ёж╢б ╟В
+	public abstract String getChooseProduct();
+	//ф╪О©╫О©╫ О©╫О©╫О©╫ О©╫ж╢О©╫ О©╫О©╫
 }

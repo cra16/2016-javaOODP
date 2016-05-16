@@ -26,9 +26,11 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         JLabel label3 = new JLabel("날짜 :");
         JLabel label4 = new JLabel("기간 :");
         JLabel label5 = new JLabel("공연 설명 :");
+        JLabel label6 = new JLabel("가격 :");
 
         JTextArea area1 = new JTextArea();  //공연설명
         JTextField field1 = new JTextField(15); //공연이름
+        JTextField field2 = new JTextField(15); //가격
         JButton btn1 = new JButton("다음");
         for(i=0;i<31;i++)                       // Dropdown
         {
@@ -48,10 +50,12 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         label2.setBounds(30,110,80,40); //장소
         label3.setBounds(30,150,80,40); //날짜
         label4.setBounds(30,190,80,40); //기간
-        label5.setBounds(30,230,80,40); //공연 설명
-        btn1.setBounds(160,420,70,50);
-        area1.setBounds(30,270,200,130);
+        label6.setBounds(30,230,80,40); //가격
+        label5.setBounds(30,270,80,40); //공연 설명
+        btn1.setBounds(160,460,70,50);
         field1.setBounds(110,70, 120, 30);
+        area1.setBounds(30,310,200,130);
+        field2.setBounds(110,230, 120, 30);
         monthList.setBounds(110, 150, 60, 30);
         dayList.setBounds(180,150, 50,30);
         periodList.setBounds(110, 190, 70, 30);
@@ -63,9 +67,11 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         label3.setFont(new java.awt.Font("Gulim", 0, 14));
         label4.setFont(new java.awt.Font("Gulim", 0, 14));
         label5.setFont(new java.awt.Font("Gulim", 0, 14));
+        label6.setFont(new java.awt.Font("Gulim", 0, 14));
         btn1.setFont(new java.awt.Font("Gulim", 0, 14));
         area1.setFont(new java.awt.Font("Gulim", 0, 14));
         field1.setFont(new java.awt.Font("Gulim", 0, 14));
+        field2.setFont(new java.awt.Font("Gulim", 0, 14));
         monthList.setFont(new java.awt.Font("Gulim", 0, 14));
         dayList.setFont(new java.awt.Font("Gulim", 0, 14));
         periodList.setFont(new java.awt.Font("Gulim", 0, 14));
@@ -77,7 +83,9 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         add1panel.add(label3);
         add1panel.add(label4);
         add1panel.add(label5);
+        add1panel.add(label6);
         add1panel.add(field1);
+        add1panel.add(field2);
         add1panel.add(btn1);
         add1panel.add(area1);
         add1panel.add(monthList);
@@ -88,7 +96,10 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new AddPerform2_View().setVisible(true); // Main Form to show after the Login Form.
+            	
+                new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
+                		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
+                		periodList.getSelectedIndex(),field2.getText(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });
@@ -102,14 +113,4 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-    public static void main(String arr[])
-
-    {
-        new AddPerform1_View();
-    }
-
-
-
 }

@@ -22,6 +22,7 @@ public class LoginView extends JFrame //implements ActionListener
         JRadioButton checkAudience = new JRadioButton("Audience",false);
         JRadioButton checkHost = new JRadioButton("Host",false);
         ButtonGroup btngroup = new ButtonGroup();
+
         JButton login = new JButton("로그인");
         btngroup.add(checkAudience);
         btngroup.add(checkHost);
@@ -43,7 +44,7 @@ public class LoginView extends JFrame //implements ActionListener
 
 
         loginpanel.add(label1);
-        loginpanel. add(label2);
+        loginpanel.add(label2);
         loginpanel.add(text1);
         loginpanel.add(text2);
         loginpanel.add(checkAudience);
@@ -52,9 +53,21 @@ public class LoginView extends JFrame //implements ActionListener
 
         login.addActionListener(new ActionListener()
         {
+        	
             public void actionPerformed(ActionEvent e) {
-                new LoginView().setVisible(true); // Main Form to show after the Login Form.
-                dispose();
+
+            	int checknumber;
+            	if(checkAudience.isSelected())
+            		checknumber=1;
+            	else if(checkHost.isSelected())
+            		checknumber=2;
+            	else
+            		checknumber=0;
+            	LoginController controller = new LoginController(text1.getText(),text2.getText(),checknumber);//input user information.
+
+            	controller.checkLogin();
+            		dispose();
+
             }
         });
 
@@ -69,11 +82,7 @@ public class LoginView extends JFrame //implements ActionListener
     }
 
 
-    public void actionPerformed(ActionEvent e)
-    {
-        new LoginView().setVisible(true); // Main Form to show after the Login Form.
-        dispose();
-    }
+
 
 
     public static void main(String arr[])

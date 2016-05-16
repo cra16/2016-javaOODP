@@ -1,34 +1,38 @@
 import java.sql.*;
 
 public class Performance {
-	private Place place = new Place();
+	private Place place;
 	private int placeNum;
-	private Schedule schedule=new Schedule();
+	private Schedule schedule;
 	private Host host;
 	private int cost;
 	private String name;
-	private Ticket[] ticket;
-	private int ticketcount=0;
-	private Time time;
-	private Date date;
+	private String description;
 	
-	public Performance(int placeNum, Host host, String name, Date date, Time time ,int cost)
-	{
+	public Performance(int placeNum, Host host, Schedule schedule, String name, int cost, String description){
 		this.placeNum = placeNum;
+		this.place = new Place(placeNum);
 		this.host = host;
 		this.name = name;
-		this.schedule.setDate(date);
-		this.schedule.setTime(time);
+		this.schedule = schedule;
 		this.cost = cost;
+		this.description = description;
 	}
-	
-	public void createTicket()
-	{
-		ticket[ticketcount]= new Ticket(this);
+
+	public Place getPlace() {
+		return place;
 	}
-	public void showInformation()
-	{
-		
+
+	public void setPlace(Place place) {
+		this.place = place;
+	}
+
+	public int getPlaceNum() {
+		return placeNum;
+	}
+
+	public void setPlaceNum(int placeNum) {
+		this.placeNum = placeNum;
 	}
 
 	public Schedule getSchedule() {
@@ -39,27 +43,12 @@ public class Performance {
 		this.schedule = schedule;
 	}
 
-	public String getPlaceName() {
-		return this.place.getPlaceName(this.placeNum);
-	}
-	
-	public int getMaxSeat(){
-		return this.place.getMaxSeat(this.placeNum);
-	}
-	
-	public int getCurrentNum(){
-		return this.place.getCurrentNum(this.placeNum);
-	}
-	public void setPlace(int place) {
-		this.placeNum = place;
+	public Host getHost() {
+		return host;
 	}
 
-	public String getHost() {
-		return host.getName();
-	}
-	
-	public Seat[] getSeat() {
-		return this.place.getSeat(this.placeNum);
+	public void setHost(Host host) {
+		this.host = host;
 	}
 
 	public int getCost() {
@@ -71,32 +60,18 @@ public class Performance {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public Ticket[] getTicket() {
-		return ticket;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setTicket(Ticket[] ticket) {
-		this.ticket = ticket;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
-	public int getTicketcount() {
-		return ticketcount;
-	}
-
-	public void setTicketcount(int ticketcount) {
-		this.ticketcount = ticketcount;
-	}
-
-
-	
-	
-	
-	
 }
