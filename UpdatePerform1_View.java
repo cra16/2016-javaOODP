@@ -15,7 +15,7 @@ public class UpdatePerform1_View extends JFrame {
     String[] periodstamp = new String[7];
     int i = 0;
 
-    UpdatePerform1_View()
+    UpdatePerform1_View(Performance perform)
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -32,6 +32,17 @@ public class UpdatePerform1_View extends JFrame {
 
         JTextArea area1 = new JTextArea();  //공연설명
         JTextField field1 = new JTextField(15); //공연이름
+        
+        
+        
+        field1.setText(perform.getName());
+        area1.setText(perform.getDescription());
+        
+        String[] splitString =perform.getSchedule().getFirstDay().toString().split("-");
+        
+        int month = Integer.parseInt(splitString[1]);
+        int date = Integer.parseInt(splitString[2]);
+        
         JButton btn1 = new JButton("다음");
         for(i=0;i<31;i++)                       // Dropdown
         {
@@ -46,6 +57,9 @@ public class UpdatePerform1_View extends JFrame {
         JComboBox periodList = new JComboBox(periodstamp);
         JComboBox placeList = new JComboBox(placestamp);
 
+        monthList.setSelectedIndex(month-1);
+        dayList.setSelectedIndex(date-1);
+        
         title.setBounds(30, 20, 200, 40);
         label1.setBounds(30,70,80,40);  //공연이름
         label2.setBounds(30,110,80,40); //장소
@@ -91,7 +105,7 @@ public class UpdatePerform1_View extends JFrame {
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new UpdatePerform2_View(field1.getText(),placeList.getSelectedIndex(),
+                new UpdatePerform2_View(perform,field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
                 		periodList.getSelectedIndex(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
                 
@@ -107,14 +121,6 @@ public class UpdatePerform1_View extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
-    public static void main(String arr[])
-
-    {
-        new UpdatePerform1_View();
-    }
-
 
 
 }

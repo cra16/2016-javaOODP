@@ -47,7 +47,7 @@ public class HomeView extends JFrame //implements ActionListener
 	        	            		}
 	        	            	}
 	        	            	
-	        	                new  MyPerformView(p); // Main Form to show after the Login Form.
+	        	                new  UpdatePerform1_View(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });

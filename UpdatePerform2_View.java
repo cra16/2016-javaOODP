@@ -8,8 +8,8 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
 {
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
-
-    UpdatePerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String Text)
+    int timeNum;
+    UpdatePerform2_View(Performance perform,String performName,int placeNum, int monthNum,int dayNum, int duration, String Text)
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -22,13 +22,20 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         JLabel subtitle = new JLabel("<날짜별 시간 선택>");
         JButton btn1 = new JButton("완료");
 
-        JLabel label[] = new JLabel[duration+1]; //SAMPLE 1
-    	JComboBox drop[] = new JComboBox[duration+1];
+        JLabel label[] = new JLabel[perform.getSchedule().getDuration()+1]; //SAMPLE 1
+    	JComboBox drop[] = new JComboBox[perform.getSchedule().getDuration()+1];
         
         for(int i=0; i<duration+1; i++)
         {	
         	label[i] = new JLabel("날짜"+i +": ");
+        	System.out.println(perform.getSchedule().getTime()[i]);
+        	if(perform.getSchedule().getTime()[i]!=null)
+        	{	
+        	String[] splitString = perform.getSchedule().getTime()[i].toString().split(":");
+        	timeNum = Integer.parseInt(splitString[0])-15;
+        	}
         	drop[i] = new JComboBox(timestamp);
+        	drop[i].setSelectedIndex(timeNum);
         	label[i].setBounds(30, 110+ (i*40), 70, 40); //SAMPLE 1
         	drop[i].setBounds(110, 110+(i*40), 100, 30);
         	 label[i].setFont(new java.awt.Font("Gulim", 0, 14));
@@ -56,18 +63,20 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
             	UpdatePerformController controller =
             			new UpdatePerformController();
             	
-            	String[] Time = new String[duration+1];
+            	String[] Time = new String[perform.getSchedule().getDuration()+1];
+
             	
             	for(int i=0; i<duration+1;i++)
             	{
             		Time[i] = timestamp[drop[i].getSelectedIndex()];
             	}
-            	controller.eventUpdatePerformance(performName,placeNum,monthNum, dayNum, Time, duration,Text);
+            	controller.eventUpdatePerformance(perform,performName,placeNum,monthNum, dayNum, Time, duration,Text);
 
                 dispose();
             }
         });
 
+        
         // frame setting
         add1panel.setVisible(true);
         add1panel.setLayout(null);

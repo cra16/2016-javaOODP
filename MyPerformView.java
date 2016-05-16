@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,7 @@ public class MyPerformView extends JFrame {
 
     MyPerformView(Performance perform){
     	
-    		contentPane=this.getContentPane();
+    	contentPane=this.getContentPane();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
@@ -47,10 +48,13 @@ public class MyPerformView extends JFrame {
         updateBtn.setBounds(0,0,100,40);
         label1.setBounds(0,0,150,40);
 
+        
+        
+        
         updateBtn.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new UpdatePerform1_View().setVisible(true); // Main Form to show after the Login Form.
+                new UpdatePerform1_View(perform).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });

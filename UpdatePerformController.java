@@ -26,7 +26,7 @@ public class UpdatePerformController{
 
 	}
 
-	public void eventUpdatePerformance(String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text){
+	public void eventUpdatePerformance(Performance perform,String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text){
 		
 
 		Calendar temp=Calendar.getInstance();
