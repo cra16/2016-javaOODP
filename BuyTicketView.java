@@ -6,12 +6,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.Time;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class BuyTicketView extends JFrame //implements ActionListener
 {
     Container contentPane;
+    DBHelper dBHelper = DBHelper.getInstance();
     Performance perform;
 
     BuyTicketView(Performance perform)
@@ -149,8 +155,21 @@ public class BuyTicketView extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener() //예매하기
         {
             public void actionPerformed(ActionEvent e) {
-            	if(DBHelper.getInstance().getCurrentNum(perform.getName(), date, time)<perform.getPlace().getMaxSeat()){
-            		DBHelper.getInstance().reserveTicket(perform.getName(), date, time, audienceName);
+            	Calendar cal = Calendar.getInstance();
+            	cal.setTime(perform.getSchedule().getFirstDay());
+            	cal.add(Calendar.DATE, dateList.getSelectedIndex());
+            	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            	Date date=null;
+            	Time time=perform.getSchedule().getTime()[dateList.getSelectedIndex()];
+				try {
+					date = new Date(df.parse(df.format(cal.getTime())).getTime());
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+            	if(dBHelper.getCurrentNum(perform.getName(), date, time)<perform.getPlace().getMaxSeat()){
+            		dBHelper.reserveTicket(perform.getName(), date, time, dBHelper.getAudience().getName());
             	}else {
             		if(DBHelper.getInstance().getHost()!=null)
                 		new HomeView();
