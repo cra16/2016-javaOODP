@@ -73,7 +73,7 @@ public class AddPerformController implements ActionListener {
 		Integer priceInt = new Integer(price);
 		Performance p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,priceInt,Text);
-
+		
 		helper.addPerformance(p);
 		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
 		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName

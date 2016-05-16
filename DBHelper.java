@@ -26,7 +26,7 @@ public class DBHelper {
 		String phoneNum = null;
 		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -159,6 +159,7 @@ public class DBHelper {
 
 	public void addPerformance(Performance perform){
 		performs.add(perform.getName());
+		host.getPerformanceList().add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
@@ -180,6 +181,7 @@ public class DBHelper {
 	public void updatePerformance(String performName, Performance perform){
 		int index = performs.indexOf(performName);
 		performs.set(index, perform.getName());
+		host.getPerformanceList().set(index, perform.getName());
 		try{
 			
 			query = "update performance set ";
@@ -196,9 +198,9 @@ public class DBHelper {
 			query += "duration="+perform.getSchedule().getDuration();
 			for(int i=0;i<7;i++){
 				if(perform.getSchedule().getTime()[i] == null)
-					query += ", time"+i+"='"+perform.getSchedule().getTime()[i];
-				else
-					query += ", time"+i+"='"+perform.getSchedule().getTime()[i]+"'";
+					query += ", time"+(i+1)+"="+perform.getSchedule().getTime()[i];
+				else 
+					query += ", time"+(i+1)+"='"+perform.getSchedule().getTime()[i]+"'";
 			}
 			query += " where performanceName='"+performName+"'";
 			stmt.executeUpdate(query);
@@ -211,6 +213,7 @@ public class DBHelper {
 	public void deletePerformance(String perform){
 		int index = performs.indexOf(perform);
 		performs.remove(index);
+		host.getPerformanceList().remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform+"'";
 			stmt.executeUpdate(query);

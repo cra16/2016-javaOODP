@@ -72,6 +72,25 @@ public class MyPerformView extends JFrame {
 	                dispose();
 	            }
 	        });
+	        delBtn[i].addActionListener(new ActionListener(){
+	        	public void actionPerformed(ActionEvent e)
+	        	{
+	        		int index=0;
+	        		for(int i=0; i<performName.size();i++)
+	        		{
+	        			if(delBtn[i]==e.getSource())
+	        			{
+	        				index=i;
+	        				break;
+	        				
+	        			}
+	        			
+	        		}
+	        		dispose();
+        			DBHelper.getInstance().deletePerformance(performName.get(index));
+        			new MyPerformView(performName);
+	        	}
+	        });
 	        
 	        mypanel.add(performpanel[i]);
 	    }
