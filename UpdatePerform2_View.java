@@ -22,8 +22,8 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         JLabel subtitle = new JLabel("<날짜별 시간 선택>");
         JButton btn1 = new JButton("완료");
 
-        JLabel label[] = new JLabel[perform.getSchedule().getDuration()+1]; //SAMPLE 1
-    	JComboBox drop[] = new JComboBox[perform.getSchedule().getDuration()+1];
+        JLabel label[] = new JLabel[duration+1]; //SAMPLE 1
+    	JComboBox drop[] = new JComboBox[duration+1];
         
         for(int i=0; i<duration+1; i++)
         {	
@@ -63,12 +63,13 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
             	UpdatePerformController controller =
             			new UpdatePerformController();
             	
-            	String[] Time = new String[perform.getSchedule().getDuration()+1];
-
+            	String[] Time = new String[duration+1];
+            		
             	
             	for(int i=0; i<duration+1;i++)
             	{
             		Time[i] = timestamp[drop[i].getSelectedIndex()];
+            		
             	}
             	controller.eventUpdatePerformance(perform,performName,placeNum,monthNum, dayNum, Time, duration,Text);
 

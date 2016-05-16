@@ -29,13 +29,15 @@ public class UpdatePerform1_View extends JFrame {
         JLabel label3 = new JLabel("날짜 :");
         JLabel label4 = new JLabel("기간 :");
         JLabel label5 = new JLabel("공연 설명 :");
+        JLabel label6 = new JLabel("금액 :");
 
         JTextArea area1 = new JTextArea();  //공연설명
         JTextField field1 = new JTextField(15); //공연이름
-        
+        JTextField field2 = new JTextField(15);
         
         
         field1.setText(perform.getName());
+        field2.setText(String.valueOf(perform.getCost()));
         area1.setText(perform.getDescription());
         
         String[] splitString =perform.getSchedule().getFirstDay().toString().split("-");
@@ -65,21 +67,26 @@ public class UpdatePerform1_View extends JFrame {
         label2.setBounds(30,110,80,40); //장소
         label3.setBounds(30,150,80,40); //날짜
         label4.setBounds(30,190,80,40); //기간
-        label5.setBounds(30,230,80,40); //공연 설명
+        label5.setBounds(30,250,80,40); //공연 설명
         btn1.setBounds(160,420,70,50);
-        area1.setBounds(30,270,200,130);
+        area1.setBounds(30,290,200,130);
+        label6.setBounds(30, 230,80, 40);
         field1.setBounds(110,70, 120, 30);
+       
+        
         monthList.setBounds(110, 150, 60, 30);
         dayList.setBounds(180,150, 50,30);
         periodList.setBounds(110, 190, 70, 30);
         placeList.setBounds(110,110,120,30);
-
+        field2.setBounds(110,230,120,30);
+        
         title.setFont(new Font("Gulim", Font.BOLD, 15));
         label1.setFont(new java.awt.Font("Gulim", 0, 14));
         label2.setFont(new java.awt.Font("Gulim", 0, 14));
         label3.setFont(new java.awt.Font("Gulim", 0, 14));
         label4.setFont(new java.awt.Font("Gulim", 0, 14));
         label5.setFont(new java.awt.Font("Gulim", 0, 14));
+        label6.setFont(new java.awt.Font("Gulim", 0, 14));
         btn1.setFont(new java.awt.Font("Gulim", 0, 14));
         area1.setFont(new java.awt.Font("Gulim", 0, 14));
         field1.setFont(new java.awt.Font("Gulim", 0, 14));
@@ -101,6 +108,8 @@ public class UpdatePerform1_View extends JFrame {
         add1panel.add(dayList);
         add1panel.add(periodList);
         add1panel.add(placeList);
+        add1panel.add(field2);
+        add1panel.add(label6);
 
         btn1.addActionListener(new ActionListener()
         {
