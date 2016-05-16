@@ -75,7 +75,7 @@ public class HomeView extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
             	
-                new MyPerformView(null).setVisible(true); // Main Form to show after the Login Form.
+                new MyPerformView(DBHelper.getInstance().getHost().getPerformanceList()).setVisible(true); // Main Form to show after the Login Form.
                 dispose();
             }
         });
