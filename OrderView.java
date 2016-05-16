@@ -6,11 +6,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 
 public class OrderView extends JFrame //implements ActionListener
 {
     Container contentPane;
+    DBHelper dBHelper = DBHelper.getInstance();
+    
     String [] header = {"공연", "날짜"};
     Object[][] data =               // SAMPLE입니다!!
             {
@@ -27,21 +30,34 @@ public class OrderView extends JFrame //implements ActionListener
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
-
-        //SAMPLE
-        JLabel perform1 = new JLabel("MIC");
-        perform1.setBounds(0,0,240,50);
-        perform1.setBorder(BorderFactory.createLineBorder(Color.lightGray));
-        perform1.setHorizontalAlignment(JLabel.CENTER);
-        perform1.setFont(new java.awt.Font("Gulim", 0, 15));
-
-        JButton cancelBtn = new JButton("예매취소");
-        cancelBtn.setBounds(250,0,100,50);
-        cancelBtn.setFont(new java.awt.Font("Gulim", 0, 15));
-
-        orderpanel.add(perform1);
-        orderpanel.add(cancelBtn);
-
+        
+        ArrayList<Ticket> tickets = dBHelper.getAudience().getTickets();
+        if(dBHelper.getAudience().getTickets().size() > 0){
+        	JLabel[] perform = new JLabel[tickets.size()];
+        	JButton[] cancelBtn = new JButton[tickets.size()];
+        	for(int i=0;i<tickets.size();i++){
+        		
+		        perform[i] = new JLabel(tickets.get(i).getPerformanceName()+"  "+tickets.get(i).getDate()+" -- "+tickets.get(i).getTime());
+		        perform[i].setBounds(0,50*i,240,50);
+		        perform[i].setBorder(BorderFactory.createLineBorder(Color.lightGray));
+		        perform[i].setHorizontalAlignment(JLabel.CENTER);
+		        perform[i].setFont(new java.awt.Font("Gulim", 0, 15));
+		
+		        cancelBtn[i] = new JButton("예매취소");
+		        cancelBtn[i].setBounds(250,50*i,100,50);
+		        cancelBtn[i].setFont(new java.awt.Font("Gulim", 0, 15));
+		
+		        orderpanel.add(perform[i]);
+		        orderpanel.add(cancelBtn[i]);
+		        cancelBtn[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
+		                {
+		                    public void actionPerformed(ActionEvent e) {
+		                        new HomeView_audience().setVisible(true); // Main Form to show after the Login Form.
+		                        dispose();
+		                    }
+		                });
+        	}
+        }
         // BUTTONS: 공연등록, 내공연
         JButton  closeBtn = new JButton("뒤로가기");
         closeBtn.setBounds(250,550,100,50);
@@ -64,13 +80,4 @@ public class OrderView extends JFrame //implements ActionListener
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
-    public static void main(String arr[])
-    {
-        new OrderView();
-    }
-
-
-
 }

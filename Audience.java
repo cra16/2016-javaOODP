@@ -13,25 +13,6 @@ public class Audience {
 		this.tickets = tickets;
 	}
 	
-	public void addTicket()
-	{
-		
-	}
-	public void modifyTicket()
-	{
-		
-	}
-	
-	public void cancelTicket()
-	{
-		
-	}
-	
-	public void showTicket()
-	{
-		
-	}
-	
 	//mutator and accessor
 	public String getName() {
 		return name;
@@ -51,5 +32,8 @@ public class Audience {
 	public void setUserID(String userID) {
 		this.userID = userID;
 	}
-	
+
+	public ArrayList<Ticket> getTickets() {
+		return tickets;
+	}
 }

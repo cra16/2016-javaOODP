@@ -197,7 +197,7 @@ public class DBHelper {
 			for(int i=0;i<7;i++){
 				if(perform.getSchedule().getTime()[i] == null)
 					query += ", time"+i+"='"+perform.getSchedule().getTime()[i];
-				else 
+				else
 					query += ", time"+i+"='"+perform.getSchedule().getTime()[i]+"'";
 			}
 			query += " where performanceName='"+performName+"'";
@@ -226,6 +226,7 @@ public class DBHelper {
 	
 	public void reserveTicket(String performName, Date date, Time time, String audienceName){
 		try{
+			audience.getTickets().add(new Ticket(performName, date, time, audienceName));
 			query = "insert into ticket values('"+performName+"','"+date+"','"+time+"','"+audienceName+"')";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
@@ -237,6 +238,9 @@ public class DBHelper {
 	
 	public void cancelTicket(String performName, Date date, Time time, String audienceName){
 		try{
+			int index = audience.getTickets().indexOf(new Ticket(performName, date, time, audienceName));
+			audience.getTickets().remove(index);
+			
 			query = "delete from ticket where performanceName='"+performName+"' and date='"+date+"' and time='"+time+"' and audienceName='"+audienceName+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){

@@ -7,14 +7,6 @@ import java.awt.event.ActionListener;
 public class HomeView extends JFrame //implements ActionListener
 {
     Container contentPane;
-    String [] header = {"공연", "날짜"};
-    Object[][] data =               // SAMPLE입니다!!
-            {
-                    {"공연", "날짜"},
-                    {"곡성", "5/23"},
-                    {"하이루", "1/2"},
-                    {"즉새두", "2/3"},
-            };
     DBHelper dBHelper = DBHelper.getInstance();
     JButton[] perform;
 
