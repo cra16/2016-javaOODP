@@ -28,7 +28,7 @@ public class AddPerformController implements ActionListener {
 		
 	}
 	
-	public void eventAddPerformance(String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text)
+	public void eventAddPerformance(String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String price, String Text)
 	{
 		
 		
@@ -58,9 +58,6 @@ public class AddPerformController implements ActionListener {
 				if(i<duration+1)
 				{
 					String a = Time[i]+":"+"00";
-					
-					
-					
 					t=transFormat2.parse(a);
 				}
 			} catch (ParseException e) {
@@ -73,9 +70,9 @@ public class AddPerformController implements ActionListener {
 				time2[i]=null;
 		}
 
-		
+		Integer priceInt = new Integer(price);
 		Performance p = new Performance(placeNum,helper.getHost(),
-				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
+				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,priceInt,Text);
 
 		helper.addPerformance(p);
 		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),

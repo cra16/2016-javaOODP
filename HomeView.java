@@ -40,14 +40,12 @@ public class HomeView extends JFrame //implements ActionListener
 	        	            	Performance p=null;
 	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
 	        	            	{
-	        	            		if(o==perform[i])
-	        	            		{
-	        	            			System.out.println("G");
+	        	            		if(o==perform[i]){
 	        	            			p=DBHelper.getInstance().getPerformance(perform[i].getText());
 	        	            		}
 	        	            	}
 	        	            	
-	        	                new  UpdatePerform1_View(p); // Main Form to show after the Login Form.
+	        	                new  BuyTicketView(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });

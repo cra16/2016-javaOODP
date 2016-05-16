@@ -9,7 +9,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
 
-    AddPerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String Text)
+    AddPerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String price, String Text)
     {
         contentPane=this.getContentPane();
         JPanel add1panel = new JPanel();
@@ -66,7 +66,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
             	{
             		Time[i] = timestamp[drop[i].getSelectedIndex()];
             	}
-            	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum+1, Time, duration,Text);
+            	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum+1, Time, duration, price, Text);
                 DBHelper helper = DBHelper.getInstance();
                 
                 if(helper.getHost() !=null)

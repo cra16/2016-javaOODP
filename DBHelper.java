@@ -73,7 +73,7 @@ public class DBHelper {
 				}
 			}
 			
-			query = "select performanceName from performance";
+			query = "select performance.performanceName from performance, schedule where performance.performanceName = schedule.performanceName order by firstDay";
 			result = stmt.executeQuery(query);
 			while(result.next()){
 				performs.add(result.getString("performanceName"));
@@ -163,7 +163,6 @@ public class DBHelper {
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
 			query = "insert into schedule values('"+perform.getName()+"',"+"'"+perform.getSchedule().getFirstDay()+"',"+perform.getSchedule().getDuration();
-
 			for(int i=0;i<7;i++){
 				if(perform.getSchedule().getTime()[i] == null)
 					query += ","+perform.getSchedule().getTime()[i];
@@ -171,7 +170,6 @@ public class DBHelper {
 					query += ",'"+perform.getSchedule().getTime()[i]+"'";
 			}
 			query += ")";
-			System.out.println(query);
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
