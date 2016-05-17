@@ -81,15 +81,8 @@ public class LoginView extends JFrame //implements ActionListener
 
     }
 
-
-
-
-
     public static void main(String arr[])
     {
         new LoginView();
     }
-
-
-
 }

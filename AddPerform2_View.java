@@ -45,7 +45,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         
      
         btn1.setBounds(160,420,70,50);
-        btn2.setBounds(240,420,70,50);
+        btn2.setBounds(80,420,70,50);
         title.setFont(new Font("Gulim", Font.BOLD, 15));
         subtitle.setFont(new java.awt.Font("Gulim", 0, 14));
        
@@ -73,7 +73,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
                 DBHelper helper = DBHelper.getInstance();
                 
                 if(helper.getHost() !=null)
-                	new HomeView();
+                	new HomeView_host();
                 else if(helper.getAudience()!=null)
                 	new HomeView_audience();
             	dispose();
@@ -85,7 +85,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView();
+        		new HomeView_host();
         	}
         	
         });

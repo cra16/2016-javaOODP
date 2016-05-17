@@ -97,33 +97,20 @@ public class MyPerformView extends JFrame {
      
 
        
-        
-        backBtn.setBounds(240,420,70,50);
+        backBtn.setFont(new java.awt.Font("Gulim", 0, 14));
+        backBtn.setBounds(0,510,350,50);
         backBtn.addActionListener(new ActionListener(){
             
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView();
+        		new HomeView_host();
         	}
         	
         });
         mypanel.add(backBtn);
-        
-        
-        
-        
-        
-
-
-        
-
-
-
-
 
         // frame setting
-        mypanel.setVisible(true);
         mypanel.setVisible(true);
         setSize(350,600);
 

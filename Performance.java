@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Performance {
+public class Performance extends Product{
 	private Place place;
 	private int placeNum;
 	private Schedule schedule;

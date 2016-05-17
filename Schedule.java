@@ -2,8 +2,6 @@ import java.sql.*;
 
 public class Schedule {
 	private Time[] time;
-
-
 	private Date firstDay;
 	private int duration;
 	private String performanceName;

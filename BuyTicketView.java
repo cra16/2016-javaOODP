@@ -20,8 +20,7 @@ public class BuyTicketView extends JFrame //implements ActionListener
     DBHelper dBHelper = DBHelper.getInstance();
     Performance perform;
 
-    BuyTicketView(Performance perform)
-    {
+    BuyTicketView(Performance perform){
     	this.perform = perform;
     	
         contentPane=this.getContentPane();
@@ -36,7 +35,6 @@ public class BuyTicketView extends JFrame //implements ActionListener
         JLabel priceLabel = new JLabel("가격 :");
         JLabel placeLabel = new JLabel("장소 :");
         JLabel dateLabel = new JLabel("날짜 :");
-        JLabel timeLabel = new JLabel("시간 :");
         JLabel detailLabel = new JLabel("공연 설명 :");
         
         JLabel name = new JLabel(perform.getName()); // Data 채워주세용
@@ -46,54 +44,34 @@ public class BuyTicketView extends JFrame //implements ActionListener
         JTextArea detail = new JTextArea(perform.getDescription());  // 우선 disabled 상태로 표시될 것.
         detail.setEditable(false);   // disabled
         
-        
-        String[] splitString =perform.getSchedule().getFirstDay().toString().split("-");
-        String mergeString="";
+        Calendar cal = Calendar.getInstance();
+    	cal.setTime(perform.getSchedule().getFirstDay());
         String[] userDateStamp = new String[perform.getSchedule().getDuration()];
-        for(int i=1; i<splitString.length;i++)
-        {
-        	mergeString+=splitString[i];
-        	if(i<splitString.length-1)
-        	{
-        		mergeString+="/";
-        	}
-        	
-        }
-        for(int i=0; i<userDateStamp.length; i++)
-        {
-        	if(i==0)
-        		userDateStamp[i]=mergeString;
-        	else
-        	{
-        		int changeday=Integer.parseInt(splitString[splitString.length-1])+i; //아직 예외처리 안만듬
-        		
-        		mergeString = splitString[1]+"/" ;
-        		if(changeday<10)
-        		{
-        			mergeString += "0"+changeday;
-                	
-        		}
-        		else
-        		mergeString +=changeday;
-            	
-        		userDateStamp[i]=mergeString;
-        	}
-        }
+    	for(int i=0;i<perform.getSchedule().getDuration();i++){
+	    	cal.add(Calendar.DATE, 1);
+	    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    	Date date=null;
+			try {
+				date = new Date(df.parse(df.format(cal.getTime())).getTime()); 
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+			String[] splitString = date.toString().split("-");
+			userDateStamp[i] = splitString[1] + "/" + splitString[2];
+    	}
         
         int count=0;
         while(perform.getSchedule().getTime()[count] != null){
         	count++;
         }
-        String[] userTimeStamp = new String[count];
         for(int i=0;i<count;i++){
-        	splitString = perform.getSchedule().getTime()[i].toString().split(":");
-        	mergeString = splitString[0]+":"+splitString[1];
+        	String[] splitString = perform.getSchedule().getTime()[i].toString().split(":");
+        	String mergeString = splitString[0]+":"+splitString[1];
         	userDateStamp[i] += " -- "+mergeString;
         }
                 
         JComboBox dateList = new JComboBox(userDateStamp);  // 날짜 1~7개로 제한하기 : 예) 5/5, 4/5 등
         
-        JButton btn1 = new JButton("예매하기");
         JButton btn2 = new JButton("뒤로가기");
 
         title.setBounds(50, 20, 200, 40);
@@ -109,7 +87,6 @@ public class BuyTicketView extends JFrame //implements ActionListener
         place.setBounds(150,190,130,40);
         price.setBounds(150,230,130,40);
         dateList.setBounds(150,155,140,30);
-        btn1.setBounds(110,470,100,50);
         btn2.setBounds(230,470,100,50);
         detail.setBounds(50,310,270,130);
 
@@ -127,7 +104,6 @@ public class BuyTicketView extends JFrame //implements ActionListener
         price.setFont(new java.awt.Font("Gulim", 0, 14));
         dateList.setFont(new java.awt.Font("Gulim", 0, 14));
         detail.setFont(new java.awt.Font("Gulim", 0, 14));
-        btn1.setFont(new java.awt.Font("Gulim", 0, 14));
         btn2.setFont(new java.awt.Font("Gulim", 0, 14));
 
         buypanel.add(title);
@@ -143,42 +119,15 @@ public class BuyTicketView extends JFrame //implements ActionListener
         buypanel.add(placeLabel);
         buypanel.add(priceLabel);
         buypanel.add(dateLabel);
-        buypanel.add(btn1);
         buypanel.add(btn2);
 
-        btn1.addActionListener(new ActionListener() //예매하기
-        {
-            public void actionPerformed(ActionEvent e) {
-            	Calendar cal = Calendar.getInstance();
-            	cal.setTime(perform.getSchedule().getFirstDay());
-            	cal.add(Calendar.DATE, dateList.getSelectedIndex());
-            	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-            	Date date=null;
-            	Time time=perform.getSchedule().getTime()[dateList.getSelectedIndex()];
-				try {
-					date = new Date(df.parse(df.format(cal.getTime())).getTime());
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				
-            	if(dBHelper.getCurrentNum(perform.getName(), date, time)<perform.getPlace().getMaxSeat()){
-            		dBHelper.reserveTicket(perform.getName(), date, time, dBHelper.getAudience().getName());
-            	}else {
-            		System.out.println("예매 실패");
-            	}
-            	if(DBHelper.getInstance().getHost()!=null)
-            		new HomeView();
-            	else if(DBHelper.getInstance().getAudience()!=null)
-            		new HomeView_audience();
-            	dispose();
-            }
-        });
+        drawReserveBtn(buypanel, dateList);
+        
         btn2.addActionListener(new ActionListener() //뒤로가기
         {
             public void actionPerformed(ActionEvent e) {
             	if(DBHelper.getInstance().getHost()!=null)
-            		new HomeView();
+            		new HomeView_host();
             	else if(DBHelper.getInstance().getAudience()!=null)
             		new HomeView_audience();
                 dispose();
@@ -193,6 +142,39 @@ public class BuyTicketView extends JFrame //implements ActionListener
         this.setContentPane(buypanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+    }
+    
+    public void drawReserveBtn(JPanel buypanel, JComboBox dateList){
+        JButton btn1 = new JButton("예매하기");
+        btn1.setBounds(110,470,100,50);
+        btn1.setFont(new java.awt.Font("Gulim", 0, 14));
+    	buypanel.add(btn1);
+    	btn1.addActionListener(new ActionListener() //예매하기
+    	        {
+    	            public void actionPerformed(ActionEvent e) {
+    	            	Calendar cal = Calendar.getInstance();
+    	            	cal.setTime(perform.getSchedule().getFirstDay());
+    	            	cal.add(Calendar.DATE, dateList.getSelectedIndex());
+    	            	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    	            	Date date=null;
+    	            	Time time=perform.getSchedule().getTime()[dateList.getSelectedIndex()];
+    					try {
+    						date = new Date(df.parse(df.format(cal.getTime())).getTime());
+    					} catch (ParseException e1) {
+    						e1.printStackTrace();
+    					}
+    					
+    	            	if(dBHelper.getCurrentNum(perform.getName(), date, time)<perform.getPlace().getMaxSeat()){
+    	            		dBHelper.reserveTicket(perform.getName(), date, time, dBHelper.getAudience().getName());
+    	            	}else {
+    	            		System.out.println("예매 실패");
+    	            	}
+    	            	if(DBHelper.getInstance().getHost()!=null)
+    	            		new HomeView_host();
+    	            	else if(DBHelper.getInstance().getAudience()!=null)
+    	            		new HomeView_audience();
+    	            	dispose();
+    	            }
+    	        });
     }
 }

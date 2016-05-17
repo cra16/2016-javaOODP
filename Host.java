@@ -52,8 +52,4 @@ public class Host{
 	public ArrayList<String> getPerformanceList() {
 		return performanceList;
 	}
-
-	public void setPerformanceList(ArrayList<String> performanceList) {
-		this.performanceList = performanceList;
-	}
 }

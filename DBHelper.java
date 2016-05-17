@@ -15,18 +15,20 @@ public class DBHelper {
 	private Host host;
 	private Audience audience;
 	private String query;
-	private ArrayList<String> performs;
+	//private ArrayList<String> performs;
 	private boolean user_validator;
-	//private Factory perFactory = new PerformanceFactory();
-	//private ArrayList<Product> performance = new ArrayList<Product>();
+	private Factory perFactory;
+	private ArrayList<Product> performs;
 	
 	private DBHelper(String id, String pw, int type){
+		perFactory = new PerformanceFactory();
+		performs = new ArrayList<Product>();
+		
 		String user_id = null;
 		String name = null;
 		String phoneNum = null;
-		performs = new ArrayList<String>();
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -73,10 +75,18 @@ public class DBHelper {
 				}
 			}
 			
-			query = "select performance.performanceName from performance, schedule where performance.performanceName = schedule.performanceName order by firstDay";
+			query = "select performance.performanceName from performance, schedule where performance.performanceName=schedule.performanceName order by firstDay";
 			result = stmt.executeQuery(query);
+			result.last();
+			String[] performName = new String[result.getRow()];
+			result.beforeFirst();
+			int count=0;
 			while(result.next()){
-				performs.add(result.getString("performanceName"));
+				performName[count++] = result.getString("performanceName");
+			}
+			for(int i=0;i<count-1;i++){
+				Product perform = perFactory.create(getPerformance(performName[i]));
+				performs.add(perform);
 			}
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -158,7 +168,7 @@ public class DBHelper {
 	}
 
 	public void addPerformance(Performance perform){
-		performs.add(perform.getName());
+		performs.add(perform);
 		host.getPerformanceList().add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
@@ -180,7 +190,7 @@ public class DBHelper {
 	
 	public void updatePerformance(String performName, Performance perform){
 		int index = performs.indexOf(performName);
-		performs.set(index, perform.getName());
+		performs.set(index, perform);
 		host.getPerformanceList().set(index, perform.getName());
 		try{
 			
@@ -277,11 +287,11 @@ public class DBHelper {
 		return audience;
 	}
 
-	public ArrayList<String> getPerforms() {
+	public ArrayList<Product> getPerforms() {
 		return performs;
 	}
 
-	public void setPerforms(ArrayList<String> performs) {
+	public void setPerforms(ArrayList<Product> performs) {
 		this.performs = performs;
 	}
 

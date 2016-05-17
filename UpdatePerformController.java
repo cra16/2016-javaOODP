@@ -20,12 +20,6 @@ public class UpdatePerformController{
 	//private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
 	//private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
 	
-	public void UpdatePerformController()
-	{
-		//���⵵ GUI�� ���λ��� �ϴ� �������س���
-
-	}
-
 	public void eventUpdatePerformance(Performance perform,String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text){
 		
 
@@ -73,9 +67,6 @@ public class UpdatePerformController{
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
 
 		helper.updatePerformance(perform.getName(), p);
-		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
-		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
-		//		,cost,"1"));
 	}
 	
 }

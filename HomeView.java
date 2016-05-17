@@ -1,27 +1,32 @@
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class HomeView extends JFrame //implements ActionListener
-{
-    Container contentPane;
-    DBHelper dBHelper = DBHelper.getInstance();
-    JButton[] perform;
-
-    HomeView()
-    {
+public abstract class HomeView extends JFrame{
+	protected Container contentPane;
+    protected DBHelper dBHelper;
+    protected JButton[] perform;
+    
+    public abstract void drawBottomButton(JPanel homepanel);
+    HomeView(){
+    	draw_HomeView();
+    }
+    public final void draw_HomeView(){
+    	dBHelper = DBHelper.getInstance();
         contentPane=this.getContentPane();
         JPanel homepanel = new JPanel();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
-
+        
         if(dBHelper.getPerforms().size() > 0){
 	        perform = new JButton[dBHelper.getPerforms().size()];
 	        for(int i=0;i<dBHelper.getPerforms().size();i++){
-	        	perform[i] = new JButton(dBHelper.getPerforms().get(i));
+	        	perform[i] = new JButton(((Performance)dBHelper.getPerforms().get(i)).getName());
 	        	perform[i].setBounds(0,50*i,350,50);
 	        	perform[i].setFont(new java.awt.Font("Gulim", 0, 16));
 	        	homepanel.add(perform[i]);
@@ -29,49 +34,26 @@ public class HomeView extends JFrame //implements ActionListener
 	        	        {
 	        	            public void actionPerformed(ActionEvent e) {
 	        	            	Object o = e.getSource();
-	        	            	Performance p=null;
+	        	            	Performance p = null;
 	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
 	        	            	{
-	        	            		if(o==perform[i]){
+	        	            		if(o==perform[i])
+	        	            		{
 	        	            			p=DBHelper.getInstance().getPerformance(perform[i].getText());
+	        	            			break;
 	        	            		}
+	        	            		else
+	        	            			p=null;
 	        	            	}
-	        	            	
-	        	                new  BuyTicketView(p); // Main Form to show after the Login Form.
+	        	            	new BuyTicketView(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });
 	        }
         }
 
-        // BUTTONS: 공연등록, 내공연
-        JButton addPerform = new JButton("공연 등록");
-        JButton myPerform = new JButton("내 공연");
-
-        addPerform.setBounds(0,550,175,50);
-        myPerform.setBounds(175,550,175,50);
-        addPerform.setFont(new java.awt.Font("Gulim", 0, 16));
-        myPerform.setFont(new java.awt.Font("Gulim", 0, 16));
-
-        homepanel.add(addPerform);
-        homepanel.add(myPerform);
-
-        addPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
-        {
-            public void actionPerformed(ActionEvent e) {
-                new AddPerform1_View().setVisible(true); // Main Form to show after the Login Form.
-                dispose();
-            }
-        });
-        myPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
-        {
-            public void actionPerformed(ActionEvent e) {
-            	
-                new MyPerformView(DBHelper.getInstance().getHost().getPerformanceList()).setVisible(true); // Main Form to show after the Login Form.
-                dispose();
-            }
-        });
-
+        drawBottomButton(homepanel);
+        
         // frame setting
         homepanel.setVisible(true);
         homepanel.setLayout(null);
@@ -79,6 +61,5 @@ public class HomeView extends JFrame //implements ActionListener
         this.setContentPane(homepanel);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    }
+    };
 }

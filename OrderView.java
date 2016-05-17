@@ -11,11 +11,13 @@ import java.util.*;
 
 public class OrderView extends JFrame //implements ActionListener
 {
-    Container contentPane;
-    DBHelper dBHelper = DBHelper.getInstance();
+	private Container contentPane;
+    private DBHelper dBHelper;
+    private CancelTicketState ticketState = PossibleState.getInstance();
 
     OrderView()
     {
+    	dBHelper = DBHelper.getInstance();
         contentPane=this.getContentPane();
         JPanel orderpanel = new JPanel();
         setBounds(0,0,700,700);
@@ -43,36 +45,14 @@ public class OrderView extends JFrame //implements ActionListener
 		        
 		        orderpanel.add(perform[i]);
 		        
-		        if(tickets.get(i).getDate().after(new Date())){
-			        cancelBtn[i] = new JButton("예매취소");
-			        cancelBtn[i].setBounds(250,50*i,100,50);
-			        cancelBtn[i].setFont(new java.awt.Font("Gulim", 0, 15));
-			
-			        orderpanel.add(cancelBtn[i]);
-			        
-			        cancelBtn[i].addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
-			                {
-			                    public void actionPerformed(ActionEvent e) {
-			                    	int index=0;
-			    	            	for(int i=0; i<tickets.size();i++)
-			    	            	{
-			    	            		if(cancelBtn[i]==e.getSource())
-			    	            		{
-			    	            			index=i;
-			    	            			break;
-			    	            		}
-			    	            	}
-			                    	dBHelper.cancelTicket(dBHelper.getAudience().getTickets().get(index));
-			                        new OrderView().setVisible(true); // Main Form to show after the Login Form.
-			                        dispose();
-			                    }
-			                });
-		        }
+		        System.out.println(tickets.get(i).getDate());
+		        ticketState = ticketState.checkDay(tickets.get(i).getDate());
+		        ticketState.makeCancelBtn(orderpanel, cancelBtn, i, tickets.size());
         	}
         }
         // BUTTONS: 공연등록, 내공연
         JButton  closeBtn = new JButton("뒤로가기");
-        closeBtn.setBounds(250,550,100,50);
+        closeBtn.setBounds(0,510,350,50);
         closeBtn.setFont(new java.awt.Font("Gulim", 0, 15));
         orderpanel.add(closeBtn);
 

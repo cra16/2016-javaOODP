@@ -21,6 +21,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         JLabel title = new JLabel("공연 수정 - [2/2]");
         JLabel subtitle = new JLabel("<날짜별 시간 선택>");
         JButton btn1 = new JButton("완료");
+        JButton btn2 = new JButton("취소");
 
         JLabel label[] = new JLabel[duration+1]; //SAMPLE 1
     	JComboBox drop[] = new JComboBox[duration+1];
@@ -49,6 +50,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         subtitle.setBounds(30, 70, 170, 40);
        
         btn1.setBounds(160,420,70,50);
+        btn2.setBounds(80,420,70,50);
         title.setFont(new Font("Gulim", Font.BOLD, 15));
         subtitle.setFont(new java.awt.Font("Gulim", 0, 14));
        
@@ -56,6 +58,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         add1panel.add(title);
         add1panel.add(subtitle);
         add1panel.add(btn1);
+        add1panel.add(btn2);
 
         btn1.addActionListener(new ActionListener()
         {
@@ -72,9 +75,19 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
             		
             	}
             	controller.eventUpdatePerformance(perform,performName,placeNum,monthNum, dayNum, Time, duration,Text);
-            	new HomeView();
+            	new HomeView_host();
                 dispose();
             }
+        });
+        
+        btn2.addActionListener(new ActionListener(){
+            
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		dispose();
+        		new HomeView_host();
+        	}
+        	
         });
 
         

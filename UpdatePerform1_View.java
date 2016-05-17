@@ -46,6 +46,8 @@ public class UpdatePerform1_View extends JFrame {
         int date = Integer.parseInt(splitString[2]);
         
         JButton btn1 = new JButton("다음");
+        JButton btn2 = new JButton("취소");
+        
         for(i=0;i<31;i++)                       // Dropdown
         {
             daystamp[i] = String.valueOf(i+1);
@@ -67,10 +69,11 @@ public class UpdatePerform1_View extends JFrame {
         label2.setBounds(30,110,80,40); //장소
         label3.setBounds(30,150,80,40); //날짜
         label4.setBounds(30,190,80,40); //기간
-        label5.setBounds(30,250,80,40); //공연 설명
-        btn1.setBounds(160,420,70,50);
-        area1.setBounds(30,290,200,130);
-        label6.setBounds(30, 230,80, 40);
+        label5.setBounds(30,270,80,40); //공연 설명
+        btn1.setBounds(160,460,70,50);
+        btn2.setBounds(80,460,70,50);
+        area1.setBounds(30,310,200,130);
+        label6.setBounds(30,230,80, 40);
         field1.setBounds(110,70, 120, 30);
        
         
@@ -88,6 +91,7 @@ public class UpdatePerform1_View extends JFrame {
         label5.setFont(new java.awt.Font("Gulim", 0, 14));
         label6.setFont(new java.awt.Font("Gulim", 0, 14));
         btn1.setFont(new java.awt.Font("Gulim", 0, 14));
+        btn2.setFont(new java.awt.Font("Gulim", 0, 14));
         area1.setFont(new java.awt.Font("Gulim", 0, 14));
         field1.setFont(new java.awt.Font("Gulim", 0, 14));
         monthList.setFont(new java.awt.Font("Gulim", 0, 14));
@@ -103,6 +107,7 @@ public class UpdatePerform1_View extends JFrame {
         add1panel.add(label5);
         add1panel.add(field1);
         add1panel.add(btn1);
+        add1panel.add(btn2);
         add1panel.add(area1);
         add1panel.add(monthList);
         add1panel.add(dayList);
@@ -120,6 +125,15 @@ public class UpdatePerform1_View extends JFrame {
                 
                 dispose();
             }
+        });
+        
+        btn2.addActionListener(new ActionListener(){
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		dispose();
+        		new HomeView_host();
+        	}
+        	
         });
 
         // frame setting

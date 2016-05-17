@@ -54,11 +54,9 @@ public class AddPerform1_View extends JFrame //implements ActionListener
 
         label6.setBounds(30,230,80,40); //가격
         label5.setBounds(30,270,80,40); //공연 설명
-        btn1.setBounds(160,460,70,50);
-
   
-        btn1.setBounds(160,420,70,50);
-        btn2.setBounds(240,420,70,50);
+        btn1.setBounds(160,460,70,50);
+        btn2.setBounds(80,460,70,50);
 
         field1.setBounds(110,70, 120, 30);
         area1.setBounds(30,310,200,130);
@@ -117,7 +115,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView();
+        		new HomeView_host();
         	}
         	
         });
