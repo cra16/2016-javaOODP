@@ -8,7 +8,10 @@ public class AddPerform2_View extends JFrame //implements ActionListener
 {
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
-
+    HomeView_host newhost;
+    HomeView_audience newaudience;
+	AddPerformController controller =
+			new AddPerformController();
     AddPerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String price, String Text)
     {
         contentPane=this.getContentPane();
@@ -60,8 +63,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         {
         	
             public void actionPerformed(ActionEvent e) {
-            	AddPerformController controller =
-            			new AddPerformController();
+            
             	
             	String[] Time = new String[duration+1];
             	
@@ -73,10 +75,14 @@ public class AddPerform2_View extends JFrame //implements ActionListener
                 DBHelper helper = DBHelper.getInstance();
                 
                 if(helper.getHost() !=null)
-                	new HomeView_host();
+                {
+                	 newhost =new HomeView_host();
+                }
                 else if(helper.getAudience()!=null)
-                	new HomeView_audience();
-            	dispose();
+                {
+                	 newaudience = new HomeView_audience();
+                }
+                dispose();
             }
         });
         
@@ -85,7 +91,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView_host();
+        		newhost= new HomeView_host();
         	}
         	
         });

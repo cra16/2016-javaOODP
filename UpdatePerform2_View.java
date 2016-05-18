@@ -9,6 +9,9 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
     Container contentPane;
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
     int timeNum;
+    HomeView_host newhost;
+    UpdatePerformController controller =
+			new UpdatePerformController();
     UpdatePerform2_View(Performance perform,String performName,int placeNum, int monthNum,int dayNum, int duration, String Text)
     {
         contentPane=this.getContentPane();
@@ -63,8 +66,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-            	UpdatePerformController controller =
-            			new UpdatePerformController();
+            	
             	
             	String[] Time = new String[duration+1];
             		
@@ -75,7 +77,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
             		
             	}
             	controller.eventUpdatePerformance(perform,performName,placeNum,monthNum, dayNum, Time, duration,Text);
-            	new HomeView_host();
+            	 newhost =new HomeView_host();
                 dispose();
             }
         });
@@ -85,7 +87,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView_host();
+        	newhost =new HomeView_host();
         	}
         	
         });

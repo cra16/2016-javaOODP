@@ -10,7 +10,7 @@ public abstract class HomeView extends JFrame{
 	protected Container contentPane;
     protected DBHelper dBHelper;
     protected JButton[] perform;
-    
+    BuyTicketView buy ;
     public abstract void drawBottomButton(JPanel homepanel);
     HomeView(){
     	draw_HomeView();
@@ -45,7 +45,7 @@ public abstract class HomeView extends JFrame{
 	        	            		else
 	        	            			p=null;
 	        	            	}
-	        	            	new BuyTicketView(p); // Main Form to show after the Login Form.
+	        	            	buy = new BuyTicketView(p); // Main Form to show after the Login Form.
 	        	                dispose();
 	        	            }
 	        	        });

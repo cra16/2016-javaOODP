@@ -40,7 +40,7 @@ public class PossibleState extends JFrame implements CancelTicketState{
     	            		}
     	            	}
                     	DBHelper.getInstance().cancelTicket(DBHelper.getInstance().getAudience().getTickets().get(index));
-                        new OrderView().setVisible(true); // Main Form to show after the Login Form.
+                        OrderView newOrderView=new OrderView(); // Main Form to show after the Login Form.
                         dispose();
                     }
                 });

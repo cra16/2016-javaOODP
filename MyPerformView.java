@@ -17,8 +17,9 @@ public class MyPerformView extends JFrame {
                     {"하이루", "1/2"},
                     {"즉새두", "2/3"},
             };
-
-
+    private HomeView_host newhost;
+    private UpdatePerform1_View updatePerform1;
+    MyPerformView performView;
     MyPerformView(ArrayList<String> performName){
     	
     	contentPane=this.getContentPane();
@@ -68,7 +69,7 @@ public class MyPerformView extends JFrame {
 	            			break;
 	            		}
 	            	}
-	                new UpdatePerform1_View(perform[index]).setVisible(true); // Main Form to show after the Login Form.
+	               updatePerform1= new UpdatePerform1_View(perform[index]); // Main Form to show after the Login Form.
 	                dispose();
 	            }
 	        });
@@ -88,7 +89,7 @@ public class MyPerformView extends JFrame {
 	        		}
 	        		dispose();
         			DBHelper.getInstance().deletePerformance(performName.get(index));
-        			new MyPerformView(performName);
+        			performView= new MyPerformView(performName);
 	        	}
 	        });
 	        
@@ -104,7 +105,7 @@ public class MyPerformView extends JFrame {
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView_host();
+        		newhost = new HomeView_host();
         	}
         	
         });

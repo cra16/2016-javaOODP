@@ -14,7 +14,8 @@ public class UpdatePerform1_View extends JFrame {
     String[] daystamp = new String[31];
     String[] periodstamp = new String[7];
     int i = 0;
-
+    UpdatePerform2_View newupdatePerform2;
+    HomeView_host newHost;
     UpdatePerform1_View(Performance perform)
     {
         contentPane=this.getContentPane();
@@ -119,9 +120,9 @@ public class UpdatePerform1_View extends JFrame {
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-                new UpdatePerform2_View(perform,field1.getText(),placeList.getSelectedIndex(),
+                newupdatePerform2 = new UpdatePerform2_View(perform,field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
-                		periodList.getSelectedIndex(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
+                		periodList.getSelectedIndex(),area1.getText()); // Main Form to show after the Login Form.
                 
                 dispose();
             }
@@ -131,7 +132,7 @@ public class UpdatePerform1_View extends JFrame {
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView_host();
+        		 newHost =new HomeView_host();
         	}
         	
         });

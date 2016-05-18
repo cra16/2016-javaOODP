@@ -11,7 +11,7 @@ public class SummaryView extends JFrame {
     Container contentPane;
     String[] datestamp = {"5/2","5/3","5/4"};  // 이 중 하나로 표시되고 disabled 할 것
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ; // 위와 동일
-
+    OrderView order;
     SummaryView()
     {
         contentPane=this.getContentPane();
@@ -81,7 +81,7 @@ public class SummaryView extends JFrame {
         btn1.addActionListener(new ActionListener() //예매하기
         {
             public void actionPerformed(ActionEvent e) {
-                new OrderView();
+                order=new OrderView();
                 dispose();
             }
         });

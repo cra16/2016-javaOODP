@@ -14,7 +14,7 @@ public class OrderView extends JFrame //implements ActionListener
 	private Container contentPane;
     private DBHelper dBHelper;
     private CancelTicketState ticketState = PossibleState.getInstance();
-
+    private HomeView_audience newaudience;
     OrderView()
     {
     	dBHelper = DBHelper.getInstance();
@@ -59,7 +59,7 @@ public class OrderView extends JFrame //implements ActionListener
         closeBtn.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
         {
             public void actionPerformed(ActionEvent e) {
-                new HomeView_audience().setVisible(true); // Main Form to show after the Login Form.
+                newaudience = new HomeView_audience(); // Main Form to show after the Login Form.
                 dispose();
             }
         });

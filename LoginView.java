@@ -5,7 +5,8 @@ import java.awt.event.*;
 public class LoginView extends JFrame //implements ActionListener
 {
     Container contentPane;
-
+    LoginController controller;
+    
     LoginView()
     {
         contentPane=this.getContentPane();
@@ -63,7 +64,7 @@ public class LoginView extends JFrame //implements ActionListener
             		checknumber=2;
             	else
             		checknumber=0;
-            	LoginController controller = new LoginController(text1.getText(),text2.getText(),checknumber);//input user information.
+            	controller = new LoginController(text1.getText(),text2.getText(),checknumber);//input user information.
 
             	controller.checkLogin();
             		dispose();
@@ -83,6 +84,6 @@ public class LoginView extends JFrame //implements ActionListener
 
     public static void main(String arr[])
     {
-        new LoginView();
+      new LoginView();
     }
 }

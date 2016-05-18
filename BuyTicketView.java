@@ -127,10 +127,14 @@ public class BuyTicketView extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
             	if(DBHelper.getInstance().getHost()!=null)
-            		new HomeView_host();
+            	{
+            		HomeView_host newhost = new HomeView_host();
+            	}
             	else if(DBHelper.getInstance().getAudience()!=null)
-            		new HomeView_audience();
-                dispose();
+            	{
+            		HomeView_audience newaudience = new HomeView_audience();
+            	}
+           		dispose();
             }
         });
 
@@ -170,9 +174,13 @@ public class BuyTicketView extends JFrame //implements ActionListener
     	            		System.out.println("예매 실패");
     	            	}
     	            	if(DBHelper.getInstance().getHost()!=null)
-    	            		new HomeView_host();
+    	            	{
+    	            		HomeView_host newHost=new HomeView_host();
+    	            	}
     	            	else if(DBHelper.getInstance().getAudience()!=null)
-    	            		new HomeView_audience();
+    	            	{
+    	            		HomeView_audience newAudience = new HomeView_audience();
+    	            	}
     	            	dispose();
     	            }
     	        });

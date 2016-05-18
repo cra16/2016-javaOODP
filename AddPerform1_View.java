@@ -11,7 +11,9 @@ public class AddPerform1_View extends JFrame //implements ActionListener
     String[] daystamp = new String[31];
     String[] periodstamp = new String[7];
     int i = 0;
-
+    
+    AddPerform2_View addPerform2View;
+    HomeView_host newHost;
     AddPerform1_View()
     {
         contentPane=this.getContentPane();
@@ -103,9 +105,9 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
             	
-                new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
+                addPerform2View = new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
-                		periodList.getSelectedIndex(),field2.getText(),area1.getText()).setVisible(true); // Main Form to show after the Login Form.
+                		periodList.getSelectedIndex(),field2.getText(),area1.getText()); // Main Form to show after the Login Form.
                 dispose();
             }
            
@@ -115,7 +117,7 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		new HomeView_host();
+        		 newHost= new HomeView_host();
         	}
         	
         });
