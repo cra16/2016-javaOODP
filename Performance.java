@@ -74,4 +74,15 @@ public class Performance extends Product{
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	@Override
+	public String getProductName() {
+		return this.getName();
+	}
+
+	@Override
+	public Performance getPerformance() {
+		// TODO Auto-generated method stub
+		return this;
+	}
 }

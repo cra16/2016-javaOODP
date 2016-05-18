@@ -66,7 +66,7 @@ public class UpdatePerformController{
 		Performance p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
 
-		helper.updatePerformance(perform.getName(), p);
+		helper.updatePerformance(perform, p);
 	}
 	
 }

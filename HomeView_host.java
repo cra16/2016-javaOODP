@@ -32,7 +32,7 @@ public class HomeView_host extends HomeView //implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
             	
-            	newperformView= new MyPerformView(DBHelper.getInstance().getHost().getPerformanceList()); // Main Form to show after the Login Form.
+            	newperformView= new MyPerformView(DBHelper.getInstance().getPerforms()); // Main Form to show after the Login Form.
                 dispose();
             }
         });

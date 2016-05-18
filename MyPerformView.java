@@ -20,30 +20,25 @@ public class MyPerformView extends JFrame {
     private HomeView_host newhost;
     private UpdatePerform1_View updatePerform1;
     MyPerformView performView;
-    MyPerformView(ArrayList<String> performName){
+    MyPerformView(ArrayList<Product> performList){
     	
     	contentPane=this.getContentPane();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
-        Performance[] perform = new Performance[performName.size()];
-        for(int i=0; i<performName.size(); i++)
-        {
-        	perform[i]=DBHelper.getInstance().getPerformance(performName.get(i));
-        }
         JPanel mypanel = new JPanel(new FlowLayout(1,50,5));
-        JLabel[] labelName = new JLabel[performName.size()];
-        JButton[] updateBtn = new JButton[performName.size()];
-        JButton[] delBtn = new JButton[performName.size()];
+        JLabel[] labelName = new JLabel[performList.size()];
+        JButton[] updateBtn = new JButton[performList.size()];
+        JButton[] delBtn = new JButton[performList.size()];
         JButton backBtn = new JButton("뒤로가기");
         
 
 
-        JPanel[] performpanel = new JPanel[performName.size()]; // SAMPLE
+        JPanel[] performpanel = new JPanel[performList.size()]; // SAMPLE
         for(int i=0; i<performpanel.length;i++)
 	    {
 	        FlowLayout fl = new FlowLayout(3,50,5);
-	        labelName[i]= new JLabel(perform[i].getName());
+	        labelName[i]= new JLabel(performList.get(i).getProductName());
 	        updateBtn[i]= new JButton("수정");
 	        delBtn[i]= new JButton("삭제");
 	        performpanel[i] = new JPanel();
@@ -61,7 +56,7 @@ public class MyPerformView extends JFrame {
 	        {
 	            public void actionPerformed(ActionEvent e) {
 	            	int index=0;
-	            	for(int i=0; i<performName.size();i++)
+	            	for(int i=0; i<performList.size();i++)
 	            	{
 	            		if(updateBtn[i]==e.getSource())
 	            		{
@@ -69,7 +64,7 @@ public class MyPerformView extends JFrame {
 	            			break;
 	            		}
 	            	}
-	               updatePerform1= new UpdatePerform1_View(perform[index]); // Main Form to show after the Login Form.
+	               updatePerform1= new UpdatePerform1_View(performList.get(index).getPerformance()); // Main Form to show after the Login Form.
 	                dispose();
 	            }
 	        });
@@ -77,7 +72,7 @@ public class MyPerformView extends JFrame {
 	        	public void actionPerformed(ActionEvent e)
 	        	{
 	        		int index=0;
-	        		for(int i=0; i<performName.size();i++)
+	        		for(int i=0; i<performList.size();i++)
 	        		{
 	        			if(delBtn[i]==e.getSource())
 	        			{
@@ -88,8 +83,8 @@ public class MyPerformView extends JFrame {
 	        			
 	        		}
 	        		dispose();
-        			DBHelper.getInstance().deletePerformance(performName.get(index));
-        			performView= new MyPerformView(performName);
+        			DBHelper.getInstance().deletePerformance(performList.get(index));
+        			performView= new MyPerformView(performList);
 	        	}
 	        });
 	        

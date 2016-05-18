@@ -28,7 +28,7 @@ public class DBHelper {
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -188,8 +188,8 @@ public class DBHelper {
 		}
 	}
 	
-	public void updatePerformance(String performName, Performance perform){
-		int index = performs.indexOf(performName);
+	public void updatePerformance(Performance previousPerform, Performance perform){
+		int index = performs.indexOf(previousPerform);
 		performs.set(index, perform);
 		host.getPerformanceList().set(index, perform.getName());
 		try{
@@ -200,7 +200,7 @@ public class DBHelper {
 			query += "placeNum="+perform.getPlaceNum()+", ";
 			query += "cost="+perform.getCost()+", ";
 			query += "description='"+perform.getDescription()+"' ";
-			query += "where performanceName='"+performName+"'";
+			query += "where performanceName='"+previousPerform.getName()+"'";
 			stmt.executeUpdate(query);
 			query = "update schedule set ";
 			query += "performanceName='"+perform.getName()+"', ";
@@ -212,7 +212,7 @@ public class DBHelper {
 				else 
 					query += ", time"+(i+1)+"='"+perform.getSchedule().getTime()[i]+"'";
 			}
-			query += " where performanceName='"+performName+"'";
+			query += " where performanceName='"+previousPerform.getName()+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -220,7 +220,7 @@ public class DBHelper {
 		}
 	}
 	
-	public void deletePerformance(String perform){
+	public void deletePerformance(Product perform){
 		int index = performs.indexOf(perform);
 		performs.remove(index);
 		host.getPerformanceList().remove(index);
@@ -297,5 +297,6 @@ public class DBHelper {
 
 	public boolean isUser_validator() {
 		return user_validator;
-	}	
+	}
+
 }
