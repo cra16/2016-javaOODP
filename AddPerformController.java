@@ -16,23 +16,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class AddPerformController implements ActionListener {
-	
-	
-	public AddPerformController()
-	{
-		
-	}
-	
-	public void addPerformacne()
-	{
-		
-	}
-	
 	public void eventAddPerformance(String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String price, String Text)
 	{
-		
-		
-		
 		Calendar temp=Calendar.getInstance();
 		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 		java.sql.Date d = null;
@@ -43,8 +28,6 @@ public class AddPerformController implements ActionListener {
 			
 		
 		Date t = null;
-		
-		
 		
 		SimpleDateFormat transFormat2= new SimpleDateFormat("HH:MM:SS");
 		

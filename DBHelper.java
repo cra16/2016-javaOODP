@@ -19,16 +19,17 @@ public class DBHelper {
 	private boolean user_validator;
 	private Factory perFactory;
 	private ArrayList<Product> performs;
+	private Product perform;
 	
 	private DBHelper(String id, String pw, int type){
 		perFactory = new PerformanceFactory();
 		performs = new ArrayList<Product>();
-		
+		 
 		String user_id = null;
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -84,8 +85,8 @@ public class DBHelper {
 			while(result.next()){
 				performName[count++] = result.getString("performanceName");
 			}
-			for(int i=0;i<count-1;i++){
-				Product perform = perFactory.create(getPerformance(performName[i]));
+			for(int i=0;i<count;i++){
+				perform = perFactory.create(getPerformance(performName[i]));
 				performs.add(perform);
 			}
 		}catch(SQLException sqex){
@@ -193,7 +194,6 @@ public class DBHelper {
 		performs.set(index, perform);
 		host.getPerformanceList().set(index, perform.getName());
 		try{
-			
 			query = "update performance set ";
 			query += "performanceName='"+perform.getName()+"', ";
 			query += "hostName='"+perform.getHost().getName()+"', ";
@@ -225,11 +225,11 @@ public class DBHelper {
 		performs.remove(index);
 		host.getPerformanceList().remove(index);
 		try{
-			query = "delete from performance where performanceName='"+perform+"'";
+			query = "delete from performance where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
-			query = "delete from schedule where performanceName='"+perform+"'";
+			query = "delete from schedule where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
-			query = "delete from ticket where performanceName='"+perform+"'";
+			query = "delete from ticket where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
