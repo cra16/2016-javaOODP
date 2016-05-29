@@ -145,6 +145,4 @@ public class UpdatePerform1_View extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
-
-
 }

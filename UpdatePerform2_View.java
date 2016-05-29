@@ -102,9 +102,4 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-
-
-
-
-
 }
