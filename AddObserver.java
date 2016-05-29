@@ -22,7 +22,7 @@ public class AddObserver implements Observer {
 	public void update(Performance perform) {
 		// TODO Auto-generated method stub
 		DBHelper.getInstance().getHost().getPerformanceList().add(perform.getName());
-		DBHelper.getInstance().getPerforms().add(perform);
+		DBHelper.getInstance().getPerforms().appendPerform(perform);
 		JDialog a=new JDialog();
 		a.add(new JLabel("입력이 완료 되었습니다."));
 		a.setSize(300,300);

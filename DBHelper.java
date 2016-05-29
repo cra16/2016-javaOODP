@@ -15,21 +15,17 @@ public class DBHelper {
 	private Host host;
 	private Audience audience;
 	private String query;
-	//private ArrayList<String> performs;
 	private boolean user_validator;
-	private Factory perFactory;
-	private ArrayList<Product> performs;
-	private Product perform;
+	private Performances performs;
 	
 	private DBHelper(String id, String pw, int type){
-		perFactory = new PerformanceFactory();
-		performs = new ArrayList<Product>();
+		performs = new Performances(100);
 		 
 		String user_id = null;
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -62,7 +58,7 @@ public class DBHelper {
 					name = result.getString(3);
 					phoneNum = result.getString(4);
 					
-					query = "select * from ticket where audienceName = '"+name+"'";
+					query = "select * from ticket where audienceName = '"+name+"' odrer by date, time";
 					result = stmt.executeQuery(query);
 					ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 					while(result.next()){
@@ -85,8 +81,7 @@ public class DBHelper {
 				performName[count++] = result.getString("performanceName");
 			}
 			for(int i=0;i<count;i++){
-				perform = perFactory.create(getPerformance(performName[i]));
-				performs.add(perform);
+				performs.appendPerform(getPerformance(performName[i]));
 			}
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
@@ -292,11 +287,11 @@ public class DBHelper {
 		return audience;
 	}
 
-	public ArrayList<Product> getPerforms() {
+	public Performances getPerforms() {
 		return performs;
 	}
 
-	public void setPerforms(ArrayList<Product> performs) {
+	public void setPerforms(Performances performs) {
 		this.performs = performs;
 	}
 

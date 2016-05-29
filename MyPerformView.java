@@ -9,36 +9,29 @@ import java.util.ArrayList;
 public class MyPerformView extends JFrame {
 
     Container contentPane;
-    String [] header = {"공연", "날짜"};
-    Object[][] data =               // SAMPLE입니다!!
-            {
-                    {"공연", "날짜"},
-                    {"곡성", "5/23"},
-                    {"하이루", "1/2"},
-                    {"즉새두", "2/3"},
-            };
+
     private HomeView_host newhost;
     private UpdatePerform1_View updatePerform1;
     MyPerformView performView;
-    MyPerformView(ArrayList<Product> performList){
+    MyPerformView(Performances performList){
     	
     	contentPane=this.getContentPane();
         setBounds(0,0,700,700);
         this.setVisible(true);
         this.setLayout( null);
         JPanel mypanel = new JPanel(new FlowLayout(1,50,5));
-        JLabel[] labelName = new JLabel[performList.size()];
-        JButton[] updateBtn = new JButton[performList.size()];
-        JButton[] delBtn = new JButton[performList.size()];
+        JLabel[] labelName = new JLabel[performList.getLength()];
+        JButton[] updateBtn = new JButton[performList.getLength()];
+        JButton[] delBtn = new JButton[performList.getLength()];
         JButton backBtn = new JButton("뒤로가기");
         
 
 
-        JPanel[] performpanel = new JPanel[performList.size()]; // SAMPLE
+        JPanel[] performpanel = new JPanel[performList.getLength()]; // SAMPLE
         for(int i=0; i<performpanel.length;i++)
 	    {
 	        FlowLayout fl = new FlowLayout(3,50,5);
-	        labelName[i]= new JLabel(performList.get(i).getProductName());
+	        labelName[i]= new JLabel(performList.getPerformAt(i).getProductName());
 	        updateBtn[i]= new JButton("수정");
 	        delBtn[i]= new JButton("삭제");
 	        performpanel[i] = new JPanel();
@@ -54,9 +47,9 @@ public class MyPerformView extends JFrame {
 	        
 	        updateBtn[i].addActionListener(new ActionListener()
 	        {
-	            public void actionPerformed(ActionEvent e) {
+	        	public void actionPerformed(ActionEvent e) {
 	            	int index=0;
-	            	for(int i=0; i<performList.size();i++)
+	            	for(int i=0; i<performList.getLength();i++)
 	            	{
 	            		if(updateBtn[i]==e.getSource())
 	            		{
@@ -64,15 +57,15 @@ public class MyPerformView extends JFrame {
 	            			break;
 	            		}
 	            	}
-	               updatePerform1= new UpdatePerform1_View(performList.get(index).getPerformance()); // Main Form to show after the Login Form.
-	                dispose();
-	            }
+	            	updatePerform1= new UpdatePerform1_View(performList.getPerformAt(index).getPerformance()); // Main Form to show after the Login Form.
+	            	dispose();
+	            	}
 	        });
 	        delBtn[i].addActionListener(new ActionListener(){
 	        	public void actionPerformed(ActionEvent e)
 	        	{
 	        		int index=0;
-	        		for(int i=0; i<performList.size();i++)
+	        		for(int i=0; i<performList.getLength();i++)
 	        		{
 	        			if(delBtn[i]==e.getSource())
 	        			{
@@ -83,7 +76,7 @@ public class MyPerformView extends JFrame {
 	        			
 	        		}
 	        		dispose();
-	        		new DeletePerformController().eventDelete(performList.get(index), index);
+	        		new DeletePerformController().eventDelete(performList.getPerformAt(index), index);
 	        	
         			performView= new MyPerformView(performList);
 	        	}

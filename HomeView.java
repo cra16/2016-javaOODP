@@ -23,10 +23,10 @@ public abstract class HomeView extends JFrame{
         this.setVisible(true);
         this.setLayout( null);
         
-        if(dBHelper.getPerforms().size() > 0){
-	        perform = new JButton[dBHelper.getPerforms().size()];
-	        for(int i=0;i<dBHelper.getPerforms().size();i++){
-	        	perform[i] = new JButton(((Performance)dBHelper.getPerforms().get(i)).getName());
+        if(dBHelper.getPerforms().getLength() > 0){
+	        perform = new JButton[dBHelper.getPerforms().getLength()];
+	        for(int i=0;i<dBHelper.getPerforms().getLength();i++){
+	        	perform[i] = new JButton(((Performance)dBHelper.getPerforms().getPerformAt(i)).getName());
 	        	perform[i].setBounds(0,50*i,350,50);
 	        	perform[i].setFont(new java.awt.Font("Gulim", 0, 16));
 	        	homepanel.add(perform[i]);
@@ -35,7 +35,7 @@ public abstract class HomeView extends JFrame{
 	        	            public void actionPerformed(ActionEvent e) {
 	        	            	Object o = e.getSource();
 	        	            	Performance p = null;
-	        	            	for(int i=0; i<dBHelper.getPerforms().size();i++)
+	        	            	for(int i=0; i<dBHelper.getPerforms().getLength();i++)
 	        	            	{
 	        	            		if(o==perform[i])
 	        	            		{

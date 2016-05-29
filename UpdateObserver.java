@@ -29,8 +29,13 @@ public class UpdateObserver implements Observer {
 	@Override
 	public void update(Performance Perform, Performance previous) {
 		// TODO Auto-generated method stub
-		int index = DBHelper.getInstance().getPerforms().indexOf(previous);
-		DBHelper.getInstance().getPerforms().set(index, Perform);
+		int index = 0;
+		while(DBHelper.getInstance().getPerforms().iterator().hasNext()){
+			if(previous == (Performance)DBHelper.getInstance().getPerforms().iterator().next())
+				break;
+			index++;
+		}
+		DBHelper.getInstance().getPerforms().setPerformAt(index, Perform);
 		DBHelper.getInstance().getHost().getPerformanceList().set(index, Perform.getName());
 		JDialog a=new JDialog();
 		System.out.println("입력 완료");
