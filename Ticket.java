@@ -6,6 +6,7 @@ public class Ticket {
 	private Time time;
 	private String performanceName;
 	
+	
 	public Ticket(String performanceName, Date date, Time time, String audienceName){
 		this.performanceName = performanceName;
 		this.date = date;

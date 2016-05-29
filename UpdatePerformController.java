@@ -16,10 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
-public class UpdatePerformController{
+public class UpdatePerformController implements Subject{
 	//private ArrayList<Product> performances = ProgramGUI.getInstance().getPerformances();
 	//private Factory perFactory = ProgramGUI.getInstance().getPerFactory();
+	private ArrayList<Observer> observer=new ArrayList<Observer>();
+	private Performance p=null;
+	private Performance previous=null;
 	
+	UpdatePerformController()
+	{
+		new UpdateObserver(this);
+	}
+
 	public void eventUpdatePerformance(Performance perform,String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text){
 		
 
@@ -63,10 +71,42 @@ public class UpdatePerformController{
 		}
 
 		
-		Performance p = new Performance(placeNum,helper.getHost(),
+		p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
 
-		helper.updatePerformance(perform, p);
+		boolean a = helper.updatePerformance(perform, p);
+		previous=perform;
+		this.notifyObservers(a);
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		// TODO Auto-generated method stub
+		observer.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		int i=observer.size();
+		if(i>=0)
+		observer.remove(o);
+	}
+
+	@Override
+	public void notifyObservers(boolean bool) {
+		// TODO Auto-generated method stub
+		Observer temp;
+		for(int i=0; i<observer.size();i++)
+		{
+			temp = observer.get(i);
+			if(bool==true)
+				temp.update(p,previous);
+			else
+				temp.fail();
+		}
+		
+	
 	}
 	
 }

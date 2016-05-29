@@ -15,7 +15,19 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class AddPerformController implements ActionListener {
+public class AddPerformController implements ActionListener,Subject {
+
+	
+	
+	private ArrayList<Observer> observer=new ArrayList<Observer>();
+	private Performance p=null;
+	
+	AddPerformController()
+	{
+		new AddObserver(this);
+	}
+
+	
 	public void eventAddPerformance(String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String price, String Text)
 	{
 		Calendar temp=Calendar.getInstance();
@@ -54,10 +66,12 @@ public class AddPerformController implements ActionListener {
 		}
 
 		Integer priceInt = new Integer(price);
-		Performance p = new Performance(placeNum,helper.getHost(),
+		 p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,priceInt,Text);
 		
-		helper.addPerformance(p);
+		boolean a =helper.addPerformance(p);
+		
+		this.notifyObservers(a);
 		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
 		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
 		//		,cost,"1"));
@@ -66,5 +80,33 @@ public class AddPerformController implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		// TODO Auto-generated method stub
+		observer.add(o);
+	}
+
+	@Override
+	public void removeObserver(Observer o) {
+		// TODO Auto-generated method stub
+		int i=observer.size();
+		if(i>=0)
+		observer.remove(o);
+	}
+
+	@Override
+	public void notifyObservers(boolean bool) {
+		// TODO Auto-generated method stub
+		Observer temp;
+		for(int i=0; i<observer.size();i++)
+		{
+			temp = observer.get(i);
+			if(bool==true)
+				temp.update(p);
+			else
+				temp.fail();
+		}
 	}
 }
