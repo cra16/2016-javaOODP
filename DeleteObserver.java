@@ -17,7 +17,12 @@ public class DeleteObserver implements Observer{
 	@Override
 	public void update(Performance Perform) {
 		// TODO Auto-generated method stub
-		int index = DBHelper.getInstance().getPerforms().indexOf(Perform);
+		int index = 0;
+		while(DBHelper.getInstance().getPerforms().iterator().hasNext()){
+			if(Perform == (Performance)DBHelper.getInstance().getPerforms().iterator().next())
+				break;
+			index++;
+		}
 		DBHelper.getInstance().getHost().getPerformanceList().remove(index);
 		JDialog a=new JDialog();
 		a.add(new JLabel("입력이 완료 되었습니다."));

@@ -58,7 +58,7 @@ public class DBHelper {
 					name = result.getString(3);
 					phoneNum = result.getString(4);
 					
-					query = "select * from ticket where audienceName = '"+name+"' odrer by date, time";
+					query = "select * from ticket where audienceName = '"+name+"' order by date, time";
 					result = stmt.executeQuery(query);
 					ArrayList<Ticket> tickets = new ArrayList<Ticket>();
 					while(result.next()){
@@ -219,8 +219,8 @@ public class DBHelper {
 	}
 	
 	public boolean deletePerformance(Product perform){
-		int index = performs.indexOf(perform);
-		performs.remove(index);
+	//	int index = performs.indexOf(perform);
+	//	performs.remove(index);
 	//	host.getPerformanceList().remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform.getProductName()+"'";
