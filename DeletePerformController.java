@@ -15,7 +15,7 @@ public class DeletePerformController implements Subject {
 	public void eventDelete(Product perform, int index)
 	{
 		boolean a =DBHelper.getInstance().deletePerformance(perform);
-
+		p=perform.getPerformance();
 		this.notifyObservers(a);
 	}
 	@Override
