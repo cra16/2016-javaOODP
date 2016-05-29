@@ -41,7 +41,6 @@ public class DBHelper {
 					user_id = result.getString("user_id");
 					name = result.getString("name");
 					phoneNum = result.getString("phoneNum");
-					System.out.println(name);
 					
 					query = "select performanceName from performance where hostName = '"+name+"'";
 					result = stmt.executeQuery(query);
@@ -239,9 +238,9 @@ public class DBHelper {
 	
 	public void reserveTicket(String performName, Date date, Time time, String audienceName){
 		try{
-			audience.getTickets().add(new Ticket(performName, date, time, audienceName));
 			query = "insert into ticket values('"+performName+"','"+date+"','"+time+"','"+audienceName+"')";
 			stmt.executeUpdate(query);
+			audience.getTickets().add(new Ticket(performName, date, time, audienceName));
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());

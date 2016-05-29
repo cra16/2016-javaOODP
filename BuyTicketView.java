@@ -47,7 +47,8 @@ public class BuyTicketView extends JFrame //implements ActionListener
         Calendar cal = Calendar.getInstance();
     	cal.setTime(perform.getSchedule().getFirstDay());
         String[] userDateStamp = new String[perform.getSchedule().getDuration()];
-    	for(int i=0;i<perform.getSchedule().getDuration();i++){
+        int i=0;
+        do{
 	    	cal.add(Calendar.DATE, 1);
 	    	DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	    	Date date=null;
@@ -58,13 +59,14 @@ public class BuyTicketView extends JFrame //implements ActionListener
 			}
 			String[] splitString = date.toString().split("-");
 			userDateStamp[i] = splitString[1] + "/" + splitString[2];
-    	}
+			i++;
+    	}while(i<perform.getSchedule().getDuration());
         
         int count=0;
         while(perform.getSchedule().getTime()[count] != null){
         	count++;
         }
-        for(int i=0;i<count;i++){
+        for(i=0;i<count;i++){
         	String[] splitString = perform.getSchedule().getTime()[i].toString().split(":");
         	String mergeString = splitString[0]+":"+splitString[1];
         	userDateStamp[i] += " -- "+mergeString;
