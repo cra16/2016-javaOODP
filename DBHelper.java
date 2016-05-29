@@ -19,7 +19,7 @@ public class DBHelper {
 	private Performances performs;
 	
 	private DBHelper(String id, String pw, int type){
-		performs = new Performances(100);
+		performs = new Performances();
 		 
 		String user_id = null;
 		String name = null;
@@ -218,7 +218,7 @@ public class DBHelper {
 		}
 	}
 	
-	public boolean deletePerformance(Product perform){
+	public boolean deletePerformance(Performance perform){
 	//	int index = performs.indexOf(perform);
 	//	performs.remove(index);
 	//	host.getPerformanceList().remove(index);

@@ -30,8 +30,10 @@ public class UpdateObserver implements Observer {
 	public void update(Performance Perform, Performance previous) {
 		// TODO Auto-generated method stub
 		int index = 0;
-		while(DBHelper.getInstance().getPerforms().iterator().hasNext()){
-			if(previous == (Performance)DBHelper.getInstance().getPerforms().iterator().next())
+		Iterator iterator = DBHelper.getInstance().getPerforms().iterator();
+		while(iterator.hasNext()){
+			Performance perform = (Performance)iterator.next();
+			if(previous.equals(perform))
 				break;
 			index++;
 		}

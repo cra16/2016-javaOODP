@@ -1,19 +1,24 @@
+import java.util.ArrayList;
 
 public class Performances implements Aggregate{
-	private Performance[] performs;
+	private ArrayList<Performance> performs;
 	private int last = 0;
-	public Performances(int maxsize){
-		this.performs = new Performance[maxsize];
+	public Performances(){
+		performs = new ArrayList<Performance>();
 	}
 	public Performance getPerformAt(int index){
-		return performs[index];
+		return performs.get(index);
 	}
 	public void setPerformAt(int index, Performance perform){
-		performs[index] = perform;
+		performs.set(index, perform);
 	}
 	public void appendPerform(Performance perform){
-		this.performs[last] = perform;
+		performs.add(perform);
 		last++;
+	}
+	public void deletePerform(int index){
+		performs.remove(index);
+		last--;
 	}
 	public int getLength(){
 		return last;

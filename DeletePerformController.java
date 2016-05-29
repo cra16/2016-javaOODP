@@ -12,21 +12,24 @@ public class DeletePerformController implements Subject {
 	{
 		new DeleteObserver(this);
 	}
-	public void eventDelete(Product perform, int index)
+	public void eventDelete(Performance perform, int index)
 	{
-		boolean a =DBHelper.getInstance().deletePerformance(perform);
-		p=perform.getPerformance();
+		boolean a = DBHelper.getInstance().deletePerformance(perform);
+		p = perform;
 		this.notifyObservers(a);
 	}
 	@Override
 	public void registerObserver(Observer o) {
 		// TODO Auto-generated method stub
-		
+		observer.add(o);
 	}
+
 	@Override
 	public void removeObserver(Observer o) {
 		// TODO Auto-generated method stub
-		
+		int i=observer.size();
+		if(i>=0)
+		observer.remove(o);
 	}
 	@Override
 	public void notifyObservers(boolean bool) {
