@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPerform1_View extends JFrame //implements ActionListener
+public class AddPerform1_View extends PageView//implements ActionListener
 {
-    Container contentPane;
+    
     String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
     String[] placestamp = {"학관 101호", "학관 104호", "채플"};
     String[] daystamp = new String[31];
@@ -16,12 +16,8 @@ public class AddPerform1_View extends JFrame //implements ActionListener
     HomeView_host newHost;
     AddPerform1_View()
     {
-        contentPane=this.getContentPane();
-        JPanel add1panel = new JPanel();
-        setBounds(0,0,350,600);
-        this.setVisible(true);
-        this.setLayout( null);
-
+       
+    	super();
         JLabel title = new JLabel("공연 등록 - [1/2]");
         JLabel label1 = new JLabel("공연 이름 :");
         JLabel label2 = new JLabel("장소 :");
@@ -125,12 +121,17 @@ public class AddPerform1_View extends JFrame //implements ActionListener
         
         
         // frame setting
-        add1panel.setVisible(true);
+       
         add1panel.setLayout(null);
-        setSize(350,600);
-        this.setContentPane(add1panel);
-        this.setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        page.setSize(350,600);
+        page.setContentPane(add1panel);
+     
+        page.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

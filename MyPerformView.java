@@ -83,7 +83,8 @@ public class MyPerformView extends JFrame {
 	        			
 	        		}
 	        		dispose();
-        			DBHelper.getInstance().deletePerformance(performList.get(index));
+	        		new DeletePerformController().eventDelete(performList.get(index), index);
+	        	
         			performView= new MyPerformView(performList);
 	        	}
 	        });

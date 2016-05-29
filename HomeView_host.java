@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public class HomeView_host extends HomeView //implements ActionListener
 {    
-	AddPerform1_View newAdd;
+	BlueAddPerformDecorator newAdd;
 	MyPerformView newperformView;
     public void drawBottomButton(JPanel homepanel){
     	// BUTTONS: 공연등록, 내공연
@@ -24,7 +25,7 @@ public class HomeView_host extends HomeView //implements ActionListener
         addPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로
         {
             public void actionPerformed(ActionEvent e) {
-                newAdd = new AddPerform1_View(); // Main Form to show after the Login Form.
+                newAdd = new BlueAddPerformDecorator(new AddPerform1_View()); // Main Form to show after the Login Form.
                 dispose();
             }
         });

@@ -29,7 +29,7 @@ public class DBHelper {
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -167,9 +167,9 @@ public class DBHelper {
 		return performance;
 	}
 
-	public void addPerformance(Performance perform){
-		performs.add(perform);
-		host.getPerformanceList().add(perform.getName());
+	public boolean addPerformance(Performance perform){
+//		performs.add(perform);
+//		host.getPerformanceList().add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
@@ -182,16 +182,18 @@ public class DBHelper {
 			}
 			query += ")";
 			stmt.executeUpdate(query);
+			return true;
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
+			return false;
 		}
 	}
 	
-	public void updatePerformance(Performance previousPerform, Performance perform){
-		int index = performs.indexOf(previousPerform);
-		performs.set(index, perform);
-		host.getPerformanceList().set(index, perform.getName());
+	public boolean updatePerformance(Performance previousPerform, Performance perform){
+		//int index = performs.indexOf(previousPerform);
+		//performs.set(index, perform);
+		//host.getPerformanceList().set(index, perform.getName());
 		try{
 			query = "update performance set ";
 			query += "performanceName='"+perform.getName()+"', ";
@@ -213,16 +215,18 @@ public class DBHelper {
 			}
 			query += " where performanceName='"+previousPerform.getName()+"'";
 			stmt.executeUpdate(query);
+			return true;
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
+			return false;
 		}
 	}
 	
-	public void deletePerformance(Product perform){
+	public boolean deletePerformance(Product perform){
 		int index = performs.indexOf(perform);
 		performs.remove(index);
-		host.getPerformanceList().remove(index);
+	//	host.getPerformanceList().remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
@@ -230,9 +234,11 @@ public class DBHelper {
 			stmt.executeUpdate(query);
 			query = "delete from ticket where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
+			return true;
 		}catch(SQLException sqex){
 			System.out.println("SQLException: " + sqex.getMessage());
 			System.out.println("SQLState: " + sqex.getSQLState());
+			return false;
 		}
 	}
 	
