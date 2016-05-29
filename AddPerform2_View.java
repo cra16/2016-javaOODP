@@ -74,14 +74,14 @@ public class AddPerform2_View extends JFrame //implements ActionListener
             	controller.eventAddPerformance(performName,placeNum,monthNum, dayNum+1, Time, duration, price, Text);
                 DBHelper helper = DBHelper.getInstance();
                 
-               /* if(helper.getHost() !=null)
+                if(helper.getHost() !=null)
                 {
                 	 newhost =new HomeView_host();
                 }
                 else if(helper.getAudience()!=null)
                 {
                 	 newaudience = new HomeView_audience();
-                }*/
+                }
                 dispose();
             }
         });

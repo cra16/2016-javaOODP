@@ -3,6 +3,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class AddObserver implements Observer {
@@ -24,24 +25,10 @@ public class AddObserver implements Observer {
 		DBHelper.getInstance().getHost().getPerformanceList().add(perform.getName());
 		DBHelper.getInstance().getPerforms().appendPerform(perform);
 		JDialog a=new JDialog();
-		a.add(new JLabel("입력이 완료 되었습니다."));
-		a.setSize(300,300);
-		a.setVisible(true);
-		a.addWindowListener(new WindowAdapter()
-		{
-			 public void windowClosing(WindowEvent e)
-			  {
-				 if(DBHelper.getInstance().getHost() !=null)
-	                {
-	                	 newhost =new HomeView_host();
-	                }
-	                else if(DBHelper.getInstance().getAudience()!=null)
-	                {
-	                	 newaudience = new HomeView_audience();
-	                }
-			  }
-		}
-		);
+		JOptionPane.showMessageDialog(a, "입력 완료");
+
+
+	
 	}
 	@Override
 	public void fail() {

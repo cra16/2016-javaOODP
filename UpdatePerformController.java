@@ -28,7 +28,7 @@ public class UpdatePerformController implements Subject{
 		new UpdateObserver(this);
 	}
 
-	public void eventUpdatePerformance(Performance perform,String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text){
+	public void eventUpdatePerformance(Performance perform,String performName, int placeNum,int monthNum,int dayNum,String[] Time, int duration, String Text,int cost){
 		
 
 		Calendar temp=Calendar.getInstance();
@@ -72,7 +72,7 @@ public class UpdatePerformController implements Subject{
 
 		
 		p = new Performance(placeNum,helper.getHost(),
-				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,100,Text);
+				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,cost,Text);
 
 		boolean a = helper.updatePerformance(perform, p);
 		previous=perform;

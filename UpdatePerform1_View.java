@@ -122,7 +122,7 @@ public class UpdatePerform1_View extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 newupdatePerform2 = new UpdatePerform2_View(perform,field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
-                		periodList.getSelectedIndex(),area1.getText()); // Main Form to show after the Login Form.
+                		periodList.getSelectedIndex(),area1.getText(),Integer.parseInt(field2.getText())); // Main Form to show after the Login Form.
                 
                 dispose();
             }
