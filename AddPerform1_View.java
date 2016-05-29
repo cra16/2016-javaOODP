@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPerform1_View extends PageView//implements ActionListener
+public class AddPerform1_View extends JFrame//implements ActionListener
 {
-    
+	Container contentPane;
     String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
     String[] placestamp = {"학관 101호", "학관 104호", "채플"};
     String[] daystamp = new String[31];
@@ -16,8 +16,10 @@ public class AddPerform1_View extends PageView//implements ActionListener
     HomeView_host newHost;
     AddPerform1_View()
     {
-       
     	super();
+    	contentPane=this.getContentPane();
+    	Panel add1panel = new Panel();
+    	
         JLabel title = new JLabel("공연 등록 - [1/2]");
         JLabel label1 = new JLabel("공연 이름 :");
         JLabel label2 = new JLabel("장소 :");
@@ -31,6 +33,7 @@ public class AddPerform1_View extends PageView//implements ActionListener
         JTextField field2 = new JTextField(15); //가격
         JButton btn1 = new JButton("다음");
         JButton btn2 = new JButton("취소");
+        
         for(i=0;i<31;i++)                       // Dropdown
         {
             daystamp[i] = String.valueOf(i+1);
@@ -100,7 +103,6 @@ public class AddPerform1_View extends PageView//implements ActionListener
         btn1.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e) {
-            	
                 addPerform2View = new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
                 		periodList.getSelectedIndex(),field2.getText(),area1.getText()); // Main Form to show after the Login Form.
@@ -113,7 +115,7 @@ public class AddPerform1_View extends PageView//implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		 newHost= new HomeView_host();
+        		newHost= new HomeView_host();
         	}
         	
         });
@@ -123,15 +125,10 @@ public class AddPerform1_View extends PageView//implements ActionListener
         // frame setting
        
         add1panel.setLayout(null);
-        page.setSize(350,600);
-        page.setContentPane(add1panel);
+        this.setSize(350,600);
+        this.setContentPane(add1panel);
      
-        page.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
-	@Override
-	public void draw() {
-		// TODO Auto-generated method stub
-		
-	}
 }

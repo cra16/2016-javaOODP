@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,11 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public abstract class HomeView extends JFrame{
+public abstract class HomeView extends PageView{
 	protected Container contentPane;
     protected DBHelper dBHelper;
     protected JButton[] perform;
-    BuyTicketView buy ;
+    protected BuyTicketView buy ;
+    protected JPanel homepanel;
     public abstract void drawBottomButton(JPanel homepanel);
     HomeView(){
     	draw_HomeView();
@@ -18,10 +20,10 @@ public abstract class HomeView extends JFrame{
     public final void draw_HomeView(){
     	dBHelper = DBHelper.getInstance();
         contentPane=this.getContentPane();
-        JPanel homepanel = new JPanel();
+        homepanel = new JPanel();
         setBounds(0,0,700,700);
         this.setVisible(true);
-        this.setLayout( null);
+        this.setLayout(null);
         
         if(dBHelper.getPerforms().getLength() > 0){
 	        perform = new JButton[dBHelper.getPerforms().getLength()];
@@ -55,6 +57,7 @@ public abstract class HomeView extends JFrame{
         drawBottomButton(homepanel);
         
         // frame setting
+        draw();
         homepanel.setVisible(true);
         homepanel.setLayout(null);
         setSize(350,600);
@@ -62,4 +65,17 @@ public abstract class HomeView extends JFrame{
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     };
+    
+	@Override
+	public JPanel getJPanel() {
+		// TODO Auto-generated method stub
+		return this.homepanel;
+	}
+	
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		JPanel panel = getJPanel();
+		panel.setBackground(Color.WHITE);
+	}
 }
