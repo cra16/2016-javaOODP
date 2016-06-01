@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class MyPerformView extends JFrame {
     Container contentPane;
     
-    OrangeBackgroundDecorator newUpdate;
     private HomeView_host newhost;
     private UpdatePerform1_View updatePerform1;
     MyPerformView performView;
@@ -57,7 +56,7 @@ public class MyPerformView extends JFrame {
 	            			break;
 	            		}
 	            	}
-	            	new UpdatePerform1_View(performList.getPerformAt(index).getPerformance()); // Main Form to show after the Login Form.
+	            	new UpdatePerform1_View(performList.getPerformAt(index)); // Main Form to show after the Login Form.
 	            	dispose();
 	            	}
 	        });

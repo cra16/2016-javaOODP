@@ -123,11 +123,11 @@ public class AddPerform1_View extends JFrame//implements ActionListener
         
         
         // frame setting
-       
+        add1panel.setVisible(true);
         add1panel.setLayout(null);
         this.setSize(350,600);
         this.setContentPane(add1panel);
-     
+        this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }

@@ -1,6 +1,6 @@
 import java.sql.*;
 
-public class Performance extends Product{
+public class Performance{
 	private Place place;
 	private int placeNum;
 	private Schedule schedule;
@@ -75,14 +75,7 @@ public class Performance extends Product{
 		this.description = description;
 	}
 
-	@Override
 	public String getProductName() {
 		return this.getName();
-	}
-
-	@Override
-	public Performance getPerformance() {
-		// TODO Auto-generated method stub
-		return this;
 	}
 }

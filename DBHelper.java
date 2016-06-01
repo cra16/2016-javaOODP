@@ -25,7 +25,7 @@ public class DBHelper {
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
