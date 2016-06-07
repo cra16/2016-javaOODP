@@ -69,12 +69,9 @@ public class AddPerformController implements ActionListener,Subject {
 		 p = new Performance(placeNum,helper.getHost(),
 				new Schedule(performName,new java.sql.Date(date.getTime()),duration+1,time2),performName,priceInt,Text);
 		
-		boolean a =helper.addPerformance(p);
+		boolean a = helper.addPerformance(p);
 		
 		this.notifyObservers(a);
-		//performances.add(new Performance(placeindex, DBHelper.getInstance().getHost(),
-		//		new Schedule(PerformanceName,new java.sql.Date(date.getDate()),1,time2),PerformanceName
-		//		,cost,"1"));
 	}
 
 	@Override
@@ -84,13 +81,11 @@ public class AddPerformController implements ActionListener,Subject {
 
 	@Override
 	public void registerObserver(Observer o) {
-		// TODO Auto-generated method stub
 		observer.add(o);
 	}
 
 	@Override
 	public void removeObserver(Observer o) {
-		// TODO Auto-generated method stub
 		int i=observer.size();
 		if(i>=0)
 		observer.remove(o);
@@ -98,7 +93,6 @@ public class AddPerformController implements ActionListener,Subject {
 
 	@Override
 	public void notifyObservers(boolean bool) {
-		// TODO Auto-generated method stub
 		Observer temp;
 		for(int i=0; i<observer.size();i++)
 		{

@@ -6,20 +6,18 @@ import java.awt.event.ActionListener;
 
 public class AddPerform1_View extends PageView//implements ActionListener
 {
-	Container contentPane;
-    String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
-    String[] placestamp = {"학관 101호", "학관 104호", "채플"};
-    String[] daystamp = new String[31];
-    String[] periodstamp = new String[7];
-    int i = 0;
+	private GreenBackgroundDecorator host;
+	private Container contentPane;
+	private String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
+	private String[] placestamp = {"학관 101호", "학관 104호", "채플"};
+	private String[] daystamp = new String[31];
+	private String[] periodstamp = new String[7];
+    private  AddPerform2_View addPerform2View;
     
-    
-    
-    AddPerform2_View addPerform2View;
-    HomeView_host newHost;
     AddPerform1_View()
     {
     	super();
+    	int i = 0;
     	contentPane=this.getContentPane();
     	Panel add1panel = new Panel();
     	
@@ -116,11 +114,10 @@ public class AddPerform1_View extends PageView//implements ActionListener
            
         });
         btn2.addActionListener(new ActionListener(){
-        
         	public void actionPerformed(ActionEvent e)
         	{
+        		host= new GreenBackgroundDecorator(new HomeView_host());
         		dispose();
-        		newHost= new HomeView_host();
         	}
         	
         });

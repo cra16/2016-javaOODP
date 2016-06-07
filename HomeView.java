@@ -68,13 +68,11 @@ public abstract class HomeView extends PageView{
     
 	@Override
 	public JPanel getJPanel() {
-		// TODO Auto-generated method stub
 		return this.homepanel;
 	}
 	
 	@Override
 	public void draw() {
-		// TODO Auto-generated method stub
 		JPanel panel = getJPanel();
 		panel.setBackground(Color.WHITE);
 	}

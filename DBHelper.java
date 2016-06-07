@@ -29,7 +29,7 @@ public class DBHelper {
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -92,7 +92,7 @@ public class DBHelper {
 			System.out.println("SQLState: " + sqex.getSQLState());
 		}
 	}
-	
+
 	public static DBHelper getInstance(String id, String pw, int type)
 	{
 		if(DBHelper == null)
@@ -167,8 +167,6 @@ public class DBHelper {
 	}
 
 	public boolean addPerformance(Performance perform){
-//		performs.add(perform);
-//		host.getPerformanceList().add(perform.getName());
 		try{
 			query = "insert into performance values('"+perform.getName()+"','"+perform.getHost().getName()+"',"+perform.getPlaceNum()+","+perform.getCost()+",'"+perform.getDescription()+"')";
 			stmt.executeUpdate(query);
@@ -190,9 +188,6 @@ public class DBHelper {
 	}
 	
 	public boolean updatePerformance(Performance previousPerform, Performance perform){
-		//int index = performs.indexOf(previousPerform);
-		//performs.set(index, perform);
-		//host.getPerformanceList().set(index, perform.getName());
 		try{
 			query = "update performance set ";
 			query += "performanceName='"+perform.getName()+"', ";
@@ -223,9 +218,6 @@ public class DBHelper {
 	}
 	
 	public boolean deletePerformance(Performance perform){
-	//	int index = performs.indexOf(perform);
-	//	performs.remove(index);
-	//	host.getPerformanceList().remove(index);
 		try{
 			query = "delete from performance where performanceName='"+perform.getProductName()+"'";
 			stmt.executeUpdate(query);
@@ -334,6 +326,12 @@ public class DBHelper {
 	public void setUpdatememento(CareMemento updatememento) {
 		this.updatememento = updatememento;
 	}
+
+	public static void setDBHelper(DBHelper dBHelper) {
+		DBHelper = dBHelper;
+	}
+	
+	
 	
 
 }	

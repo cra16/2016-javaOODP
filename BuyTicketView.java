@@ -16,9 +16,11 @@ import java.util.Calendar;
 
 public class BuyTicketView extends JFrame //implements ActionListener
 {
-    Container contentPane;
-    DBHelper dBHelper = DBHelper.getInstance();
-    Performance perform;
+	private GreenBackgroundDecorator host;
+	private OrangeBackgroundDecorator audience;
+	private Container contentPane;
+	private DBHelper dBHelper = DBHelper.getInstance();
+	private Performance perform;
 
     BuyTicketView(Performance perform){
     	this.perform = perform;
@@ -122,19 +124,20 @@ public class BuyTicketView extends JFrame //implements ActionListener
         buypanel.add(priceLabel);
         buypanel.add(dateLabel);
         buypanel.add(btn2);
-
-        drawReserveBtn(buypanel, dateList);
+        
+        if(dBHelper.getHost() == null)
+        	drawReserveBtn(buypanel, dateList);
         
         btn2.addActionListener(new ActionListener() //뒤로가기
         {
             public void actionPerformed(ActionEvent e) {
             	if(DBHelper.getInstance().getHost()!=null)
             	{
-            		HomeView_host newhost = new HomeView_host();
+            		host = new GreenBackgroundDecorator(new HomeView_host());
             	}
             	else if(DBHelper.getInstance().getAudience()!=null)
             	{
-            		HomeView_audience newaudience = new HomeView_audience();
+            		audience = new OrangeBackgroundDecorator(new HomeView_audience());
             	}
            		dispose();
             }

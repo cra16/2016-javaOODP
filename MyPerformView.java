@@ -7,11 +7,11 @@ import java.util.ArrayList;
 
 
 public class MyPerformView extends JFrame {
-    Container contentPane;
-    
-    private HomeView_host newhost;
+    private Container contentPane;
+    private GreenBackgroundDecorator host;
     private UpdatePerform1_View updatePerform1;
-    MyPerformView performView;
+    private MyPerformView performView;
+    
     MyPerformView(Performances performList){
     	
     	contentPane=this.getContentPane();
@@ -96,7 +96,7 @@ public class MyPerformView extends JFrame {
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		newhost = new HomeView_host();
+        		host = new GreenBackgroundDecorator(new HomeView_host());
         	}
         	
         });

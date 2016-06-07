@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class LoginController{
-	GreenBackgroundDecorator host;
-	OrangeBackgroundDecorator audience;
+	private GreenBackgroundDecorator host;
+	private OrangeBackgroundDecorator audience;
 	private String loginID;
 	private String loginPassword;
 	private int userType;

@@ -21,18 +21,14 @@ public class AddObserver implements Observer {
 	}
 	@Override
 	public void update(Performance perform) {
-		// TODO Auto-generated method stub
 		DBHelper.getInstance().getHost().getPerformanceList().add(perform.getName());
 		DBHelper.getInstance().getPerforms().appendPerform(perform);
 		JDialog a=new JDialog();
 		JOptionPane.showMessageDialog(a, "입력 완료");
 
-
-	
 	}
 	@Override
 	public void fail() {
-		// TODO Auto-generated method stub
 		JDialog a=new JDialog();
 		a.add(new JLabel("입력이 실패되었습니다.."));
 		a.setSize(300,300);
@@ -40,9 +36,5 @@ public class AddObserver implements Observer {
 
 	}
 	@Override
-	public void update(Performance Perform, Performance previous) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void update(Performance Perform, Performance previous) {}
 }
