@@ -10,6 +10,7 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
     String[] timestamp = {"15:00", "16:00", "17:00", "18:00","19:00","20:00","21:00","22:00"} ;
     int timeNum;
     HomeView_host newhost;
+    UpdatePerform1_View previousview;
     UpdatePerformController controller =
 			new UpdatePerformController();
     UpdatePerform2_View(Performance perform,String performName,int placeNum, int monthNum,int dayNum, int duration, String Text,int cost)
@@ -87,7 +88,10 @@ public class UpdatePerform2_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        	newhost =new HomeView_host();
+        		previousview = (UpdatePerform1_View)DBHelper.getInstance().getUpdatememento().getLastMemento().getView();
+        		previousview.setVisible(true);
+        	
+       // 	newhost =new HomeView_host();
         	}
         	
         });

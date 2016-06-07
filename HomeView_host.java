@@ -26,7 +26,9 @@ public class HomeView_host extends HomeView //implements ActionListener
         {
             public void actionPerformed(ActionEvent e) {
             	addView = new AddPerform1_View(); // Main Form to show after the Login Form.
-                dispose();
+            	 DBHelper.getInstance().getAddorigin().setView(addView);
+                 DBHelper.getInstance().getAddmemento().addAddMemento(DBHelper.getInstance().getAddorigin().createAddMemento());
+            	dispose();
             }
         });
         myPerform.addActionListener(new ActionListener()  // 공연등록 버튼 페이지 경로

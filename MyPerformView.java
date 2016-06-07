@@ -56,7 +56,10 @@ public class MyPerformView extends JFrame {
 	            			break;
 	            		}
 	            	}
-	            	new UpdatePerform1_View(performList.getPerformAt(index)); // Main Form to show after the Login Form.
+	            	updatePerform1=new UpdatePerform1_View(performList.getPerformAt(index)); // Main Form to show after the Login Form.
+	            	DBHelper.getInstance().getUpdateorigin().setView(updatePerform1);
+	                 DBHelper.getInstance().getUpdatememento().addAddMemento(DBHelper.getInstance().getUpdateorigin().createAddMemento());
+	            	
 	            	dispose();
 	            	}
 	        });

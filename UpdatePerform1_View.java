@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 /**
  * Created by Eunbee on 2016-05-15.
  */
-public class UpdatePerform1_View extends JFrame {
+public class UpdatePerform1_View extends PageView {
     Container contentPane;
     String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
     String[] placestamp = {"학관 101호", "학관 104호", "채플"};
@@ -145,4 +145,14 @@ public class UpdatePerform1_View extends JFrame {
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+	@Override
+	public JPanel getJPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

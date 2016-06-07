@@ -1,9 +1,10 @@
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddPerform1_View extends JFrame//implements ActionListener
+public class AddPerform1_View extends PageView//implements ActionListener
 {
 	Container contentPane;
     String[] monthstamp = {"January","February","March","April","May","June","July","August","September","October","November","Desember"};
@@ -11,6 +12,8 @@ public class AddPerform1_View extends JFrame//implements ActionListener
     String[] daystamp = new String[31];
     String[] periodstamp = new String[7];
     int i = 0;
+    
+    
     
     AddPerform2_View addPerform2View;
     HomeView_host newHost;
@@ -106,6 +109,8 @@ public class AddPerform1_View extends JFrame//implements ActionListener
                 addPerform2View = new AddPerform2_View(field1.getText(),placeList.getSelectedIndex(),
                 		monthList.getSelectedIndex(),dayList.getSelectedIndex(),
                 		periodList.getSelectedIndex(),field2.getText(),area1.getText()); // Main Form to show after the Login Form.
+               
+
                 dispose();
             }
            
@@ -131,4 +136,14 @@ public class AddPerform1_View extends JFrame//implements ActionListener
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     }
+	@Override
+	public JPanel getJPanel() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void draw() {
+		// TODO Auto-generated method stub
+		
+	}
 }

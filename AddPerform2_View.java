@@ -12,6 +12,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
     HomeView_audience newaudience;
 	AddPerformController controller =
 			new AddPerformController();
+	AddPerform1_View previousview;
     AddPerform2_View(String performName,int placeNum, int monthNum,int dayNum, int duration, String price, String Text)
     {
         contentPane=this.getContentPane();
@@ -82,6 +83,7 @@ public class AddPerform2_View extends JFrame //implements ActionListener
                 {
                 	 newaudience = new HomeView_audience();
                 }
+            	DBHelper.getInstance().getAddmemento().deleteAddMemento();
                 dispose();
             }
         });
@@ -91,7 +93,9 @@ public class AddPerform2_View extends JFrame //implements ActionListener
         	public void actionPerformed(ActionEvent e)
         	{
         		dispose();
-        		newhost= new HomeView_host();
+        		
+        		previousview = (AddPerform1_View)DBHelper.getInstance().getAddmemento().getLastMemento().getView();
+        		previousview.setVisible(true);
         	}
         	
         });

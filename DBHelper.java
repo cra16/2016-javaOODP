@@ -17,6 +17,10 @@ public class DBHelper {
 	private String query;
 	private boolean user_validator;
 	private Performances performs;
+	private Originator addorigin = new Originator();
+	private CareMemento addmemento = new CareMemento();
+	private Originator updateorigin =new Originator();
+	private CareMemento updatememento = new CareMemento();
 	
 	private DBHelper(String id, String pw, int type){
 		performs = new Performances();
@@ -25,7 +29,7 @@ public class DBHelper {
 		String name = null;
 		String phoneNum = null;
 		try{
-			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "dasorr");
+			con = DriverManager.getConnection("jdbc:mysql://localhost","root", "bitnami");
 			stmt = con.createStatement();
 			stmt.executeQuery("use oodp;");
 		
@@ -299,4 +303,37 @@ public class DBHelper {
 		return user_validator;
 	}
 
-}
+	public Originator getAddorigin() {
+		return addorigin;
+	}
+
+	public void setAddorigin(Originator addorigin) {
+		this.addorigin = addorigin;
+	}
+
+	public CareMemento getAddmemento() {
+		return addmemento;
+	}
+
+	public void setAddmemento(CareMemento addmemento) {
+		this.addmemento = addmemento;
+	}
+
+	public Originator getUpdateorigin() {
+		return updateorigin;
+	}
+
+	public void setUpdateorigin(Originator updateorigin) {
+		this.updateorigin = updateorigin;
+	}
+
+	public CareMemento getUpdatememento() {
+		return updatememento;
+	}
+
+	public void setUpdatememento(CareMemento updatememento) {
+		this.updatememento = updatememento;
+	}
+	
+
+}	
